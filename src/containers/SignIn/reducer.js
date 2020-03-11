@@ -9,16 +9,10 @@ export const initialState = {
     [Enum.PASSWORD_FIELD]: '',
 };
 
-const changeField = (state, {payload}) => {
-    console.log('changeField', {
-        ...state,
-        [payload.destination]: payload.value
-    });
-    return ({
-        ...state,
-        [payload.destination]: payload.value
-    });
-};
+const changeField = (state, {payload}) => ({
+    ...state,
+    [payload.destination]: payload.value
+});
 
 export const reducer = createReducer(initialState, {
     [C.SIGN_IN_CHANGE_FIELD]: changeField

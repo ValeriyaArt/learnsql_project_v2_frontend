@@ -45,6 +45,7 @@ class SignIn extends React.PureComponent{
                             variant="contained"
                             className={classes.button}
                             disabled={disableButton}
+                            onClick={this.clickButtonHandler}
                     >
                         Войти
                     </Button>
