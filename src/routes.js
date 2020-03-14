@@ -1,16 +1,14 @@
 import React from "react";
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 
-import Home from './containers/Home';
+import Layout from './containers/Layout';
 import SignIn from './containers/SignIn';
 import SignUp from './containers/SignUp';
 import Course from './containers/Course';
 
 export default () => (
     <Router>
-        <Route path="/"
-               component={Home}
-        >
+        <Layout>
             <Route path="/sign-in"
                    component={SignIn}
             />
@@ -20,6 +18,6 @@ export default () => (
             <Route path="/course" //todo: change route
                    component={Course}
             />
-        </Route>
+        </Layout>
     </Router>
 );
