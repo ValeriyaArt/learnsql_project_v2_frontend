@@ -15,7 +15,7 @@ import styles from './Course.styles';
 
 class Course extends React.PureComponent{
     state = {
-        currentTab: 0,
+        currentTab: 2,
     };
 
     changeTabHandler = (event, tabNumber) => {

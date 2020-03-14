@@ -1,11 +1,11 @@
 import React from 'react';
-import Link from 'react-router-dom/Link';
 
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import CloseIcon from '@material-ui/icons/Close';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
@@ -26,16 +26,29 @@ class Header extends React.PureComponent{
         this.setState({anchorEl: null});
     };
 
+    handleGeneralMenuButtonClick = () => {
+        const {openGeneralMenu} = this.props;
+
+        if (openGeneralMenu){
+            this.props.handleCloseMenu();
+        } else {
+            this.props.handleOpenMenu();
+        }
+    };
+
     render() {
-        const {classes} = this.props;
+        const {classes, openGeneralMenu} = this.props;
         const {anchorEl} = this.state;
         const isOpenAvatarMenu = Boolean(anchorEl);
 
         return(
             <AppBar position="static">
                 <Toolbar>
-                    <IconButton edge="start" color="inherit" aria-label="menu">
-                        <MenuIcon />
+                    <IconButton edge="start"
+                                color="inherit"
+                                aria-label="menu"
+                                onClick={this.handleGeneralMenuButtonClick}>
+                        {openGeneralMenu ? <CloseIcon /> : <MenuIcon />}
                     </IconButton>
                     <Typography variant="h6">
                         SQL Learn
