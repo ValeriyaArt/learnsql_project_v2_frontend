@@ -1,13 +1,13 @@
 import BaseService from "../../service/base-service";
 
 class SignInService extends BaseService{
-    signIn(){
+    signIn(password, username){
         const formData = new FormData();
 
-        formData.append('password', 'root');
-        formData.append('username', 'root');
+        formData.append('password', password);
+        formData.append('username', username);
 
-        return this.post('http://94.250.249.177:8000/auth/token/login/', formData);
+        return this.post('/auth/token/login/', formData);
     }
 }
 
