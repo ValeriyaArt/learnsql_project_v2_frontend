@@ -1,0 +1,1 @@
+export const GET_COURSE_INFO = 'GET_COURSE_INFO';
