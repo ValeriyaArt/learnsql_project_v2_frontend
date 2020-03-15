@@ -1,7 +1,8 @@
 
 export default (theme) => ({
     root: {
-        display: 'flex'
+        display: 'flex',
+        marginTop: '64px' //todo: add var from material ui theme
     },
     content: {
         flexGrow: 1,
@@ -11,7 +12,8 @@ export default (theme) => ({
             duration: theme.transitions.duration.leavingScreen,
         }),
         marginLeft: 0,
-        zIndex: -2
+        boxSizing: 'border-box',
+        height: `calc(100vh - 64px)`, //todo: add var from material ui theme
     },
     contentShift: {
         transition: theme.transitions.create('margin', {

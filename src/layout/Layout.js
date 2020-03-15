@@ -1,11 +1,14 @@
 import React from 'react';
 import PropTypes from "prop-types";
 import className from 'classnames';
-import Box from "@material-ui/core/Box"
+
+import {MuiThemeProvider} from '@material-ui/core/styles';
 import withStyles from '@material-ui/core/styles/withStyles';
 
-import Header from './components/Header';
-import Menu from './components/Menu';
+import Header from '../components/Header';
+import Menu from '../components/Menu';
+
+import theme from './themeMaterialUi';
 
 import styles from './Layout.styles';
 
@@ -27,7 +30,7 @@ class Layout extends React.Component {
         const {classes} = this.props;
 
         return (
-            <>
+            <MuiThemeProvider theme={theme}>
                 <Header handleOpenMenu={this.handleOpenMenu}
                         handleCloseMenu={this.handleCloseMenu}
                         openGeneralMenu={openMenu}
@@ -38,13 +41,13 @@ class Layout extends React.Component {
                         {this.props.children}
                     </div>
                 </div>
-            </>
+            </MuiThemeProvider>
         );
     }
 }
 
 Layout.propTypes = {
-    children: PropTypes.object
+    children: PropTypes.any
 };
 
 export default withStyles(styles)(Layout);

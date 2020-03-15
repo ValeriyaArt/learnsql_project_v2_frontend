@@ -42,7 +42,7 @@ class Header extends React.PureComponent{
         const isOpenAvatarMenu = Boolean(anchorEl);
 
         return(
-            <AppBar position="static">
+            <AppBar position="fixed" className={classes.header}>
                 <Toolbar>
                     <IconButton edge="start"
                                 color="inherit"
