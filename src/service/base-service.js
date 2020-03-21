@@ -1,4 +1,3 @@
-import axios from 'axios';
 import get from 'lodash/get';
 import axiosLib from 'axios';
 
@@ -18,7 +17,6 @@ export default class BaseService {
     }
 
     interceptSuccessResponse = (response) => {
-        console.log('interceptSuccessResponse response', response);
         return {
             ...response,
             data: get(response, 'data.data')
@@ -26,12 +24,13 @@ export default class BaseService {
     };
 
     interceptFailResponse = (error) => {
-        console.log('interceptFailResponse error', error);
-        return {
+        const response = {
             ...error,
-            data: get(error, 'data.data'),
-            message: get(error, 'data.msg')
-        }
+            errors: get(error, 'response.data.errors'),
+            message: get(error, 'response.data.errors[0].detail')
+        };
+
+        return Promise.reject(response);
     };
 
     createInstance = () => {

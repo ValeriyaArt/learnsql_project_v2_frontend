@@ -1,4 +1,5 @@
 export function getEnvVariable(variableName, defaultValue = undefined) {
+
     if (typeof process.env === "object" && process.env.hasOwnProperty(variableName) && process.env[variableName] !== "" && process.env[variableName] !== null) {
         return process.env[variableName];
     }

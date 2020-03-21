@@ -2,13 +2,16 @@ import {createLogic} from "redux-logic";
 import get from 'lodash/get';
 
 import * as C from './constants';
-import actions from './actions';
+import actions from '../../layout/actions';
 
 import Service from './service';
+import UserService from '../../service/user-service';
+
 import {getFieldValue} from "./getters";
 import * as Enum from "./enum";
 
 const service = new Service();
+const userService = new UserService();
 
 const signIn = createLogic({
     type: C.SIGN_IN,
@@ -19,18 +22,21 @@ const signIn = createLogic({
         const password = getFieldValue(state, Enum.PASSWORD_FIELD);
         const username = getFieldValue(state, Enum.LOGIN_FIELD);
 
-        dispatch(actions.signInFetching());
+        dispatch(actions.fetchingTrue({destination: Enum.SIGN_IN_FETCHING}));
 
         service.signIn(password, username)
             .then((res) => {
-                const token = get(res, 'data.data.id', null);
-                console.log('res',res)
+                const token = get(res, 'data.attributes.auth_token', null);
+
+                userService.setToken(token);
+
+                dispatch(actions.fetchingSuccess());
             })
             .catch((err) => {
-                debugger
-                console.log('err', err);
+                dispatch(actions.fetchingFailed(get(err, 'message', '')));
             })
             .then(() => {
+                dispatch(actions.fetchingFalse({destination: Enum.SIGN_IN_FETCHING}));
                 return done();
             });
     }

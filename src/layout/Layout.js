@@ -7,9 +7,11 @@ import withStyles from '@material-ui/core/styles/withStyles';
 
 import Header from '../components/Header';
 import Menu from '../components/Menu';
+import AbsoluteLoader from '../components/AbsoluteLoader';
 
 import theme from './themeMaterialUi';
 
+import connect from './Layout.connect';
 import styles from './Layout.styles';
 
 class Layout extends React.Component {
@@ -27,10 +29,11 @@ class Layout extends React.Component {
 
     render() {
         const {openMenu} = this.state;
-        const {classes} = this.props;
+        const {classes, fetching} = this.props;
 
         return (
             <MuiThemeProvider theme={theme}>
+                <AbsoluteLoader isFetching={fetching} />
                 <Header handleOpenMenu={this.handleOpenMenu}
                         handleCloseMenu={this.handleCloseMenu}
                         openGeneralMenu={openMenu}
@@ -47,7 +50,8 @@ class Layout extends React.Component {
 }
 
 Layout.propTypes = {
-    children: PropTypes.any
+    children: PropTypes.any,
+    fetching: PropTypes.bool
 };
 
-export default withStyles(styles)(Layout);
+export default connect(withStyles(styles)(Layout));
