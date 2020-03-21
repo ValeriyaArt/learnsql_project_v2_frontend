@@ -3,7 +3,7 @@ import shallowEqual from "recompose/shallowEqual";
 import {withSnackbar} from 'notistack';
 import PropTypes from "prop-types";
 
-class Notificator extends React.PureComponent{
+class Notificator extends React.Component{
     shouldComponentUpdate(nextProps, nextState, nextContext) {
         return !shallowEqual(this.props.errors, nextProps.errors);
     }
