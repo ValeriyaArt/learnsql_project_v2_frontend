@@ -1,11 +1,12 @@
 import {connect} from 'react-redux';
 import {bindActionCreators} from "redux";
 import actions from "./actions";
-import {isFetching} from './getters';
+import {isFetching, getErrors} from './getters';
 
 const mapStateToProps = (state) => {
     return {
-        fetching: isFetching(state)
+        fetching: isFetching(state),
+        errors: getErrors(state),
     };
 };
 

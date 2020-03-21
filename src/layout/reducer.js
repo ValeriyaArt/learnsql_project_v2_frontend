@@ -6,7 +6,8 @@ export const GENERAL_PATH = 'main';
 
 export const initialState = {
     [Enum.FETCHING]: {},
-    [Enum.ERROR]: '',
+    [Enum.ERROR_MESSAGE]: '',
+    [Enum.ERRORS]: [],
 };
 
 const fetchingTrue = (state, {payload}) => ({
@@ -27,7 +28,8 @@ const fetchingFalse = (state, {payload}) => ({
 
 const fetchingFailed = (state, {payload}) => ({
     ...state,
-    [Enum.ERROR]: payload
+    [Enum.ERROR_MESSAGE]: payload.message,
+    [Enum.ERRORS]: payload.errors,
 });
 
 export const reducer = createReducer(initialState, {

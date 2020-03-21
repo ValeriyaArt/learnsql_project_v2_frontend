@@ -1,2 +1,3 @@
 export const FETCHING = 'FETCHING';
-export const ERROR = 'ERROR';
+export const ERRORS = 'ERRORS';
+export const ERROR_MESSAGE = 'ERROR_MESSAGE';

@@ -4,6 +4,7 @@ import * as Enum from './enum';
 
 const getStateData = (state) => get(state, GENERAL_PATH, {});
 const getFetching = (state) => get(getStateData(state), Enum.FETCHING, {});
+export const getErrors = (state) => get(getStateData(state), Enum.ERRORS, []);
 
 export const isFetching = (state) => {
     const fetching = getFetching(state);

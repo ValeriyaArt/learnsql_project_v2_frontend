@@ -33,7 +33,10 @@ const signIn = createLogic({
                 dispatch(actions.fetchingSuccess());
             })
             .catch((err) => {
-                dispatch(actions.fetchingFailed(get(err, 'message', '')));
+                dispatch(actions.fetchingFailed({
+                    message: get(err, 'message', ''),
+                    errors: get(err, 'errors', [])
+                }));
             })
             .then(() => {
                 dispatch(actions.fetchingFalse({destination: Enum.SIGN_IN_FETCHING}));
