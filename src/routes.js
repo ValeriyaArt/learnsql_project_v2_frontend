@@ -10,7 +10,7 @@ import RouterService from './service/router-service';
 import UserService from './service/user-service';
 
 const routerService = RouterService.factory();
-const userService = new UserService();
+const userService = UserService.factory();
 
 export default () => (
     <Router>

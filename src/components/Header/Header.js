@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from "prop-types";
 
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -37,53 +38,63 @@ class Header extends React.PureComponent{
     };
 
     render() {
-        const {classes, openGeneralMenu} = this.props;
+        const {classes, openGeneralMenu, isAuth} = this.props;
         const {anchorEl} = this.state;
         const isOpenAvatarMenu = Boolean(anchorEl);
 
         return(
             <AppBar position="fixed" className={classes.header}>
                 <Toolbar>
-                    <IconButton edge="start"
-                                color="inherit"
-                                aria-label="menu"
-                                onClick={this.handleGeneralMenuButtonClick}>
-                        {openGeneralMenu ? <CloseIcon /> : <MenuIcon />}
-                    </IconButton>
+                    {isAuth &&
+                        <IconButton edge="start"
+                                    color="inherit"
+                                    aria-label="menu"
+                                    onClick={this.handleGeneralMenuButtonClick}>
+                            {openGeneralMenu ? <CloseIcon /> : <MenuIcon />}
+                        </IconButton>
+                    }
                     <Typography variant="h6">
                         SQL Learn
                     </Typography>
-                    <div className={classes.avatar}>
-                        <IconButton
-                            aria-haspopup="true"
-                            onClick={this.handleMenu}
-                            color="inherit"
-                        >
-                            <AccountCircle />
-                        </IconButton>
-                        <Menu
-                            id="menu-appbar"
-                            anchorEl={anchorEl}
-                            anchorOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            keepMounted
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            open={isOpenAvatarMenu}
-                            onClose={this.handleClose}
-                        >
-                            <MenuItem onClick={this.handleClose}>Профиль</MenuItem>
-                            <MenuItem onClick={this.handleClose}>Выйти</MenuItem>
-                        </Menu>
-                    </div>
+                    {isAuth &&
+                        <div className={classes.avatar}>
+                            <IconButton
+                                aria-haspopup="true"
+                                onClick={this.handleMenu}
+                                color="inherit"
+                            >
+                                <AccountCircle/>
+                            </IconButton>
+                            <Menu
+                                anchorEl={anchorEl}
+                                anchorOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                keepMounted
+                                transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                open={isOpenAvatarMenu}
+                                onClose={this.handleClose}
+                                PopoverClasses={{
+                                    root: classes.popper
+                                }}
+                            >
+                                <MenuItem onClick={this.handleClose}>Профиль</MenuItem>
+                                <MenuItem onClick={this.handleClose}>Выйти</MenuItem>
+                            </Menu>
+                        </div>
+                    }
                 </Toolbar>
             </AppBar>
         );
     }
 }
+
+Header.propTypes = {
+    isAuth: PropTypes.bool,
+};
 
 export default withStyles(styles)(Header);

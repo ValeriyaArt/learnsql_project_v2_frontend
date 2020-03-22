@@ -7,6 +7,8 @@ import {SnackbarProvider} from 'notistack';
 import {MuiThemeProvider} from '@material-ui/core/styles';
 import withStyles from '@material-ui/core/styles/withStyles';
 
+import UserService from '../service/user-service';
+
 import Header from '../components/Header';
 import Menu from '../components/Menu';
 import AbsoluteLoader from '../components/AbsoluteLoader';
@@ -16,6 +18,8 @@ import theme from './themeMaterialUi';
 
 import connect from './Layout.connect';
 import styles from './Layout.styles';
+
+const userService = UserService.factory();
 
 class Layout extends React.Component {
     state = {
@@ -33,6 +37,7 @@ class Layout extends React.Component {
     render() {
         const {openMenu} = this.state;
         const {classes, fetching, errors} = this.props;
+        const isAuth = userService.isAuth();
 
         return (
             <SnackbarProvider maxSnack={3}>
@@ -42,6 +47,7 @@ class Layout extends React.Component {
                     <Header handleOpenMenu={this.handleOpenMenu}
                             handleCloseMenu={this.handleCloseMenu}
                             openGeneralMenu={openMenu}
+                            isAuth={isAuth}
                     />
                     <div className={classes.root}>
                         <Menu isOpen={openMenu} />

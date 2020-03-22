@@ -4,5 +4,8 @@ export default (theme) => ({
     },
     header: {
         zIndex: 10000
+    },
+    popper: {
+        zIndex: '10000 !important'
     }
 });
