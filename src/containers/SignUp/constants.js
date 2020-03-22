@@ -1,0 +1,5 @@
+export const SIGN_UP_CHANGE_FIELD = 'SIGN_UP_CHANGE_FIELD';
+export const GET_GROUP_OPTIONS = 'GET_GROUP_OPTIONS';
+export const SET_GROUP_OPTIONS = 'SET_GROUP_OPTIONS';
+
+export const SIGN_UP = 'SIGN_UP';

@@ -15,7 +15,7 @@ import styles from './SignIn.styles';
 
 class SignIn extends React.PureComponent{
     changeLogin = (e) => {
-        this.props.actions.signInChangeField({destination: Enum.LOGIN_FIELD, value: get(e, 'target.value', '')})
+        this.props.actions.signInChangeField({destination: Enum.USERNAME_FIELD, value: get(e, 'target.value', '')})
     };
 
     changePassword = (e) => {

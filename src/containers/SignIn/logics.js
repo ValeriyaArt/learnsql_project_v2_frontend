@@ -20,7 +20,7 @@ const signIn = createLogic({
         const state = getState();
 
         const password = getFieldValue(state, Enum.PASSWORD_FIELD);
-        const username = getFieldValue(state, Enum.LOGIN_FIELD);
+        const username = getFieldValue(state, Enum.USERNAME_FIELD);
 
         dispatch(actions.fetchingTrue({destination: Enum.SIGN_IN_FETCHING}));
 
@@ -31,6 +31,7 @@ const signIn = createLogic({
                 userService.setToken(token);
 
                 dispatch(actions.fetchingSuccess());
+                //todo: add redirect to home page
             })
             .catch((err) => {
                 dispatch(actions.fetchingFailed({

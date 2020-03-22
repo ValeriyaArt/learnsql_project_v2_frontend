@@ -5,7 +5,7 @@ import * as Enum from './enum';
 export const GENERAL_PATH = 'signIn';
 
 export const initialState = {
-    [Enum.LOGIN_FIELD]: '',
+    [Enum.USERNAME_FIELD]: '',
     [Enum.PASSWORD_FIELD]: '',
 };
 

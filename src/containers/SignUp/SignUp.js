@@ -6,11 +6,19 @@ import Button from '@material-ui/core/Button';
 import Typography  from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 
+import connect from './SignUp.connect';
 import styles from './SignUp.styles';
+import PropTypes from "prop-types";
 
 class SignUp extends React.PureComponent{
+    componentDidMount() {
+        if (this.props.groupOptions.length === 0){
+            this.props.actions.getGroupOptions();
+        }
+    }
+
     render() {
-        const {classes} = this.props;
+        const {classes, disableButton, groupOptions} = this.props;
 
         return(
             <div className={classes.root}>
@@ -35,6 +43,7 @@ class SignUp extends React.PureComponent{
                     <Button color="primary"
                             variant="contained"
                             className={classes.button}
+                            disabled={disableButton}
                     >
                         Зарегистрироваться
                     </Button>
@@ -52,4 +61,11 @@ class SignUp extends React.PureComponent{
     }
 }
 
-export default withStyles(styles)(SignUp);
+SignUp.propTypes = {
+    classes: PropTypes.object,
+    actions: PropTypes.object,
+    disableButton: PropTypes.bool,
+    groupOptions: PropTypes.array,
+};
+
+export default connect(withStyles(styles)(SignUp));

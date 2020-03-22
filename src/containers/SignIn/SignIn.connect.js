@@ -7,7 +7,7 @@ import {getFieldValue} from './getters';
 const mapStateToProps = (state) => {
     return {
         disableButton: getFieldValue(state, Enum.PASSWORD_FIELD).length === 0
-                    || getFieldValue(state, Enum.LOGIN_FIELD).length === 0,
+                    || getFieldValue(state, Enum.USERNAME_FIELD).length === 0,
     };
 };
 
