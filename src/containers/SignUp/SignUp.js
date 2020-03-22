@@ -8,6 +8,8 @@ import Button from '@material-ui/core/Button';
 import Typography  from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 
+import {appRouter} from '../../service/router-service';
+
 import * as Enum from './enum';
 
 import connect from './SignUp.connect';
@@ -67,7 +69,7 @@ class SignUp extends React.PureComponent{
 
                     <Typography className={classes.noAccount}>
                         Есть аккаунт?&nbsp;
-                        <Link to={'sign-in'}
+                        <Link to={appRouter.getSignInRoute()}
                               className={classes.link}>
                             Войти
                         </Link>

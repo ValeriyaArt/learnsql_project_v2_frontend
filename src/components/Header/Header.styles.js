@@ -7,5 +7,12 @@ export default (theme) => ({
     },
     popper: {
         zIndex: '10000 !important'
+    },
+    link: {
+        textDecoration: 'none',
+        color: theme.palette.text.primary,
+        '&:hover': {
+            color: theme.palette.text.primary
+        }
     }
 });

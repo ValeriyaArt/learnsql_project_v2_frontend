@@ -5,6 +5,7 @@ import Layout from './layout';
 import SignIn from './containers/SignIn';
 import SignUp from './containers/SignUp';
 import Course from './containers/Course';
+import Profile from './containers/Profile';
 
 import RouterService from './service/router-service';
 import UserService from './service/user-service';
@@ -20,6 +21,9 @@ export default () => (
             />
             <Route path={routerService.getSignUpRoute()}
                    component={SignUp}
+            />
+            <Route path={routerService.getProfileRoute()}
+                   component={Profile}
             />
             <Route path={routerService.getCourseRoute()}>
                 {!userService.isAuth() ? <Redirect to={routerService.getSignInRoute()} /> : <Course />}

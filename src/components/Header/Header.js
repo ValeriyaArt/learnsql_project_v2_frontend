@@ -12,7 +12,13 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import withStyles from '@material-ui/core/styles/withStyles';
 
+import UserService from "../../service/user-service";
+
 import styles from './Header.styles';
+import {appRouter} from "../../service/router-service";
+import Link from "react-router-dom/Link";
+
+const userService = UserService.factory();
 
 class Header extends React.PureComponent{
     state = {
@@ -35,6 +41,11 @@ class Header extends React.PureComponent{
         } else {
             this.props.handleOpenMenu();
         }
+    };
+
+    handleLogout = () => {
+        userService.logout();
+        this.handleClose();
     };
 
     render() {
@@ -82,8 +93,12 @@ class Header extends React.PureComponent{
                                     root: classes.popper
                                 }}
                             >
-                                <MenuItem onClick={this.handleClose}>Профиль</MenuItem>
-                                <MenuItem onClick={this.handleClose}>Выйти</MenuItem>
+                                <MenuItem>
+                                    <Link to={appRouter.getProfileRoute()}
+                                          className={classes.link}
+                                    > Профиль </Link>
+                                </MenuItem>
+                                <MenuItem onClick={this.handleLogout}>Выйти</MenuItem>
                             </Menu>
                         </div>
                     }

@@ -3,6 +3,7 @@ let routerServiceInstance = null;
 const SIGN_IN = 'sign-in';
 const SIGN_UP = 'sign-up';
 const COURSE = 'course';
+const PROFILE = 'profile';
 
 const SEPARATOR = '/';
 
@@ -27,7 +28,13 @@ export default class RouterService {
         return SEPARATOR + COURSE;
     };
 
+    getProfileRoute = () => {
+        return SEPARATOR + PROFILE;
+    };
+
     getHomeRoute = () => {
         return SEPARATOR;
     };
 }
+
+export const appRouter = RouterService.factory();
