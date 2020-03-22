@@ -11,7 +11,8 @@ const mapStateToProps = (state) => {
                     || getFieldValue(state, Enum.LAST_NAME_FIELD).length === 0
                     || getFieldValue(state, Enum.PASSWORD_FIELD).length === 0
                     || getFieldValue(state, Enum.PASSWORD_REPEAT_FIELD).length === 0
-                    || getFieldValue(state, Enum.GROUP_FIELD).length === 0,
+                    // || getFieldValue(state, Enum.GROUP_FIELD).length === 0
+        ,
         groupOptions: getGroupOptions(state),
     };
 };
