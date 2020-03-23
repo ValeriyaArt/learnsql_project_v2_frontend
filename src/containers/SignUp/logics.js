@@ -39,31 +39,6 @@ const signUp = createLogic({
     }
 });
 
-const getGroupOptions = createLogic({
-    type: C.GET_GROUP_OPTIONS,
-    latest: true,
-    process({getState, action}, dispatch, done) {
-        dispatch(actions.fetchingTrue({destination: Enum.GROUP_OPTIONS_FETCHING}));
-
-        service.getGroupOptions()
-            .then((res) => {
-                console.log('res', res);
-                dispatch(actions.fetchingSuccess());
-            })
-            .catch((err) => {
-                dispatch(actions.fetchingFailed({
-                    message: get(err, 'message', ''),
-                    errors: get(err, 'errors', [])
-                }));
-            })
-            .then(() => {
-                dispatch(actions.fetchingFalse({destination: Enum.GROUP_OPTIONS_FETCHING}));
-                return done();
-            });
-    }
-});
-
 export default [
     signUp,
-    getGroupOptions,
 ];

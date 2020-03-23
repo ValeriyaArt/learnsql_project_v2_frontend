@@ -2,7 +2,8 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from "redux";
 import actions from "./actions";
 import * as Enum from './enum';
-import {getFieldValue, getGroupOptions} from './getters';
+import {getFieldValue} from './getters';
+import {getGroupOptions} from '../../layout/getters';
 
 const mapStateToProps = (state) => {
     return {
