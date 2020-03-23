@@ -6,6 +6,10 @@ import get from "lodash/get";
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Typography  from '@material-ui/core/Typography';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 import {appRouter} from '../../service/router-service';
@@ -16,6 +20,10 @@ import connect from './SignUp.connect';
 import styles from './SignUp.styles';
 
 class SignUp extends React.PureComponent{
+    state = {
+        passwordFieldIsFocused: false
+    };
+
     changeField = (destination) => (e) => {
         this.props.actions.signUpChangeField({destination, value: get(e, 'target.value', '')})
     };
@@ -24,8 +32,18 @@ class SignUp extends React.PureComponent{
         this.props.actions.signUp();
     };
 
+    passwordFieldFocus = () => {
+        this.setState({passwordFieldIsFocused: true});
+    };
+
+    passwordFieldBlur = () => {
+        this.setState({passwordFieldIsFocused: false});
+    };
+
     render() {
-        const {classes, disableButton, groupOptions} = this.props;
+        const {classes, disableButton, groupOptions, isPasswordError} = this.props;
+        const {passwordFieldIsFocused} = this.state;
+        const showPasswordError = isPasswordError && !passwordFieldIsFocused;
 
         return(
             <div className={classes.root}>
@@ -51,7 +69,25 @@ class SignUp extends React.PureComponent{
                                className={classes.textField}
                                onChange={this.changeField(Enum.PASSWORD_REPEAT_FIELD)}
                                type="password"
+                               error={showPasswordError}
+                               onFocus={this.passwordFieldFocus}
+                               onBlur={this.passwordFieldBlur}
+                               helperText={showPasswordError && 'Пароли не совпадают'}
                     />
+
+                    <FormControl>
+                        <InputLabel id="group-selector-label">Номер группы</InputLabel>
+                        <Select
+                            labelId="group-selector-label"
+                            onChange={this.changeField(Enum.GROUP_FIELD)}>
+                            {groupOptions.map(group =>
+                                <MenuItem value={group.id} key={`group-${group.id}`}>
+                                    {get(group, 'attributes.title', '')}
+                                </MenuItem>
+                            )}
+                        </Select>
+                    </FormControl>
+
                     <Button color="primary"
                             variant="contained"
                             className={classes.button}
@@ -78,6 +114,7 @@ SignUp.propTypes = {
     classes: PropTypes.object,
     actions: PropTypes.object,
     disableButton: PropTypes.bool,
+    isPasswordError: PropTypes.bool,
     groupOptions: PropTypes.array,
 };
 

@@ -14,6 +14,14 @@ export const getFormDataForSignUp = (state) => {
     formData.append(Enum.FIRST_NAME_FIELD, getFieldValue(state, Enum.FIRST_NAME_FIELD));
     formData.append(Enum.LAST_NAME_FIELD, getFieldValue(state, Enum.LAST_NAME_FIELD));
     formData.append(Enum.GROUP_FIELD, getFieldValue(state, Enum.GROUP_FIELD));
+    formData.append(Enum.PASSWORD_REPEAT_FIELD, getFieldValue(state, Enum.PASSWORD_REPEAT_FIELD));
 
     return formData;
+};
+
+export const isPasswordError = (state) => {
+    const password = getFieldValue(state, Enum.PASSWORD_FIELD);
+    const passwordRepeat = getFieldValue(state, Enum.PASSWORD_REPEAT_FIELD);
+
+    return password.length > 0 && passwordRepeat.length > 0 && password !== passwordRepeat;
 };

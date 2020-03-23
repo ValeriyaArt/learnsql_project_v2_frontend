@@ -18,8 +18,7 @@ const getGroupOptions = createLogic({
 
         service.getGroupOptions()
             .then((res) => {
-                console.log('res', res);
-                dispatch(actions.setGroupOptions());
+                dispatch(actions.setGroupOptions(res.data));
                 dispatch(actions.fetchingSuccess());
             })
             .catch((err) => {

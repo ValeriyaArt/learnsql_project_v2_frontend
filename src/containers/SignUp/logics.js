@@ -19,7 +19,7 @@ const signUp = createLogic({
         const formData = getFormDataForSignUp(state);
 
         dispatch(actions.fetchingTrue({destination: Enum.SIGN_UP_FETCHING}));
-
+        console.log('formData', formData);
         service.signUp(formData)
             .then((res) => {
                 dispatch(actions.fetchingSuccess());

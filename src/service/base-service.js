@@ -14,6 +14,7 @@ export default class BaseService {
     }
 
     post(url, postData) {
+        console.log('post')
         return new Promise((successFn, errorFn) => {
             this.getAxios().post(url, postData).then(successFn).catch(errorFn);
         });
@@ -60,9 +61,11 @@ export default class BaseService {
             _axios = this.createInstance();
         }
 
-        if (_axios !== null) {
-            _axios.defaults.headers.common['Authorization'] = userService.getToken();
-        }
+        // const isAuth = userService.isAuth();
+        //
+        // if (_axios !== null && isAuth) {
+        //     _axios.defaults.headers.common['Authorization'] = userService.getToken();
+        // }
 
         return _axios;
     }
