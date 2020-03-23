@@ -16,9 +16,7 @@ import styles from './Profile.styles';
 
 class Profile extends React.PureComponent{
     componentDidMount() {
-        if (this.props.groupOptions.length === 0){
-            this.props.actions.getGroupOptions();
-        }
+
     }
 
     changeField = (destination) => (e) => {

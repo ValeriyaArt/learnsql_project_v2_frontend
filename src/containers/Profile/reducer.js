@@ -11,7 +11,6 @@ export const initialState = {
     [Enum.GROUP_FIELD]: '',
     [Enum.PASSWORD_FIELD]: '',
     [Enum.PASSWORD_REPEAT_FIELD]: '',
-    [Enum.GROUP_OPTIONS]: [],
     [Enum.PHOTO_FIELD]: [],
 };
 
@@ -20,12 +19,6 @@ const changeField = (state, {payload}) => ({
     [payload.destination]: payload.value
 });
 
-const setGroupOptions = (state, {payload}) => ({
-    ...state,
-    [Enum.GROUP_OPTIONS]: payload
-});
-
 export const reducer = createReducer(initialState, {
     [C.CHANGE_PROFILE_FIELD]: changeField,
-    [C.SET_GROUP_OPTIONS]: setGroupOptions,
 });

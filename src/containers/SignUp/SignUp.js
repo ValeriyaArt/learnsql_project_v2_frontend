@@ -16,12 +16,6 @@ import connect from './SignUp.connect';
 import styles from './SignUp.styles';
 
 class SignUp extends React.PureComponent{
-    componentDidMount() {
-        if (this.props.groupOptions.length === 0){
-            this.props.actions.getGroupOptions();
-        }
-    }
-
     changeField = (destination) => (e) => {
         this.props.actions.signUpChangeField({destination, value: get(e, 'target.value', '')})
     };

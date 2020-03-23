@@ -5,7 +5,6 @@ import * as Enum from './enum';
 const getStateData = (state) => get(state, GENERAL_PATH, {});
 
 export const getFieldValue = (state, field) => get(getStateData(state), field, '');
-export const getGroupOptions = (state) => get(getStateData(state), Enum.GROUP_OPTIONS, []);
 
 export const getFormDataForChangeInfo = (state) => {
     const formData = new FormData();

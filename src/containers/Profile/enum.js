@@ -6,7 +6,4 @@ export const PASSWORD_REPEAT_FIELD = 'passwordRepeat';
 export const GROUP_FIELD = 'group_number';
 export const PHOTO_FIELD = 'photo';
 
-export const GROUP_OPTIONS = 'GROUP_OPTIONS';
-
-export const GET_PROFILE_FETCHING = 'GET_PROFILE_FETCHING';
 export const CHANGE_PROFILE_FETCHING = 'CHANGE_PROFILE_FETCHING';
