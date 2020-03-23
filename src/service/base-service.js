@@ -2,6 +2,9 @@ import get from 'lodash/get';
 import axiosLib from 'axios';
 
 import AppConfig from '../config/app-config-service';
+import UserService from "./user-service";
+
+const userService = UserService.factory();
 
 export default class BaseService {
     get(url) {
@@ -55,6 +58,10 @@ export default class BaseService {
             }
         } else {
             _axios = this.createInstance();
+        }
+
+        if (_axios !== null) {
+            _axios.defaults.headers.common['Authorization'] = userService.getToken();
         }
 
         return _axios;

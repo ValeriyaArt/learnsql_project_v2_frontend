@@ -16,15 +16,15 @@ const userService = UserService.factory();
 export default () => (
     <Router>
         <Layout>
-            <Route path={routerService.getSignInRoute()}
-                   component={SignIn}
-            />
-            <Route path={routerService.getSignUpRoute()}
-                   component={SignUp}
-            />
-            <Route path={routerService.getProfileRoute()}
-                   component={Profile}
-            />
+            <Route path={routerService.getSignInRoute()}>
+                {!userService.isAuth() ? <SignIn /> : <Redirect to={routerService.getProfileRoute()} /> }
+            </Route>
+            <Route path={routerService.getSignUpRoute()}>
+                {!userService.isAuth() ? <SignUp /> : <Redirect to={routerService.getProfileRoute()} /> }
+            </Route>
+            <Route path={routerService.getProfileRoute()}>
+                {!userService.isAuth() ? <Redirect to={routerService.getSignInRoute()} /> : <Profile />}
+            </Route>
             <Route path={routerService.getCourseRoute()}>
                 {!userService.isAuth() ? <Redirect to={routerService.getSignInRoute()} /> : <Course />}
             </Route>

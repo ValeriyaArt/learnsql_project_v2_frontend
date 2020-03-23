@@ -16,6 +16,10 @@ import connect from './SignIn.connect';
 import styles from './SignIn.styles';
 
 class SignIn extends React.PureComponent{
+    componentWillUnmount() {
+        this.props.actions.signInPageDown();
+    }
+
     changeLogin = (e) => {
         this.props.actions.signInChangeField({destination: Enum.USERNAME_FIELD, value: get(e, 'target.value', '')})
     };

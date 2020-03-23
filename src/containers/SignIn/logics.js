@@ -31,7 +31,6 @@ const signIn = createLogic({
                 userService.setToken(token);
 
                 dispatch(actions.fetchingSuccess());
-                //todo: add redirect to home page
             })
             .catch((err) => {
                 dispatch(actions.fetchingFailed({

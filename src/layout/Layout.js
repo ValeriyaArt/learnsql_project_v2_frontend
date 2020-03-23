@@ -30,7 +30,21 @@ class Layout extends React.Component {
         if (this.props.groupOptions.length === 0){
             this.props.actions.getGroupOptions();
         }
+
+        this.getUserData();
     }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        this.getUserData();
+    }
+
+    getUserData = () => {
+        const isAuth = userService.isAuth();
+
+        if (Object.keys(this.props.user).length === 0 && isAuth){
+            this.props.actions.getUserData();
+        }
+    };
 
     handleOpenMenu = () => {
         this.setState({openMenu: true});
