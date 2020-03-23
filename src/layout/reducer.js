@@ -8,6 +8,8 @@ export const initialState = {
     [Enum.FETCHING]: {},
     [Enum.ERROR_MESSAGE]: '',
     [Enum.ERRORS]: [],
+    [Enum.GROUP_OPTIONS]: [],
+    [Enum.USER]: {},
 };
 
 const fetchingTrue = (state, {payload}) => ({
@@ -32,8 +34,20 @@ const fetchingFailed = (state, {payload}) => ({
     [Enum.ERRORS]: payload.errors,
 });
 
+const setUserData = (state, {payload}) => ({
+    ...state,
+    [Enum.USER]: payload,
+});
+
+const setGroupOptions = (state, {payload}) => ({
+    ...state,
+    [Enum.GROUP_OPTIONS]: payload,
+});
+
 export const reducer = createReducer(initialState, {
     [C.FETCHING_TRUE]: fetchingTrue,
     [C.FETCHING_FALSE]: fetchingFalse,
     [C.FETCHING_FAILED]: fetchingFailed,
+    [C.SET_USER_DATA]: setUserData,
+    [C.SET_GROUP_OPTIONS]: setGroupOptions,
 });

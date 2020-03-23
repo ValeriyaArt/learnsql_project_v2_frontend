@@ -26,6 +26,12 @@ class Layout extends React.Component {
         openMenu: false
     };
 
+    componentDidMount() {
+        if (this.props.groupOptions.length === 0){
+            this.props.actions.getGroupOptions();
+        }
+    }
+
     handleOpenMenu = () => {
         this.setState({openMenu: true});
     };
