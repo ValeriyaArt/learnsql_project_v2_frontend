@@ -5,7 +5,9 @@ import PropTypes from "prop-types";
 
 class Notificator extends React.Component{
     shouldComponentUpdate(nextProps, nextState, nextContext) {
-        return !shallowEqual(this.props.errors, nextProps.errors);
+        return !shallowEqual(this.props.errors, nextProps.errors)
+            || !shallowEqual(this.props.successMessages, nextProps.successMessages)
+        ;
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -13,6 +15,15 @@ class Notificator extends React.Component{
             this.props.errors.map(error => {
                 this.props.enqueueSnackbar(error.detail, {
                     variant: 'error',
+                    autoHideDuration: 3000,
+                });
+            })
+        }
+
+        if (prevProps.successMessages !== this.props.successMessages){
+            this.props.successMessages.map(message => {
+                this.props.enqueueSnackbar(message, {
+                    variant: 'success',
                     autoHideDuration: 3000,
                 });
             })
@@ -26,6 +37,7 @@ class Notificator extends React.Component{
 
 Notificator.propTypes = {
     errors: PropTypes.array,
+    successMessages: PropTypes.array,
 };
 
 export default withSnackbar(Notificator);

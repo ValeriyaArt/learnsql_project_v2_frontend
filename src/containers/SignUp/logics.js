@@ -3,6 +3,7 @@ import get from 'lodash/get';
 
 import * as C from './constants';
 import actions from '../../layout/actions';
+import signUpPageActions from './actions';
 
 import Service from './service';
 
@@ -10,6 +11,7 @@ import {getFormDataForSignUp} from "./getters";
 import * as Enum from "./enum";
 
 const service = new Service();
+
 
 const signUp = createLogic({
     type: C.SIGN_UP,
@@ -22,9 +24,8 @@ const signUp = createLogic({
         console.log('formData', formData);
         service.signUp(formData)
             .then((res) => {
-                dispatch(actions.fetchingSuccess());
-                //todo: add redirect to sign in page
-                //todo: add success notification
+                dispatch(actions.fetchingSuccess(['Вы успешно зарегистрированы!']));
+                dispatch(signUpPageActions.signUpPageDown());
             })
             .catch((err) => {
                 dispatch(actions.fetchingFailed({

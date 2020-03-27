@@ -13,6 +13,7 @@ const mapStateToProps = (state) => {
                     || getFieldValue(state, Enum.PASSWORD_FIELD).length === 0
                     || getFieldValue(state, Enum.PASSWORD_REPEAT_FIELD).length === 0
                     || getFieldValue(state, Enum.GROUP_FIELD).length === 0
+                    || isPasswordError(state)
         ,
         groupOptions: getGroupOptions(state),
         isPasswordError: isPasswordError(state),

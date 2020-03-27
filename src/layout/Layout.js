@@ -56,14 +56,14 @@ class Layout extends React.Component {
 
     render() {
         const {openMenu} = this.state;
-        const {classes, fetching, errors} = this.props;
+        const {classes, fetching, errors, successMessages} = this.props;
         const isAuth = userService.isAuth();
 
         return (
             <SnackbarProvider maxSnack={3}>
                 <MuiThemeProvider theme={theme}>
                     <AbsoluteLoader isFetching={fetching} />
-                    <Notificator errors={errors} />
+                    <Notificator errors={errors} successMessages={successMessages} />
                     <Header handleOpenMenu={this.handleOpenMenu}
                             handleCloseMenu={this.handleCloseMenu}
                             openGeneralMenu={openMenu}

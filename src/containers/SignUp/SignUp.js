@@ -24,6 +24,10 @@ class SignUp extends React.PureComponent{
         passwordFieldIsFocused: false
     };
 
+    componentWillUnmount() {
+        this.props.actions.signUpPageDown();
+    }
+
     changeField = (destination) => (e) => {
         this.props.actions.signUpChangeField({destination, value: get(e, 'target.value', '')})
     };

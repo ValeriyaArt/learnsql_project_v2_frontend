@@ -18,7 +18,9 @@ const changeField = (state, {payload}) => ({
     [payload.destination]: payload.value
 });
 
+const pageDown = () => initialState;
 
 export const reducer = createReducer(initialState, {
     [C.SIGN_UP_CHANGE_FIELD]: changeField,
+    [C.SIGN_UP_PAGE_DOWN]: pageDown,
 });
