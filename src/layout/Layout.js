@@ -35,7 +35,7 @@ class Layout extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        this.getUserData();
+        // this.getUserData();
     }
 
     getUserData = () => {

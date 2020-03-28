@@ -9,9 +9,9 @@ export const initialState = {
     [Enum.FIRST_NAME_FIELD]: '',
     [Enum.LAST_NAME_FIELD]: '',
     [Enum.GROUP_FIELD]: '',
+    [Enum.OLD_PASSWORD_FIELD]: '',
     [Enum.PASSWORD_FIELD]: '',
     [Enum.PASSWORD_REPEAT_FIELD]: '',
-    [Enum.PHOTO_FIELD]: [],
 };
 
 const changeField = (state, {payload}) => ({

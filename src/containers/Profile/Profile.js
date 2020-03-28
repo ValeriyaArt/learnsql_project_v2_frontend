@@ -1,53 +1,66 @@
 import React from 'react';
-import Link from 'react-router-dom/Link';
 import PropTypes from "prop-types";
-import get from "lodash/get";
-
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import Typography  from '@material-ui/core/Typography';
-import Paper from "@material-ui/core/Paper";
 import withStyles from '@material-ui/core/styles/withStyles';
 
-import * as Enum from './enum';
+import Typography from "@material-ui/core/Typography";
+
+import PasswordContainer from './PasswordContainer';
+import ProfileInfoContainer from './ProfileInfoContainer';
 
 import connect from './Profile.connect';
 import styles from './Profile.styles';
 
 class Profile extends React.PureComponent{
-    componentDidMount() {
-
-    }
-
-    changeField = (destination) => (e) => {
-        this.props.actions.profileChangeField({destination, value: get(e, 'target.value', '')})
+    state = {
+        changePasswordMode: false
     };
 
-    clickButtonHandler = () => {
-        this.props.actions.signUp();
+    changePasswordClickHandler = () => {
+        if (this.state.changePasswordMode){
+            this.setChangePasswordModeFalse();
+        } else {
+            this.setChangePasswordModeTrue();
+        }
+    };
+
+    setChangePasswordModeTrue = () => {
+        this.setState({changePasswordMode: true});
+    };
+
+    setChangePasswordModeFalse = () => {
+        this.setState({changePasswordMode: false});
+    };
+
+    passwordModeButton = (text) => {
+        const {classes} = this.props;
+
+        return (
+            <Typography className={classes.changePassword} onClick={this.changePasswordClickHandler}>
+                {text}
+            </Typography>
+        );
     };
 
     render() {
-        const {classes, username, firstName, lastName} = this.props;
+        const {classes} = this.props;
+        const {changePasswordMode} = this.state;
 
         return(
-            <Paper>
-                <TextField label="Логин"
-                           className={classes.textField}
-                           onChange={this.changeField(Enum.USERNAME_FIELD)}
-                           value={username}
-                />
-                <TextField label="Имя"
-                           className={classes.textField}
-                           onChange={this.changeField(Enum.FIRST_NAME_FIELD)}
-                           value={firstName}
-                />
-                <TextField label="Фамилия"
-                           className={classes.textField}
-                           onChange={this.changeField(Enum.LAST_NAME_FIELD)}
-                           value={lastName}
-                />
-            </Paper>
+            <div className={classes.root}>
+                <div className={classes.form}>
+                    {changePasswordMode ?
+                        <>
+                            {this.passwordModeButton('Назад')}
+                            <PasswordContainer />
+                        </>
+                        :
+                        <>
+                            <ProfileInfoContainer />
+                            {this.passwordModeButton('Изменить пароль')}
+                        </>
+                    }
+                </div>
+            </div>
         );
     }
 }

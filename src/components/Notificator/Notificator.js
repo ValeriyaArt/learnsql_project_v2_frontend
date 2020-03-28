@@ -12,6 +12,7 @@ class Notificator extends React.Component{
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevProps.errors !== this.props.errors){
+            // eslint-disable-next-line
             this.props.errors.map(error => {
                 this.props.enqueueSnackbar(error.detail, {
                     variant: 'error',
@@ -21,6 +22,7 @@ class Notificator extends React.Component{
         }
 
         if (prevProps.successMessages !== this.props.successMessages){
+            // eslint-disable-next-line
             this.props.successMessages.map(message => {
                 this.props.enqueueSnackbar(message, {
                     variant: 'success',

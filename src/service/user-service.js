@@ -16,7 +16,7 @@ export default class UserService {
     }
 
     getToken() {
-        return localStorage.getItem(STORAGE_ITEM);
+        return localStorage.getItem(STORAGE_ITEM).replace('"', '').replace('"', '');
     }
 
     logout() {

@@ -61,11 +61,11 @@ export default class BaseService {
             _axios = this.createInstance();
         }
 
-        // const isAuth = userService.isAuth();
-        //
-        // if (_axios !== null && isAuth) {
-        //     _axios.defaults.headers.common['Authorization'] = userService.getToken();
-        // }
+        const isAuth = userService.isAuth();
+
+        if (_axios !== null && isAuth) {
+            _axios.defaults.headers.common['Authorization'] = `Token ${userService.getToken()}`;
+        }
 
         return _axios;
     }

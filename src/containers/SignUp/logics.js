@@ -12,7 +12,6 @@ import * as Enum from "./enum";
 
 const service = new Service();
 
-
 const signUp = createLogic({
     type: C.SIGN_UP,
     latest: true,
