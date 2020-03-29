@@ -54,6 +54,7 @@ class Layout extends React.Component {
 
     logout = () => {
         this.props.actions.setAuthFalse();
+        this.handleCloseMenu();
     };
 
     render() {

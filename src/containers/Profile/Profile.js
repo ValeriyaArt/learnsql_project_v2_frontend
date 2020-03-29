@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from "prop-types";
 import get from 'lodash/get';
+import {Redirect} from "react-router";
 
 import withStyles from '@material-ui/core/styles/withStyles';
 import Typography from "@material-ui/core/Typography";
@@ -8,9 +9,15 @@ import Typography from "@material-ui/core/Typography";
 import PasswordContainer from './PasswordContainer';
 import ProfileInfoContainer from './ProfileInfoContainer';
 
+import * as Enum from "./enum";
+
+import {appRouter} from "../../service/router-service";
+import UserService from "../../service/user-service";
+
 import connect from './Profile.connect';
 import styles from './Profile.styles';
-import * as Enum from "./enum";
+
+const userService = UserService.factory();
 
 class Profile extends React.PureComponent{
     state = {
@@ -72,8 +79,11 @@ class Profile extends React.PureComponent{
     };
 
     render() {
-        const {classes} = this.props;
+        const {classes, auth} = this.props;
         const {changePasswordMode} = this.state;
+        const isAuth = userService.isAuth() && auth;
+
+        if (!isAuth) return <Redirect to={appRouter.getSignInRoute()} />;
 
         return(
             <div className={classes.root}>
@@ -99,6 +109,7 @@ Profile.propTypes = {
     classes: PropTypes.object,
     actions: PropTypes.object,
     disableButton: PropTypes.bool,
+    auth: PropTypes.bool,
     groupOptions: PropTypes.array,
 };
 

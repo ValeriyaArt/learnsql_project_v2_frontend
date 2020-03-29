@@ -5,10 +5,10 @@ class SignInService extends BaseService{
 
     }
     getCourses(){
-
+        return this.get('api/course')
     }
     getMyCourses(){
-
+        return this.get('api/student-course')
     }
 }
 
