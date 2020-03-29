@@ -26,7 +26,6 @@ export default class UserService {
     }
 
     isAuth() {
-        console.log('isAuth', this.getToken())
         return this.getToken() !== null && this.getToken() !== undefined;
     }
 }

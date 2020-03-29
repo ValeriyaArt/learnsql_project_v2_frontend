@@ -93,7 +93,7 @@ class Header extends React.PureComponent{
                                     root: classes.popper
                                 }}
                             >
-                                <MenuItem>
+                                <MenuItem onClick={this.handleClose}>
                                     <Link to={appRouter.getProfileRoute()}
                                           className={classes.link}
                                     >

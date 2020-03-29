@@ -29,8 +29,9 @@ class Layout extends React.Component {
 
     shouldComponentUpdate(nextProps, nextState){
         return !shallowEqual(this.props.errors, nextProps.errors)
-            || this.props.fetching !== nextProps.fetching
             || !shallowEqual(this.props.children, nextProps.children)
+            || this.props.fetching !== nextProps.fetching
+            || this.state.openMenu !== nextState.openMenu
         ;
     }
 

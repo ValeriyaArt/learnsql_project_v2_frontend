@@ -11,6 +11,9 @@ import QuestionIcon from '@material-ui/icons/Mail';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 import styles from './Menu.styles';
+import Link from "react-router-dom/Link";
+import {appRouter} from "../../service/router-service";
+import Typography from "@material-ui/core/Typography";
 
 class Menu extends React.PureComponent{
     render() {
@@ -27,9 +30,12 @@ class Menu extends React.PureComponent{
             >
                 <List>
                     <ListItem button>
-                        <ListItemIcon><InboxIcon /></ListItemIcon>
-                        <ListItemText primary={'Курс 1'} />
+                        <Link to={appRouter.getHomeRoute()} className={classes.link}>
+                            <ListItemIcon><InboxIcon /></ListItemIcon>
+                            <ListItemText primary={'Курсы'} />
+                        </Link>
                     </ListItem>
+
                     <ListItem button>
                         <ListItemIcon><InboxIcon /></ListItemIcon>
                         <ListItemText primary={'Курс 2'} />
