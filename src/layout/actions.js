@@ -12,6 +12,9 @@ const setUserData = createAction(C.SET_USER_DATA, 'payload');
 const getGroupOptions = createAction(C.GET_GROUP_OPTIONS, 'payload');
 const setGroupOptions = createAction(C.SET_GROUP_OPTIONS, 'payload');
 
+const setAuthTrue = createAction(C.SET_AUTH_TRUE, 'payload');
+const setAuthFalse = createAction(C.SET_AUTH_FALSE, 'payload');
+
 export default {
     fetchingTrue,
     fetchingFalse,
@@ -21,4 +24,6 @@ export default {
     setUserData,
     getGroupOptions,
     setGroupOptions,
+    setAuthTrue,
+    setAuthFalse,
 }

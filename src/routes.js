@@ -1,5 +1,5 @@
 import React from "react";
-import {BrowserRouter as Router, Route, Redirect} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Redirect, Switch} from 'react-router-dom';
 
 import Layout from './layout';
 import SignIn from './containers/SignIn';
@@ -17,21 +17,43 @@ const userService = UserService.factory();
 export default () => (
     <Router>
         <Layout>
-            <Route path={routerService.getSignInRoute()}>
-                {!userService.isAuth() ? <SignIn /> : <Redirect to={routerService.getHomeRoute()} /> }
-            </Route>
-            <Route path={routerService.getSignUpRoute()}>
-                {!userService.isAuth() ? <SignUp /> : <Redirect to={routerService.getProfileRoute()} /> }
-            </Route>
-            <Route path={routerService.getProfileRoute()}>
-                {!userService.isAuth() ? <Redirect to={routerService.getSignInRoute()} /> : <Profile />}
-            </Route>
-            <Route path={routerService.getCourseRoute()}>
-                {!userService.isAuth() ? <Redirect to={routerService.getSignInRoute()} /> : <Course />}
-            </Route>
-            <Route path={routerService.getHomeRoute()}>
-                {!userService.isAuth() ? <Redirect to={routerService.getSignInRoute()} /> : <Home />}
-            </Route>
+            <Switch>
+                <Route path={routerService.getSignInRoute()}>
+                    <SignIn />
+                </Route>
+                <Route path={routerService.getSignUpRoute()}>
+                    <SignUp />
+                </Route>
+                <PrivateRoute path={routerService.getProfileRoute()}>
+                    <Profile />
+                </PrivateRoute>
+                <PrivateRoute path={routerService.getCourseRoute()}>
+                    <Course />
+                </PrivateRoute>
+                <PrivateRoute path={routerService.getHomeRoute()}>
+                    <Home />
+                </PrivateRoute>
+            </Switch>
         </Layout>
     </Router>
 );
+
+function PrivateRoute({ children, ...rest }) {
+    return (
+        <Route
+            {...rest}
+            render={({ location }) =>
+                userService.isAuth() ? (
+                    children
+                ) : (
+                    <Redirect
+                        to={{
+                            pathname: routerService.getSignInRoute(),
+                            state: { from: location }
+                        }}
+                    />
+                )
+            }
+        />
+    );
+}

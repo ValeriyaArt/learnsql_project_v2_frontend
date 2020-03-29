@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'react-router-dom/Link';
+import {Redirect} from "react-router";
 import PropTypes from "prop-types";
 import get from "lodash/get";
 
@@ -13,11 +14,14 @@ import InputLabel from '@material-ui/core/InputLabel';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 import {appRouter} from '../../service/router-service';
+import UserService from "../../service/user-service";
 
 import * as Enum from './enum';
 
 import connect from './SignUp.connect';
 import styles from './SignUp.styles';
+
+const userService = UserService.factory();
 
 class SignUp extends React.PureComponent{
     state = {
@@ -45,9 +49,13 @@ class SignUp extends React.PureComponent{
     };
 
     render() {
-        const {classes, disableButton, groupOptions, isPasswordError} = this.props;
+        const {classes, disableButton, groupOptions, isPasswordError, auth} = this.props;
         const {passwordFieldIsFocused} = this.state;
         const showPasswordError = isPasswordError && !passwordFieldIsFocused;
+
+        const isAuth = userService.isAuth() && auth;
+
+        if (isAuth) return <Redirect to={appRouter.getHomeRoute()} />;
 
         return(
             <div className={classes.root}>
@@ -119,6 +127,7 @@ SignUp.propTypes = {
     actions: PropTypes.object,
     disableButton: PropTypes.bool,
     isPasswordError: PropTypes.bool,
+    auth: PropTypes.bool,
     groupOptions: PropTypes.array,
 };
 

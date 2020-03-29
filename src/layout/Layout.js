@@ -27,10 +27,19 @@ class Layout extends React.Component {
         openMenu: false
     };
 
+    componentDidMount() {
+        const isAuth = userService.isAuth();
+
+        if (isAuth){
+            this.props.actions.setAuthTrue();
+        }
+    }
+
     shouldComponentUpdate(nextProps, nextState){
         return !shallowEqual(this.props.errors, nextProps.errors)
             || !shallowEqual(this.props.children, nextProps.children)
             || this.props.fetching !== nextProps.fetching
+            || this.props.auth !== nextProps.auth
             || this.state.openMenu !== nextState.openMenu
         ;
     }
@@ -43,10 +52,14 @@ class Layout extends React.Component {
         this.setState({openMenu: false});
     };
 
+    logout = () => {
+        this.props.actions.setAuthFalse();
+    };
+
     render() {
         const {openMenu} = this.state;
-        const {classes, fetching, errors, successMessages} = this.props;
-        const isAuth = userService.isAuth();
+        const {classes, fetching, errors, successMessages, auth} = this.props;
+        const isAuth = userService.isAuth() && auth;
 
         return (
             <SnackbarProvider maxSnack={3}>
@@ -57,9 +70,10 @@ class Layout extends React.Component {
                             handleCloseMenu={this.handleCloseMenu}
                             openGeneralMenu={openMenu}
                             isAuth={isAuth}
+                            logout={this.logout}
                     />
                     <div className={classes.root}>
-                        <Menu isOpen={openMenu} />
+                        {isAuth && <Menu isOpen={openMenu} />}
                         <div className={className(classes.content, {[classes.contentShift]: openMenu})}>
                             {this.props.children}
                         </div>

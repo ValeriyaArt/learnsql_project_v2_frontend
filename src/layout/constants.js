@@ -8,3 +8,6 @@ export const SET_USER_DATA = 'SET_USER_DATA';
 
 export const GET_GROUP_OPTIONS = 'GET_GROUP_OPTIONS';
 export const SET_GROUP_OPTIONS = 'SET_GROUP_OPTIONS';
+
+export const SET_AUTH_TRUE = 'SET_AUTH_TRUE';
+export const SET_AUTH_FALSE = 'SET_AUTH_FALSE';

@@ -1,4 +1,5 @@
 import React from 'react';
+import {Redirect} from "react-router";
 import Link from 'react-router-dom/Link';
 import PropTypes from "prop-types";
 import get from 'lodash/get';
@@ -9,11 +10,14 @@ import Typography  from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 import {appRouter} from '../../service/router-service';
+import UserService from "../../service/user-service";
 
 import * as Enum from './enum';
 
 import connect from './SignIn.connect';
 import styles from './SignIn.styles';
+
+const userService = UserService.factory();
 
 class SignIn extends React.PureComponent{
     componentWillUnmount() {
@@ -33,7 +37,10 @@ class SignIn extends React.PureComponent{
     };
 
     render() {
-        const {classes, disableButton} = this.props;
+        const {classes, disableButton, auth} = this.props;
+        const isAuth = userService.isAuth() && auth;
+
+        if (isAuth) return <Redirect to={appRouter.getHomeRoute()} />;
 
         return(
             <div className={classes.root}>
@@ -73,6 +80,7 @@ SignIn.propTypes = {
     classes: PropTypes.object,
     actions: PropTypes.object,
     disableButton: PropTypes.bool,
+    auth: PropTypes.bool,
 };
 
 export default withStyles(styles)(connect(SignIn));

@@ -11,6 +11,7 @@ export const initialState = {
     [Enum.SUCCESS_MESSAGES]: [],
     [Enum.GROUP_OPTIONS]: [],
     [Enum.USER]: {},
+    [Enum.IS_AUTH]: false,
 };
 
 const fetchingTrue = (state, {payload}) => ({
@@ -50,6 +51,16 @@ const setGroupOptions = (state, {payload}) => ({
     [Enum.GROUP_OPTIONS]: payload,
 });
 
+const setAuthTrue = (state) => ({
+    ...state,
+    [Enum.IS_AUTH]: true,
+});
+
+const setAuthFalse = (state) => ({
+    ...state,
+    [Enum.IS_AUTH]: false,
+});
+
 export const reducer = createReducer(initialState, {
     [C.FETCHING_TRUE]: fetchingTrue,
     [C.FETCHING_FALSE]: fetchingFalse,
@@ -57,4 +68,6 @@ export const reducer = createReducer(initialState, {
     [C.FETCHING_SUCCESS]: fetchingSuccess,
     [C.SET_USER_DATA]: setUserData,
     [C.SET_GROUP_OPTIONS]: setGroupOptions,
+    [C.SET_AUTH_FALSE]: setAuthFalse,
+    [C.SET_AUTH_TRUE]: setAuthTrue,
 });

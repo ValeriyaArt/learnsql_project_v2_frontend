@@ -8,6 +8,7 @@ export const getErrors = (state) => get(getStateData(state), Enum.ERRORS, []);
 export const getSuccessMessages = (state) => get(getStateData(state), Enum.SUCCESS_MESSAGES, []);
 export const getUser = (state) => get(getStateData(state), Enum.USER, {});
 export const getGroupOptions = (state) => get(getStateData(state), Enum.GROUP_OPTIONS, []);
+export const getAuth = (state) => get(getStateData(state), Enum.IS_AUTH, false);
 
 export const isFetching = (state) => {
     const fetching = getFetching(state);

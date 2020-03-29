@@ -31,6 +31,7 @@ const signIn = createLogic({
                 userService.setToken(token);
 
                 dispatch(actions.fetchingSuccess());
+                dispatch(actions.setAuthTrue());
             })
             .catch((err) => {
                 dispatch(actions.fetchingFailed({

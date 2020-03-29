@@ -46,6 +46,7 @@ class Header extends React.PureComponent{
     handleLogout = () => {
         userService.logout();
         this.handleClose();
+        this.props.logout();
     };
 
     render() {
@@ -118,6 +119,7 @@ class Header extends React.PureComponent{
 
 Header.propTypes = {
     isAuth: PropTypes.bool,
+    logout: PropTypes.func,
 };
 
 export default withStyles(styles)(Header);

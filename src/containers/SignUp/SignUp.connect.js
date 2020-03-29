@@ -3,7 +3,7 @@ import {bindActionCreators} from "redux";
 import actions from "./actions";
 import * as Enum from './enum';
 import {getFieldValue, isPasswordError} from './getters';
-import {getGroupOptions} from '../../layout/getters';
+import {getAuth, getGroupOptions} from '../../layout/getters';
 
 const mapStateToProps = (state) => {
     return {
@@ -17,6 +17,7 @@ const mapStateToProps = (state) => {
         ,
         groupOptions: getGroupOptions(state),
         isPasswordError: isPasswordError(state),
+        auth: getAuth(state),
     };
 };
 
