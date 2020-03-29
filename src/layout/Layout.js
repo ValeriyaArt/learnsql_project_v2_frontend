@@ -18,6 +18,7 @@ import theme from './themeMaterialUi';
 
 import connect from './Layout.connect';
 import styles from './Layout.styles';
+import shallowEqual from "recompose/shallowEqual";
 
 const userService = UserService.factory();
 
@@ -25,6 +26,13 @@ class Layout extends React.Component {
     state = {
         openMenu: false
     };
+
+    componentShouldUpdate(nextProps, nextState){
+        return !shallowEqual(this.props.errors, nextProps.errors)
+            || this.props.fetching !== nextProps.fetching
+            || !shallowEqual(this.props.children, nextProps.children)
+        ;
+    }
 
     componentDidMount() {
         if (this.props.groupOptions.length === 0){
@@ -35,7 +43,7 @@ class Layout extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        // this.getUserData();
+        //this.getUserData();
     }
 
     getUserData = () => {

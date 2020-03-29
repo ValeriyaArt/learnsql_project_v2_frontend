@@ -17,7 +17,7 @@ export default () => (
     <Router>
         <Layout>
             <Route path={routerService.getSignInRoute()}>
-                {!userService.isAuth() ? <SignIn /> : <Redirect to={routerService.getProfileRoute()} /> }
+                {!userService.isAuth() ? <SignIn /> : <Redirect to={routerService.getHomeRoute()} /> }
             </Route>
             <Route path={routerService.getSignUpRoute()}>
                 {!userService.isAuth() ? <SignUp /> : <Redirect to={routerService.getProfileRoute()} /> }

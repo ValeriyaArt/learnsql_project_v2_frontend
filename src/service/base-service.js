@@ -14,7 +14,6 @@ export default class BaseService {
     }
 
     post(url, postData) {
-        console.log('post')
         return new Promise((successFn, errorFn) => {
             this.getAxios().post(url, postData).then(successFn).catch(errorFn);
         });
@@ -60,6 +59,10 @@ export default class BaseService {
         } else {
             _axios = this.createInstance();
         }
+
+        _axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+        _axios.defaults.xsrfCookieName = "csrftoken";
+        // _axios.defaults.withCredentials = true;
 
         const isAuth = userService.isAuth();
 

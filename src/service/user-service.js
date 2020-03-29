@@ -16,6 +16,8 @@ export default class UserService {
     }
 
     getToken() {
+        if (!localStorage.getItem(STORAGE_ITEM)) return null;
+
         return localStorage.getItem(STORAGE_ITEM).replace('"', '').replace('"', '');
     }
 
@@ -24,6 +26,7 @@ export default class UserService {
     }
 
     isAuth() {
+        console.log('isAuth', this.getToken())
         return this.getToken() !== null && this.getToken() !== undefined;
     }
 }
