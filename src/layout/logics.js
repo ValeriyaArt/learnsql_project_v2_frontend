@@ -42,8 +42,7 @@ const getUserData = createLogic({
 
         service.getUserData()
             .then((res) => {
-                console.log('res', res);
-                dispatch(actions.setUserData());
+                dispatch(actions.setUserData(res.data));
                 dispatch(actions.fetchingSuccess());
             })
             .catch((err) => {

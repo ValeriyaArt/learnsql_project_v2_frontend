@@ -44,6 +44,7 @@ class ProfileInfoContainer extends React.PureComponent{
     };
 
     changeClickButtonHandler = () => {
+        this.setEditModeFalse();
         this.props.actions.changeProfileInfo();
     };
 

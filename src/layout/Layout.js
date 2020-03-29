@@ -27,32 +27,12 @@ class Layout extends React.Component {
         openMenu: false
     };
 
-    componentShouldUpdate(nextProps, nextState){
+    shouldComponentUpdate(nextProps, nextState){
         return !shallowEqual(this.props.errors, nextProps.errors)
             || this.props.fetching !== nextProps.fetching
             || !shallowEqual(this.props.children, nextProps.children)
         ;
     }
-
-    componentDidMount() {
-        if (this.props.groupOptions.length === 0){
-            this.props.actions.getGroupOptions();
-        }
-
-        this.getUserData();
-    }
-
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        //this.getUserData();
-    }
-
-    getUserData = () => {
-        const isAuth = userService.isAuth();
-
-        if (Object.keys(this.props.user).length === 0 && isAuth){
-            this.props.actions.getUserData();
-        }
-    };
 
     handleOpenMenu = () => {
         this.setState({openMenu: true});

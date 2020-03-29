@@ -19,6 +19,12 @@ export default class BaseService {
         });
     }
 
+    put(url, putData) {
+        return new Promise((successFn, errorFn) => {
+            this.getAxios().put(url, putData).then(successFn).catch(errorFn);
+        });
+    }
+
     interceptSuccessResponse = (response) => {
         return {
             ...response,
@@ -62,7 +68,6 @@ export default class BaseService {
 
         _axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
         _axios.defaults.xsrfCookieName = "csrftoken";
-        // _axios.defaults.withCredentials = true;
 
         const isAuth = userService.isAuth();
 
