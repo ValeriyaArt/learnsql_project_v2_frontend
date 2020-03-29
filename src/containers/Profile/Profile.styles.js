@@ -16,6 +16,7 @@ export default (theme) => ({
     changePassword: {
         color: theme.palette.primary.main,
         cursor: 'pointer',
-        marginTop: '15px'
+        marginTop: '15px',
+        marginBottom: '15px',
     }
 });

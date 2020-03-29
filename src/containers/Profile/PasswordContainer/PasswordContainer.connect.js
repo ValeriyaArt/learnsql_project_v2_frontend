@@ -9,6 +9,7 @@ const mapStateToProps = (state) => {
         disableButton: getFieldValue(state, Enum.PASSWORD_REPEAT_FIELD).length === 0
             || getFieldValue(state, Enum.PASSWORD_FIELD).length === 0
             || getFieldValue(state, Enum.OLD_PASSWORD_FIELD).length === 0
+            || isPasswordError(state)
         ,
         isPasswordError: isPasswordError(state),
     };

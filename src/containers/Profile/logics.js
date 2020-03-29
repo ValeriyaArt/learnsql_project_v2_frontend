@@ -3,6 +3,7 @@ import get from 'lodash/get';
 
 import * as C from './constants';
 import actions from '../../layout/actions';
+import profileActions from './actions';
 
 import Service from './service';
 
@@ -22,7 +23,11 @@ const changeProfileInfo = createLogic({
 
         service.changeProfileInfo(formData)
             .then((res) => {
-                //todo: set new user data or get from BE
+                dispatch(profileActions.changeProfileField({destination: Enum.PASSWORD_FIELD, value: ''}));
+                dispatch(profileActions.changeProfileField({destination: Enum.PASSWORD_REPEAT_FIELD, value: ''}));
+                dispatch(profileActions.changeProfileField({destination: Enum.OLD_PASSWORD_FIELD, value: ''}));
+
+                dispatch(actions.setUserData(res.data));
                 dispatch(actions.fetchingSuccess(['Данные успешно изменены.']));
             })
             .catch((err) => {

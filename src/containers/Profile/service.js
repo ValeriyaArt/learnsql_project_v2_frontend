@@ -5,7 +5,7 @@ class ProfileService extends BaseService{
         return this.put('/auth/users/me', formData);
     }
     changePassword(formData) {
-        return this.post('/auth/users', formData);
+        return this.post('/auth/users/set_password/', formData);
     }
 }
 
