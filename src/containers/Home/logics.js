@@ -35,7 +35,7 @@ const getCourses = createLogic({
 });
 
 const getMyCourses = createLogic({
-    type: C.GET_COURSES,
+    type: C.GET_MY_COURSES,
     latest: true,
     process({getState, action}, dispatch, done) {
         dispatch(actions.fetchingTrue({destination: Enum.GET_MY_COURSES_FETCHING}));
@@ -69,7 +69,7 @@ const joinCourse = createLogic({
         service.joinCourse(courseId)
             .then((res) => {
                 dispatch(actions.fetchingSuccess());
-                dispatch(homeActions.setMyCourses(res.data));
+                dispatch(homeActions.getMyCourses());
             })
             .catch((err) => {
                 dispatch(actions.fetchingFailed({

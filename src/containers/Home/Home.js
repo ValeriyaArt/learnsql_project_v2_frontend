@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from "prop-types";
+import get from 'lodash/get';
 import {Redirect} from "react-router";
 
 import Card from '@material-ui/core/Card';
@@ -14,6 +15,7 @@ import UserService from "../../service/user-service";
 
 import connect from './Home.connect';
 import styles from './Home.styles';
+import Link from "react-router-dom/Link";
 
 const userService = UserService.factory();
 
@@ -23,6 +25,10 @@ class Home extends React.PureComponent{
         this.props.actions.getMyCourses();
     }
 
+    joinCourse = (courseId) => () => {
+        this.props.actions.joinCourse(courseId);
+    };
+
     render() {
         const {classes, auth, courses, myCourses} = this.props;
         const isAuth = userService.isAuth() && auth;
@@ -30,25 +36,39 @@ class Home extends React.PureComponent{
         if (!isAuth) return <Redirect to={appRouter.getSignInRoute()} />;
 
         return(
-            <>
-                <Card className={classes.root}>
-                    <CardContent>
-                        <Typography variant="h5" component="h2">
-                            Course name
-                        </Typography>
-                        <Typography className={classes.description} color="textSecondary">
-                            course description course descriptioncourse descriptioncourse description course description course description
-                        </Typography>
-                    </CardContent>
-                    <CardActions className={classes.actions}>
-                        <Button color="primary"
-                                variant="outlined"
-                        >
-                            Присоединиться
-                        </Button>
-                    </CardActions>
-                </Card>
-            </>
+            <div className={classes.root}>
+                {courses.map(course =>
+                    <Card className={classes.card} key={`course-${course.id}`}>
+                        <CardContent>
+                            <Typography variant="h5" component="h2">
+                                {get(course, 'attributes.title', '')}
+                            </Typography>
+                            <Typography className={classes.description} color="textSecondary">
+                                {get(course, 'attributes.description', '')}
+                            </Typography>
+                        </CardContent>
+                        <CardActions className={classes.actions}>
+                            {myCourses.some(myCourse => myCourse.id === course.id) ?
+                                <Button color="primary"
+                                        variant="outlined"
+                                >
+                                    <Link to={appRouter.getCourseLink(course.id)}
+                                          className={classes.link}>
+                                        На страницу курса
+                                    </Link>
+                                </Button>
+                                :
+                                <Button color="primary"
+                                        variant="outlined"
+                                        onClick={this.joinCourse(course.id)}
+                                >
+                                    Присоединиться
+                                </Button>
+                            }
+                        </CardActions>
+                    </Card>
+                )}
+            </div>
         );
     }
 }
