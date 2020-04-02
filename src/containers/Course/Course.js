@@ -1,4 +1,6 @@
 import React from 'react';
+import get from 'lodash/get';
+import {withRouter} from 'react-router-dom';
 
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -13,6 +15,10 @@ class Course extends React.PureComponent{
     state = {
         currentTab: 2,
     };
+
+    componentDidMount() {
+        this.props.actions.getCourseInfo(get(this, 'props.match.params.id', null));
+    }
 
     changeTabHandler = (event, tabNumber) => {
         this.setState({currentTab: tabNumber});
@@ -51,7 +57,7 @@ class Course extends React.PureComponent{
 
     render() {
         const {classes} = this.props;
-
+        console.log('this.props', this.props);
         return(
             <>
                 {this.renderTabMenu()}
@@ -65,4 +71,4 @@ Course.propTypes = {
 
 };
 
-export default withStyles(styles)(connect(Course));
+export default withStyles(styles)(connect(withRouter(Course)));

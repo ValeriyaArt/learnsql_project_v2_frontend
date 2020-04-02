@@ -25,7 +25,7 @@ export default class RouterService {
     };
 
     getCourseRoute = () => {
-        return SEPARATOR + COURSE;
+        return SEPARATOR + COURSE + SEPARATOR + ':id';
     };
 
     getProfileRoute = () => {
@@ -34,6 +34,10 @@ export default class RouterService {
 
     getHomeRoute = () => {
         return SEPARATOR;
+    };
+
+    getCourseLink = (id) => {
+        return SEPARATOR + COURSE + SEPARATOR + id;
     };
 }
 
