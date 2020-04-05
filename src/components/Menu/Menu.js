@@ -18,7 +18,7 @@ import styles from './Menu.styles';
 
 class Menu extends React.PureComponent{
     render() {
-        const {classes, isOpen} = this.props;
+        const {classes, isOpen, myCourses} = this.props;
 
         return(
             <Drawer
@@ -30,7 +30,7 @@ class Menu extends React.PureComponent{
                 }}
             >
                 <List>
-                    <ListItem button>
+                    <ListItem button className={classes.listItem}>
                         <Link to={appRouter.getHomeRoute()} className={classes.link}>
                             <ListItemIcon><HomeIcon /></ListItemIcon>
                             <ListItemText primary={'Главная'} />
@@ -41,20 +41,20 @@ class Menu extends React.PureComponent{
                 <Divider />
 
                 <List>
-                    <ListItem button>
-                        <ListItemIcon><SchoolIcon /></ListItemIcon>
-                        <ListItemText primary={'Курс 1'} />
-                    </ListItem>
-                    <ListItem button>
-                        <ListItemIcon><SchoolIcon /></ListItemIcon>
-                        <ListItemText primary={'Курс 2'} />
-                    </ListItem>
+                    {myCourses.map(course =>
+                        <ListItem button key={`course-link-${course.id}`} className={classes.listItem}>
+                            <Link to={appRouter.getCourseLink(course.id)} className={classes.link}>
+                                <ListItemIcon><SchoolIcon /></ListItemIcon>
+                                <ListItemText primary={`Курс ${course.id}`} />
+                            </Link>
+                        </ListItem>
+                    )}
                 </List>
 
                 <Divider />
 
                 <List>
-                    <ListItem button>
+                    <ListItem button className={classes.listItem}>
                         <ListItemIcon><QuestionIcon /></ListItemIcon>
                         <ListItemText primary={'FAQ'} />
                     </ListItem>

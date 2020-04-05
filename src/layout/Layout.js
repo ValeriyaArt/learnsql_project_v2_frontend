@@ -43,6 +43,11 @@ class Layout extends React.Component {
             || this.state.openMenu !== nextState.openMenu
         ;
     }
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.props.auth && !prevProps.auth && this.props.myCourses.length === 0){
+            this.props.actions.getMyCourses();
+        }
+    }
 
     handleOpenMenu = () => {
         this.setState({openMenu: true});
@@ -59,7 +64,7 @@ class Layout extends React.Component {
 
     render() {
         const {openMenu} = this.state;
-        const {classes, fetching, errors, successMessages, auth} = this.props;
+        const {classes, fetching, errors, successMessages, auth, myCourses} = this.props;
         const isAuth = userService.isAuth() && auth;
 
         return (
@@ -74,7 +79,7 @@ class Layout extends React.Component {
                             logout={this.logout}
                     />
                     <div className={classes.root}>
-                        {isAuth && <Menu isOpen={openMenu} />}
+                        {isAuth && <Menu isOpen={openMenu} myCourses={myCourses} />}
                         <div className={className(classes.content, {[classes.contentShift]: openMenu})}>
                             {this.props.children}
                         </div>
@@ -88,6 +93,7 @@ class Layout extends React.Component {
 Layout.propTypes = {
     children: PropTypes.any,
     errors: PropTypes.array,
+    myCourses: PropTypes.array,
     fetching: PropTypes.bool
 };
 

@@ -9,5 +9,10 @@ export default (theme) => ({
         textDecoration: 'none',
         alignItems: 'center',
         color: theme.palette.text.primary,
+        width: '100%',
+        padding: '6px 16px'
+    },
+    listItem: {
+        padding: 0
     }
 });
