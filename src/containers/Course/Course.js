@@ -5,20 +5,29 @@ import {withRouter} from 'react-router-dom';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import withStyles from '@material-ui/core/styles/withStyles';
+import Box from "@material-ui/core/Box";
 
 import TasksTab from './containers/Tasks';
 
 import connect from './Course.connect';
 import styles from './Course.styles';
-import Box from "@material-ui/core/Box";
 
 class Course extends React.PureComponent{
     state = {
-        currentTab: 2,
+        currentTab: 0,
     };
 
     componentDidMount() {
         this.props.actions.setCourseId(get(this, 'props.match.params.id', null));
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        const courseId = get(this, 'props.match.params.id', null);
+        const lastCourseId = get(prevProps, 'match.params.id', null);
+
+        if (courseId !== lastCourseId){
+            this.props.actions.setCourseId(courseId);
+        }
     }
 
     changeTabHandler = (event, tabNumber) => {

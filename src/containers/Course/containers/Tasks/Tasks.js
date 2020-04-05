@@ -1,14 +1,9 @@
 import React from 'react';
 import PropTypes from "prop-types";
-import get from 'lodash/get';
 
 import Paper from '@material-ui/core/Paper';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
-import TextField from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 import Task from './containers/Task';
@@ -18,12 +13,12 @@ import styles from './Tasks.styles';
 
 class Tasks extends React.PureComponent{
     state = {
-        currentTask: 0
+        currentTask: null
     };
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (this.state.currentTask !== prevState.currentTask){
-            this.props.actions.getCourseTasks(this.state.currentTask);
+        if (this.props.courseId !== prevProps.courseId){
+            this.props.actions.getCourseTasks();
         }
     }
 
@@ -32,7 +27,7 @@ class Tasks extends React.PureComponent{
     }
 
     changeTaskHandler = (id) => () => {
-        this.setState({currentTask: id});
+        this.props.actions.getCourseTask(id);
     };
 
     renderMenu = () => {
@@ -43,7 +38,7 @@ class Tasks extends React.PureComponent{
             <Paper>
                 <MenuList className={classes.menu}>
                     {tasks.map((task, id) =>
-                        <MenuItem onClick={this.changeTaskHandler(id)}
+                        <MenuItem onClick={this.changeTaskHandler(task.id)}
                                   key={`task-${id}`}
                                   selected={currentTask === id}
                         >
@@ -56,6 +51,7 @@ class Tasks extends React.PureComponent{
     };
 
     render() {
+
         return(
             <>
                 {this.renderMenu()}
@@ -66,7 +62,8 @@ class Tasks extends React.PureComponent{
 }
 
 Tasks.propTypes = {
-    tasks: PropTypes.array
+    tasks: PropTypes.array,
+    courseId: PropTypes.string
 };
 
 export default withStyles(styles)(connect(Tasks));

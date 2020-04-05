@@ -80,7 +80,8 @@ class Task extends React.PureComponent{
 }
 
 Task.propTypes = {
-    tasks: PropTypes.array
+    task: PropTypes.object,
+    currentTask: PropTypes.string
 };
 
 export default withStyles(styles)(connect(Task));
