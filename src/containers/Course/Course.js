@@ -10,6 +10,7 @@ import TasksTab from './containers/Tasks';
 
 import connect from './Course.connect';
 import styles from './Course.styles';
+import Box from "@material-ui/core/Box";
 
 class Course extends React.PureComponent{
     state = {
@@ -17,7 +18,7 @@ class Course extends React.PureComponent{
     };
 
     componentDidMount() {
-        this.props.actions.getCourseInfo(get(this, 'props.match.params.id', null));
+        this.props.actions.setCourseId(get(this, 'props.match.params.id', null));
     }
 
     changeTabHandler = (event, tabNumber) => {
@@ -57,11 +58,13 @@ class Course extends React.PureComponent{
 
     render() {
         const {classes} = this.props;
-        console.log('this.props', this.props);
+
         return(
             <>
                 {this.renderTabMenu()}
-                {this.renderTabContent()}
+                <Box display={'flex'} className={classes.courseTabContent}>
+                    {this.renderTabContent()}
+                </Box>
             </>
         );
     }

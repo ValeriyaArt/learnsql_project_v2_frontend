@@ -11,6 +11,7 @@ import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import withStyles from '@material-ui/core/styles/withStyles';
 
+import Task from './containers/Task';
 
 import connect from './Tasks.connect';
 import styles from './Tasks.styles';
@@ -19,6 +20,16 @@ class Tasks extends React.PureComponent{
     state = {
         currentTask: 0
     };
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.state.currentTask !== prevState.currentTask){
+            this.props.actions.getCourseTasks(this.state.currentTask);
+        }
+    }
+
+    componentDidMount() {
+        this.props.actions.getCourseTasks();
+    }
 
     changeTaskHandler = (id) => () => {
         this.setState({currentTask: id});
@@ -36,7 +47,7 @@ class Tasks extends React.PureComponent{
                                   key={`task-${id}`}
                                   selected={currentTask === id}
                         >
-                            {get(task, 'attributes.title')}
+                            Задание {id + 1}
                         </MenuItem>
                     )}
                 </MenuList>
@@ -44,56 +55,12 @@ class Tasks extends React.PureComponent{
         )
     };
 
-    renderTask = () => {
-        const {tasks, classes} = this.props;
-        const {currentTask} = this.state;
-        const taskText = get(tasks, `${currentTask}.attributes.task_text`, '');
-
-        return (
-            <Paper className={classes.taskRoot}>
-                <Typography> <b>Задание:</b> </Typography>
-                <Typography> {taskText} </Typography>
-
-                {this.renderAnswerField()}
-            </Paper>
-        )
-    };
-
-    renderAnswerField = () => {
-        const {classes} = this.props;
-
-        return (
-            <Box display={'block'} className={classes.answerFieldContainer}>
-                <TextField label={'Запрос'}
-                           multiline
-                           rowsMax={10}
-                           rows={5}
-                           variant={'outlined'}
-                           fullWidth
-                           maxWidth={500}
-                />
-                <Box display={'flex'}
-                     justifyContent={'flex-end'}
-                     className={classes.buttonsContainer}
-                >
-                    <Button> Очистить </Button>
-                    <Button color={'primary'}
-                            variant={'outlined'}
-                            className={classes.button}
-                    >
-                        Выполнить
-                    </Button>
-                </Box>
-            </Box>
-        );
-    };
-
     render() {
         return(
-            <Box display={'flex'}>
+            <>
                 {this.renderMenu()}
-                {this.renderTask()}
-            </Box>
+                <Task />
+            </>
         );
     }
 }

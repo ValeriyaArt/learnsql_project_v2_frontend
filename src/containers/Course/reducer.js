@@ -120,6 +120,36 @@ export const initialState = {
     ]
 };
 
-export const reducer = createReducer(initialState, {
 
+const setCourseId = (state, {payload}) => ({
+    ...state,
+    [Enum.COURSE_ID]: payload,
+});
+
+const setCourseTasks = (state, {payload}) => ({
+    ...state,
+    [Enum.TASKS]: payload,
+});
+
+const setCourseTask = (state, {payload}) => ({
+    ...state,
+    [Enum.CURRENT_TASK]: payload,
+});
+
+const setCourseMethodical = (state, {payload}) => ({
+    ...state,
+    [Enum.METHODICAL]: payload,
+});
+
+const setCourseStatistics = (state, {payload}) => ({
+    ...state,
+    [Enum.STATISTICS]: payload,
+});
+
+export const reducer = createReducer(initialState, {
+    [C.SET_COURSE_TASKS]: setCourseTasks,
+    [C.SET_COURSE_TASK]: setCourseTask,
+    [C.SET_COURSE_METHODICAL]: setCourseMethodical,
+    [C.SET_COURSE_STATISTICS]: setCourseStatistics,
+    [C.SET_COURSE_ID]: setCourseId
 });

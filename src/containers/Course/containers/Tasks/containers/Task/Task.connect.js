@@ -1,11 +1,11 @@
 import {connect} from 'react-redux';
 import {bindActionCreators} from "redux";
-import actions from "../../actions";
-import {getTasks} from '../../getters';
+import actions from "../../../../actions";
+import {getCurrentTask} from '../../../../getters';
 
 const mapStateToProps = (state) => {
     return {
-        tasks: getTasks(state)
+        task: getCurrentTask(state)
     };
 };
 
