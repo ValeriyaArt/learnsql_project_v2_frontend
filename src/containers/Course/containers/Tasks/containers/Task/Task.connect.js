@@ -5,7 +5,7 @@ import {getCurrentTask} from '../../../../getters';
 
 const mapStateToProps = (state) => {
     return {
-        task: getCurrentTask(state)
+        task: getCurrentTask(state),
     };
 };
 

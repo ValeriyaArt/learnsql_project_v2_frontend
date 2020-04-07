@@ -7,7 +7,7 @@ import courseActions from './actions';
 
 import Service from './service';
 import * as Enum from "./enum";
-import {getCourseId, getCurrentTaskId} from "./getters";
+import {getCourseId, getCurrentTaskId, getTaskId} from "./getters";
 
 const service = new Service();
 
@@ -24,8 +24,10 @@ const getCourseTasks = createLogic({
 
         service.getCourseTasks(courseId)
             .then((res) => {
+                const firstTaskId = getTaskId(get(res, 'data.0', {}));
+
                 dispatch(courseActions.setCourseTasks(res.data));
-                dispatch(courseActions.getCourseTask(get(res, 'data.0.id', null)));
+                dispatch(courseActions.getCourseTask(firstTaskId));
                 dispatch(actions.fetchingSuccess());
             })
             .catch((err) => {
@@ -104,7 +106,6 @@ const getCourseStatistics = createLogic({
     process({getState, action}, dispatch, done) {
         const state = getState();
         const courseId = getCourseId(state);
-        const answer = action.payload;
 
         if (courseId === null) return done();
 

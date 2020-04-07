@@ -6,6 +6,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Box from "@material-ui/core/Box";
+import Paper from "@material-ui/core/Paper";
 
 import TasksTab from './containers/Tasks';
 
@@ -61,6 +62,8 @@ class Course extends React.PureComponent{
                 return <> Методические материалы </>;
             case 2:
                 return <TasksTab />;
+            default:
+                return <></>;
         }
 
     };
@@ -71,8 +74,10 @@ class Course extends React.PureComponent{
         return(
             <>
                 {this.renderTabMenu()}
-                <Box display={'flex'} className={classes.courseTabContent}>
-                    {this.renderTabContent()}
+                <Box className={classes.courseTabContent}>
+                    <Paper className={classes.paper}>
+                        {this.renderTabContent()}
+                    </Paper>
                 </Box>
             </>
         );

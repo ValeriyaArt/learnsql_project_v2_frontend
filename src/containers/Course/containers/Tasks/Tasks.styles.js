@@ -1,7 +1,6 @@
 export default (theme) => ({
-    taskRoot: {
-        padding: 20,
-        width: '100%'
+    root: {
+        height: '100%'
     },
     answerFieldContainer: {
         marginTop: 20,
@@ -14,6 +13,7 @@ export default (theme) => ({
         marginLeft: 10
     },
     menu: {
-        minWidth: 250
+        minWidth: 250,
+        borderRight: '1px solid #ccc'
     }
 });

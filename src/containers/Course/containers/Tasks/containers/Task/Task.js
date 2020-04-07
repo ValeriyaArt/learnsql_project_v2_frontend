@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from "prop-types";
 import get from 'lodash/get';
 
-import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
@@ -69,12 +68,12 @@ class Task extends React.PureComponent{
         const taskTitle = get(task, `attributes.title`, '');
 
         return (
-            <Paper className={classes.taskRoot}>
+            <div className={classes.taskRoot}>
                 <Typography> <b>{taskTitle}:</b> </Typography>
                 <Typography> {taskText} </Typography>
 
                 {this.renderAnswerField()}
-            </Paper>
+            </div>
         )
     }
 }

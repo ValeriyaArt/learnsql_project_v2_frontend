@@ -4,5 +4,8 @@ export default (theme) => ({
     },
     courseTabContent: {
         height: 'calc(100vh - 180px)'
+    },
+    paper: {
+        height: '100%'
     }
 });

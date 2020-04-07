@@ -1,12 +1,14 @@
 import React from 'react';
 import PropTypes from "prop-types";
 
-import Paper from '@material-ui/core/Paper';
+import Box from '@material-ui/core/Box';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 import Task from './containers/Task';
+
+import {getTaskId} from "../../getters";
 
 import connect from './Tasks.connect';
 import styles from './Tasks.styles';
@@ -35,35 +37,36 @@ class Tasks extends React.PureComponent{
         const {currentTask} = this.state;
 
         return (
-            <Paper>
-                <MenuList className={classes.menu}>
-                    {tasks.map((task, id) =>
-                        <MenuItem onClick={this.changeTaskHandler(task.id)}
-                                  key={`task-${id}`}
-                                  selected={currentTask === id}
-                        >
-                            Задание {id + 1}
-                        </MenuItem>
-                    )}
-                </MenuList>
-            </Paper>
+            <MenuList className={classes.menu}>
+                {tasks.map((task, index) =>
+                    <MenuItem
+                        onClick={this.changeTaskHandler(getTaskId(task))}
+                        key={`task-${index}`}
+                        selected={currentTask === getTaskId(task)}
+                    >
+                        Задание {index + 1}
+                    </MenuItem>
+                )}
+            </MenuList>
         )
     };
 
     render() {
+        const {classes, isFetchingGet} = this.props;
 
         return(
-            <>
+            <Box display={'flex'} className={classes.root}>
                 {this.renderMenu()}
-                <Task />
-            </>
+                {!isFetchingGet && <Task />}
+            </Box>
         );
     }
 }
 
 Tasks.propTypes = {
     tasks: PropTypes.array,
-    courseId: PropTypes.string
+    courseId: PropTypes.string,
+    isFetchingGet: PropTypes.bool
 };
 
 export default withStyles(styles)(connect(Tasks));
