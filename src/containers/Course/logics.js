@@ -146,13 +146,13 @@ const completeTask = createLogic({
 
         service.completeTask(routeId, currentTaskId, answer)
             .then((res) => {
-                console.log('res');
-                dispatch(actions.fetchingSuccess());
+                dispatch(actions.fetchingSuccess(['Задание выполнено успешно!']));
                 dispatch(courseActions.setCurrentTaskError(null));
+                dispatch(courseActions.getCourseTasks());
             })
             .catch((err) => {
                 const error = get(err, 'message', '');
-                const errorMessage = error.split(",")[1];
+                const errorMessage = get(error.split(","),'1', '');
 
                 dispatch(courseActions.setCurrentTaskError(errorMessage.replace(/[^A-Za-zА-Яа-яЁё\s]/g, "")));
             })

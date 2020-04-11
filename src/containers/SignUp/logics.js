@@ -24,7 +24,7 @@ const signUp = createLogic({
         service.signUp(formData)
             .then((res) => {
                 dispatch(actions.fetchingSuccess(['Вы успешно зарегистрированы!']));
-                dispatch(signUpPageActions.signUpPageDown());
+                dispatch(signUpPageActions.signUpClearAllFields());
             })
             .catch((err) => {
                 dispatch(actions.fetchingFailed({

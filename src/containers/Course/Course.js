@@ -1,5 +1,6 @@
 import React from 'react';
 import get from 'lodash/get';
+import {Redirect} from "react-router";
 import {withRouter} from 'react-router-dom';
 
 import Tabs from '@material-ui/core/Tabs';
@@ -10,8 +11,13 @@ import Paper from "@material-ui/core/Paper";
 
 import TasksTab from './containers/Tasks';
 
+import {appRouter} from "../../service/router-service";
+import UserService from "../../service/user-service";
+
 import connect from './Course.connect';
 import styles from './Course.styles';
+
+const userService = UserService.factory();
 
 class Course extends React.PureComponent{
     state = {
@@ -69,7 +75,11 @@ class Course extends React.PureComponent{
     };
 
     render() {
-        const {classes} = this.props;
+        const {classes, auth} = this.props;
+
+        const isAuth = userService.isAuth() && auth;
+
+        if (!isAuth) return <Redirect to={appRouter.getSignInRoute()} />;
 
         return(
             <>

@@ -4,6 +4,7 @@ const SIGN_IN = 'sign-in';
 const SIGN_UP = 'sign-up';
 const COURSE = 'course';
 const PROFILE = 'profile';
+const FAQ = 'faq';
 
 const SEPARATOR = '/';
 
@@ -30,6 +31,10 @@ export default class RouterService {
 
     getProfileRoute = () => {
         return SEPARATOR + PROFILE;
+    };
+
+    getFAQLink = () => {
+        return SEPARATOR + FAQ;
     };
 
     getHomeRoute = () => {

@@ -18,5 +18,8 @@ export default (theme) => ({
     },
     doneIcon: {
         color: 'green'
+    },
+    menuItem: {
+        justifyContent: 'space-between'
     }
 });

@@ -19,7 +19,7 @@ const fetchingTrue = (state, {payload}) => ({
     [Enum.FETCHING]: {
         ...state[Enum.FETCHING],
         [payload.destination]: true
-    }
+    },
 });
 
 const fetchingFalse = (state, {payload}) => ({

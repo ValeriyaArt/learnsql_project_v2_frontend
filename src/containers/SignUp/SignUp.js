@@ -49,7 +49,8 @@ class SignUp extends React.PureComponent{
     };
 
     render() {
-        const {classes, disableButton, groupOptions, isPasswordError, auth} = this.props;
+        const {classes, disableButton, groupOptions, isPasswordError, auth,
+            username, firstName, lastName, password, passwordRepeat } = this.props;
         const {passwordFieldIsFocused} = this.state;
         const showPasswordError = isPasswordError && !passwordFieldIsFocused;
 
@@ -63,19 +64,23 @@ class SignUp extends React.PureComponent{
                     <TextField label="Логин"
                                className={classes.textField}
                                onChange={this.changeField(Enum.USERNAME_FIELD)}
+                               value={username}
                     />
                     <TextField label="Имя"
                                className={classes.textField}
                                onChange={this.changeField(Enum.FIRST_NAME_FIELD)}
+                               value={firstName}
                     />
                     <TextField label="Фамилия"
                                className={classes.textField}
                                onChange={this.changeField(Enum.LAST_NAME_FIELD)}
+                               value={lastName}
                     />
                     <TextField label="Пароль"
                                className={classes.textField}
                                onChange={this.changeField(Enum.PASSWORD_FIELD)}
                                type="password"
+                               value={password}
                     />
                     <TextField label="Повторите пароль"
                                className={classes.textField}
@@ -85,6 +90,7 @@ class SignUp extends React.PureComponent{
                                onFocus={this.passwordFieldFocus}
                                onBlur={this.passwordFieldBlur}
                                helperText={showPasswordError && 'Пароли не совпадают'}
+                               value={passwordRepeat}
                     />
 
                     <FormControl>
@@ -123,6 +129,12 @@ class SignUp extends React.PureComponent{
 }
 
 SignUp.propTypes = {
+    username: PropTypes.string,
+    firstName: PropTypes.string,
+    lastName: PropTypes.string,
+    password: PropTypes.string,
+    passwordRepeat: PropTypes.string,
+    group: PropTypes.string,
     classes: PropTypes.object,
     actions: PropTypes.object,
     disableButton: PropTypes.bool,

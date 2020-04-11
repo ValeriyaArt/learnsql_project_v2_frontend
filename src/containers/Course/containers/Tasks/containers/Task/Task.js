@@ -12,9 +12,13 @@ import connect from './Task.connect';
 import styles from './Task.styles';
 
 class Task extends React.PureComponent{
-    state = {
-        answer: ''
-    };
+    constructor(props) {
+        super();
+
+        this.state = {
+            answer: props.solution
+        }
+    }
 
     answerChangeHandler = (event) => {
         this.setState({answer: get(event, 'target.value')});

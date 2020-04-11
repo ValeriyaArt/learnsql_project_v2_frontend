@@ -18,6 +18,12 @@ const mapStateToProps = (state) => {
         groupOptions: getGroupOptions(state),
         isPasswordError: isPasswordError(state),
         auth: getAuth(state),
+        username: getFieldValue(state, Enum.USERNAME_FIELD),
+        firstName: getFieldValue(state, Enum.FIRST_NAME_FIELD),
+        lastName: getFieldValue(state, Enum.LAST_NAME_FIELD),
+        password: getFieldValue(state, Enum.PASSWORD_FIELD),
+        passwordRepeat: getFieldValue(state, Enum.PASSWORD_REPEAT_FIELD),
+        group: getFieldValue(state, Enum.GROUP_FIELD),
     };
 };
 

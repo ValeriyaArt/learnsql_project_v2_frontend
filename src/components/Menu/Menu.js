@@ -40,23 +40,28 @@ class Menu extends React.PureComponent{
 
                 <Divider />
 
-                <List>
-                    {myCourses.map(course =>
-                        <ListItem button key={`course-link-${course.id}`} className={classes.listItem}>
-                            <Link to={appRouter.getCourseLink(course.id)} className={classes.link}>
-                                <ListItemIcon><SchoolIcon /></ListItemIcon>
-                                <ListItemText primary={`Курс ${course.id}`} />
-                            </Link>
-                        </ListItem>
-                    )}
-                </List>
-
-                <Divider />
+                {myCourses.length > 0 &&
+                    <>
+                        <List>
+                            {myCourses.map(course =>
+                                <ListItem button key={`course-link-${course.id}`} className={classes.listItem}>
+                                    <Link to={appRouter.getCourseLink(course.id)} className={classes.link}>
+                                        <ListItemIcon><SchoolIcon/></ListItemIcon>
+                                        <ListItemText primary={`Курс ${course.id}`}/>
+                                    </Link>
+                                </ListItem>
+                            )}
+                        </List>
+                        <Divider />
+                    </>
+                }
 
                 <List>
                     <ListItem button className={classes.listItem}>
-                        <ListItemIcon><QuestionIcon /></ListItemIcon>
-                        <ListItemText primary={'FAQ'} />
+                        <Link to={appRouter.getFAQLink()} className={classes.link}>
+                            <ListItemIcon><QuestionIcon /></ListItemIcon>
+                            <ListItemText primary={'FAQ'} />
+                        </Link>
                     </ListItem>
                 </List>
             </Drawer>

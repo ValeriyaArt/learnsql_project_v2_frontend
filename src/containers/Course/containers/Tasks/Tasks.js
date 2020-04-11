@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from "prop-types";
+import get from "lodash/get";
 
 import Box from '@material-ui/core/Box';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -45,9 +46,10 @@ class Tasks extends React.PureComponent{
                         onClick={this.changeTaskHandler(route.id, getTaskId(route))}
                         key={`task-${index}`}
                         selected={currentTask === getTaskId(route)}
+                        className={classes.menuItem}
                     >
                         Задание {index + 1}
-                        {route.status === 1 && <DoneIcon className={classes.doneIcon}/>}
+                        {get(route, 'attributes.status', 0) === "1" && <DoneIcon className={classes.doneIcon}/>}
                     </MenuItem>
                 )}
             </MenuList>

@@ -33,6 +33,8 @@ class Layout extends React.Component {
         if (isAuth){
             this.props.actions.setAuthTrue();
         }
+
+        this.props.actions.getGroupOptions();
     }
 
     shouldComponentUpdate(nextProps, nextState){
