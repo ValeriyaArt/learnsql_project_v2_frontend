@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import Box from '@material-ui/core/Box';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
+import DoneIcon from '@material-ui/icons/Done';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 import Task from './containers/Task';
@@ -28,7 +29,8 @@ class Tasks extends React.PureComponent{
         this.props.actions.getCourseTasks();
     }
 
-    changeTaskHandler = (id) => () => {
+    changeTaskHandler = (routeId, id) => () => {
+        this.props.actions.setCurrentRouteId(routeId);
         this.props.actions.getCourseTask(id);
     };
 
@@ -38,13 +40,14 @@ class Tasks extends React.PureComponent{
 
         return (
             <MenuList className={classes.menu}>
-                {tasks.map((task, index) =>
+                {tasks.map((route, index) =>
                     <MenuItem
-                        onClick={this.changeTaskHandler(getTaskId(task))}
+                        onClick={this.changeTaskHandler(route.id, getTaskId(route))}
                         key={`task-${index}`}
-                        selected={currentTask === getTaskId(task)}
+                        selected={currentTask === getTaskId(route)}
                     >
                         Задание {index + 1}
+                        {route.status === 1 && <DoneIcon className={classes.doneIcon}/>}
                     </MenuItem>
                 )}
             </MenuList>

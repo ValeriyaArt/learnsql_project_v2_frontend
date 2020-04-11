@@ -7,7 +7,7 @@ import courseActions from './actions';
 
 import Service from './service';
 import * as Enum from "./enum";
-import {getCourseId, getCurrentTaskId, getTaskId} from "./getters";
+import {getCourseId, getCurrentTaskId, getTaskId, getCurrentRouteId} from "./getters";
 
 const service = new Service();
 
@@ -28,6 +28,7 @@ const getCourseTasks = createLogic({
 
                 dispatch(courseActions.setCourseTasks(res.data));
                 dispatch(courseActions.getCourseTask(firstTaskId));
+                dispatch(courseActions.setCurrentRouteId(get(res, 'data.0.id', null)));
                 dispatch(actions.fetchingSuccess());
             })
             .catch((err) => {
@@ -52,6 +53,7 @@ const getCourseTask = createLogic({
         if (taskId === null) return done();
 
         dispatch(actions.fetchingTrue({destination: Enum.GET_COURSE_TASK_FETCHING}));
+        dispatch(courseActions.setCurrentTaskError(null));
 
         service.getCourseTask(taskId)
             .then((res) => {
@@ -135,25 +137,24 @@ const completeTask = createLogic({
     process({getState, action}, dispatch, done) {
         const state = getState();
         const answer = action.payload;
-        const courseId = getCourseId(state);
-        const themeId = getCurrentTaskId(state);
-        const setOfTaskId = getCurrentTaskId(state);
+        const routeId = getCurrentRouteId(state);
         const currentTaskId = getCurrentTaskId(state);
 
-        if (currentTaskId === null) return done();
+        if (currentTaskId === null || routeId === null) return done();
 
         dispatch(actions.fetchingTrue({destination: Enum.COMPLETE_TASK_FETCHING}));
 
-        service.completeTask(courseId, themeId, setOfTaskId, currentTaskId, answer)
+        service.completeTask(routeId, currentTaskId, answer)
             .then((res) => {
                 console.log('res');
                 dispatch(actions.fetchingSuccess());
+                dispatch(courseActions.setCurrentTaskError(null));
             })
             .catch((err) => {
-                dispatch(actions.fetchingFailed({
-                    message: get(err, 'message', ''),
-                    errors: get(err, 'errors', [])
-                }));
+                const error = get(err, 'message', '');
+                const errorMessage = error.split(",")[1];
+
+                dispatch(courseActions.setCurrentTaskError(errorMessage.replace(/[^A-Za-zА-Яа-яЁё\s]/g, "")));
             })
             .then(() => {
                 dispatch(actions.fetchingFalse({destination: Enum.COMPLETE_TASK_FETCHING}));

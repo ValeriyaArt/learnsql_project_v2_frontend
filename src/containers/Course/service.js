@@ -13,12 +13,15 @@ class CourseService extends BaseService{
     getCourseStatistics(id){
         return this.get(`/api/course/${id}/`);
     }
-    completeTask(courseId, themeId, taskId, answer){
+    completeTask(routeId, taskId, answer){
         const formData = new FormData();
 
         formData.append('solution', answer);
+        formData.append('task_id', taskId);
+        formData.append('status', 1);
+        formData.append('id', routeId);
 
-        return this.completeTask(`/api/student-course/${courseId}/theme/${themeId}/set-of-tasks/${taskId}/task/${taskId}`, formData);
+        return this.put(`/api/student-course/do-task/`, formData);
     }
 }
 

@@ -63,22 +63,31 @@ class Task extends React.PureComponent{
     };
 
     render() {
-        const {task, classes} = this.props;
+        const {task, classes, error} = this.props;
         const taskText = get(task, `attributes.task_text`, '');
         const taskTitle = get(task, `attributes.title`, '');
 
         return (
             <div className={classes.taskRoot}>
-                <Typography> <b>{taskTitle}:</b> </Typography>
-                <Typography> {taskText} </Typography>
+                <div className={classes.task}>
+                    <Typography> <b>{taskTitle}:</b> </Typography>
+                    <Typography> {taskText} </Typography>
 
-                {this.renderAnswerField()}
+                    {this.renderAnswerField()}
+
+                    {error &&
+                        <Box className={classes.error}>
+                            <Typography> {error} </Typography>
+                        </Box>
+                    }
+                </div>
             </div>
         )
     }
 }
 
 Task.propTypes = {
+    error: PropTypes.any,
     task: PropTypes.object,
     currentTask: PropTypes.string
 };

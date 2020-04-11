@@ -14,7 +14,11 @@ const setCourseStatistics = createAction(C.SET_COURSE_STATISTICS, 'payload');
 const getCourseMethodical = createAction(C.GET_COURSE_METHODICAL, 'payload');
 const setCourseMethodical = createAction(C.SET_COURSE_METHODICAL, 'payload');
 
+const setCurrentTaskError = createAction(C.SET_CURRENT_TASK_ERROR, 'payload');
+const removeCurrentTaskError = createAction(C.REMOVE_CURRENT_TASK_ERROR, 'payload');
+
 const setCourseId = createAction(C.SET_COURSE_ID, 'payload');
+const setCurrentRouteId = createAction(C.SET_COURSE_ROUTE_ID, 'payload');
 const completeTask = createAction(C.COMPLETE_TASK, 'payload');
 
 export default {
@@ -28,4 +32,7 @@ export default {
     getCourseMethodical,
     setCourseMethodical,
     completeTask,
+    setCurrentTaskError,
+    removeCurrentTaskError,
+    setCurrentRouteId,
 }

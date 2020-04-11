@@ -15,5 +15,8 @@ export default (theme) => ({
     menu: {
         minWidth: 250,
         borderRight: '1px solid #ccc'
+    },
+    doneIcon: {
+        color: 'green'
     }
 });
