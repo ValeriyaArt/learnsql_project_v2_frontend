@@ -11,8 +11,11 @@ const setCourseTask = createAction(C.SET_COURSE_TASK, 'payload');
 const getCourseStatistics = createAction(C.GET_COURSE_STATISTICS, 'payload');
 const setCourseStatistics = createAction(C.SET_COURSE_STATISTICS, 'payload');
 
-const getCourseMethodical = createAction(C.GET_COURSE_METHODICAL, 'payload');
-const setCourseMethodical = createAction(C.SET_COURSE_METHODICAL, 'payload');
+const getCourseMethodicalMaterials = createAction(C.GET_COURSE_METHODICAL_MATERIALS, 'payload');
+const setCourseMethodicalMaterials = createAction(C.SET_COURSE_METHODICAL_MATERIALS, 'payload');
+
+const getCourseMethodicalMaterial = createAction(C.GET_COURSE_METHODICAL_MATERIAL, 'payload');
+const setCourseMethodicalMaterial = createAction(C.SET_COURSE_METHODICAL_MATERIAL, 'payload');
 
 const setCurrentTaskError = createAction(C.SET_CURRENT_TASK_ERROR, 'payload');
 const removeCurrentTaskError = createAction(C.REMOVE_CURRENT_TASK_ERROR, 'payload');
@@ -29,8 +32,10 @@ export default {
     setCourseTasks,
     getCourseStatistics,
     setCourseStatistics,
-    getCourseMethodical,
-    setCourseMethodical,
+    getCourseMethodicalMaterials,
+    setCourseMethodicalMaterials,
+    getCourseMethodicalMaterial,
+    setCourseMethodicalMaterial,
     completeTask,
     setCurrentTaskError,
     removeCurrentTaskError,

@@ -73,8 +73,8 @@ const getCourseTask = createLogic({
     }
 });
 
-const getCourseMethodical = createLogic({
-    type: C.GET_COURSE_METHODICAL,
+const getCourseMethodicalMaterials = createLogic({
+    type: C.GET_COURSE_METHODICAL_MATERIALS,
     latest: true,
     process({getState, action}, dispatch, done) {
         const state = getState();
@@ -82,11 +82,11 @@ const getCourseMethodical = createLogic({
 
         if (courseId === null) return done();
 
-        dispatch(actions.fetchingTrue({destination: Enum.GET_COURSE_METHODICAL_FETCHING}));
+        dispatch(actions.fetchingTrue({destination: Enum.GET_COURSE_METHODICAL_MATERIALS_FETCHING}));
 
-        service.getCourseMethodical(courseId)
+        service.getCourseMethodicalMaterials(courseId)
             .then((res) => {
-                dispatch(courseActions.setCourseTasks(res.data));
+                dispatch(courseActions.setCourseMethodicalMaterials(res.data));
                 dispatch(actions.fetchingSuccess());
             })
             .catch((err) => {
@@ -96,14 +96,14 @@ const getCourseMethodical = createLogic({
                 }));
             })
             .then(() => {
-                dispatch(actions.fetchingFalse({destination: Enum.GET_COURSE_METHODICAL_FETCHING}));
+                dispatch(actions.fetchingFalse({destination: Enum.GET_COURSE_METHODICAL_MATERIALS_FETCHING}));
                 return done();
             });
     }
 });
 
 const getCourseStatistics = createLogic({
-    type: C.GET_COURSE_METHODICAL,
+    type: C.GET_COURSE_METHODICAL_MATERIALS,
     latest: true,
     process({getState, action}, dispatch, done) {
         const state = getState();
@@ -166,7 +166,7 @@ const completeTask = createLogic({
 export default [
     getCourseTask,
     getCourseTasks,
-    getCourseMethodical,
+    getCourseMethodicalMaterials,
     getCourseStatistics,
     completeTask,
 ];

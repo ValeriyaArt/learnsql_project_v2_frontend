@@ -7,8 +7,14 @@ class CourseService extends BaseService{
     getCourseTask(id){
         return this.get(`/api/tasks/${id}/`);
     }
-    getCourseMethodical(id){
-        return this.get(`/api/course/${id}/`);
+    getCourseMethodicalMaterials(courseId){
+        const config = {
+            params: {
+                courseId
+            }
+        };
+
+        return this.get(`/api/sectionsofmethodologicalmaterials/`, config);
     }
     getCourseStatistics(id){
         return this.get(`/api/course/${id}/`);

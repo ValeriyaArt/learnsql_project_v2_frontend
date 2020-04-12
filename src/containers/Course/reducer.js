@@ -31,9 +31,9 @@ const setCourseTask = (state, {payload}) => ({
     [Enum.CURRENT_TASK]: payload,
 });
 
-const setCourseMethodical = (state, {payload}) => ({
+const setCourseMethodicalMaterials = (state, {payload}) => ({
     ...state,
-    [Enum.METHODICAL]: payload,
+    [Enum.METHODICAL_MATERIALS]: payload,
 });
 
 const setCourseStatistics = (state, {payload}) => ({
@@ -55,7 +55,7 @@ export const reducer = createReducer(initialState, {
     [C.REMOVE_CURRENT_TASK_ERROR]: removeCurrentTaskError,
     [C.SET_COURSE_TASKS]: setCourseTasks,
     [C.SET_COURSE_TASK]: setCourseTask,
-    [C.SET_COURSE_METHODICAL]: setCourseMethodical,
+    [C.SET_COURSE_METHODICAL_MATERIALS]: setCourseMethodicalMaterials,
     [C.SET_COURSE_STATISTICS]: setCourseStatistics,
     [C.SET_COURSE_ID]: setCourseId,
     [C.SET_COURSE_ROUTE_ID]: setCourseRouteId,

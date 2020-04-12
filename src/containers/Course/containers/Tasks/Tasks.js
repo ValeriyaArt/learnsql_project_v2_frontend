@@ -8,7 +8,7 @@ import MenuList from '@material-ui/core/MenuList';
 import DoneIcon from '@material-ui/icons/Done';
 import withStyles from '@material-ui/core/styles/withStyles';
 
-import Task from './containers/Task';
+import Task from './Task';
 
 import {getTaskId} from "../../getters";
 

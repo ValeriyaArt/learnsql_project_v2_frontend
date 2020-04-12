@@ -7,9 +7,9 @@ import UserService from "./user-service";
 const userService = UserService.factory();
 
 export default class BaseService {
-    get(url) {
+    get(url, config) {
         return new Promise((successFn, errorFn) => {
-            this.getAxios().get(url).then(successFn).catch(errorFn);
+            this.getAxios().get(url, config).then(successFn).catch(errorFn);
         });
     }
 

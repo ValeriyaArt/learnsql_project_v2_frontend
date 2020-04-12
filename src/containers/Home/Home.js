@@ -52,15 +52,15 @@ class Home extends React.PureComponent{
                             </CardContent>
                             <CardActions className={classes.actions}>
                                 {isMyCourse ?
-                                    <Button color="primary"
-                                            variant="outlined"
-                                    >
-                                        <Link
-                                            to={appRouter.getCourseLink(course.id)}
-                                            className={classes.link}>
+                                    <Link
+                                        to={appRouter.getCourseLink(course.id)}
+                                        className={classes.link}>
+                                        <Button color="primary"
+                                                variant="outlined"
+                                        >
                                             На страницу курса
-                                        </Link>
-                                    </Button>
+                                        </Button>
+                                    </Link>
                                     :
                                     <Button color="primary"
                                             variant="outlined"

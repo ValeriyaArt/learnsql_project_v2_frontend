@@ -1,7 +1,7 @@
 import {connect} from 'react-redux';
 import {bindActionCreators} from "redux";
-import actions from "../../../../actions";
-import {getCurrentTask, getCurrentTaskError, getCurrentTaskSolution} from '../../../../getters';
+import actions from "../../../actions";
+import {getCurrentTask, getCurrentTaskError, getCurrentTaskSolution} from '../../../getters';
 
 const mapStateToProps = (state) => {
     return {
