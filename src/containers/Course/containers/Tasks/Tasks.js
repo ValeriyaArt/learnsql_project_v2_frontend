@@ -16,10 +16,6 @@ import connect from './Tasks.connect';
 import styles from './Tasks.styles';
 
 class Tasks extends React.PureComponent{
-    state = {
-        currentTask: null
-    };
-
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (this.props.courseId !== prevProps.courseId){
             this.props.actions.getCourseTasks();
@@ -36,8 +32,7 @@ class Tasks extends React.PureComponent{
     };
 
     renderMenu = () => {
-        const {tasks, classes} = this.props;
-        const {currentTask} = this.state;
+        const {tasks, classes, currentRouteId} = this.props;
 
         return (
             <MenuList className={classes.menu}>
@@ -45,7 +40,7 @@ class Tasks extends React.PureComponent{
                     <MenuItem
                         onClick={this.changeTaskHandler(route.id, getTaskId(route))}
                         key={`task-${index}`}
-                        selected={currentTask === getTaskId(route)}
+                        selected={currentRouteId === route.id}
                         className={classes.menuItem}
                     >
                         Задание {index + 1}
@@ -71,6 +66,7 @@ class Tasks extends React.PureComponent{
 Tasks.propTypes = {
     tasks: PropTypes.array,
     courseId: PropTypes.string,
+    currentRouteId: PropTypes.string,
     isFetchingGet: PropTypes.bool
 };
 

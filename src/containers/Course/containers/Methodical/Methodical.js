@@ -50,7 +50,7 @@ class Methodical extends React.PureComponent{
         return(
             <Box display={'flex'} className={classes.root}>
                 {this.renderMenu()}
-                {!isFetchingGet && < />}
+                {!isFetchingGet && <> Material </>}
             </Box>
         );
     }
