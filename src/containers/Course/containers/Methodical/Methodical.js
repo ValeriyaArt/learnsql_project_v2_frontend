@@ -7,6 +7,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import withStyles from '@material-ui/core/styles/withStyles';
 
+import Material from "./Material/Material";
+
 import connect from './Methodical.connect';
 import styles from './Methodical.styles';
 
@@ -22,22 +24,22 @@ class Methodical extends React.PureComponent{
     }
 
     changeMaterialHandler = (id) => () => {
-        // this.props.actions.setCurrentMaterialId(routeId);
-        // this.props.actions.getCourseMethodicalMaterial(id);
+        this.props.actions.getCourseMethodicalMaterial(id);
     };
 
     renderMenu = () => {
-        const {materials, classes} = this.props;
+        const {materials, classes, currentMaterialId} = this.props;
 
         return (
             <MenuList className={classes.menu}>
                 {materials.map((material, index) =>
                     <MenuItem
-                        onClick={this.changeMaterialHandler()}
-                        key={`task-${index}`}
+                        onClick={this.changeMaterialHandler(material.id)}
+                        key={`material-${index}`}
                         className={classes.menuItem}
+                        selected={currentMaterialId === material.id}
                     >
-                        Материал {index + 1}
+                        {index + 1} {get(material, 'attributes.section_name')}
                     </MenuItem>
                 )}
             </MenuList>
@@ -50,7 +52,7 @@ class Methodical extends React.PureComponent{
         return(
             <Box display={'flex'} className={classes.root}>
                 {this.renderMenu()}
-                {!isFetchingGet && <> Material </>}
+                {!isFetchingGet && <Material />}
             </Box>
         );
     }
@@ -59,6 +61,7 @@ class Methodical extends React.PureComponent{
 Methodical.propTypes = {
     materials: PropTypes.array,
     courseId: PropTypes.string,
+    currentMaterialId: PropTypes.string,
     isFetchingGet: PropTypes.bool
 };
 

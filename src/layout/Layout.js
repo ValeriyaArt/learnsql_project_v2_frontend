@@ -27,13 +27,15 @@ class Layout extends React.Component {
         openMenu: false
     };
 
-    componentDidMount() {
+    componentWillMount() {
         const isAuth = userService.isAuth();
 
         if (isAuth){
             this.props.actions.setAuthTrue();
         }
+    }
 
+    componentDidMount() {
         this.props.actions.getGroupOptions();
     }
 

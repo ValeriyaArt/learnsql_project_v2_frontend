@@ -8,13 +8,10 @@ class CourseService extends BaseService{
         return this.get(`/api/tasks/${id}/`);
     }
     getCourseMethodicalMaterials(courseId){
-        const config = {
-            params: {
-                courseId
-            }
-        };
-
-        return this.get(`/api/sectionsofmethodologicalmaterials/`, config);
+        return this.get(`/api/sectionsofmethodologicalmaterials/${courseId}`);
+    }
+    getCourseMethodicalMaterial(sectionId){
+        return this.get(`/api/topicsofsection/${sectionId}`);
     }
     getCourseStatistics(id){
         return this.get(`/api/course/${id}/`);

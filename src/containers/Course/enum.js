@@ -1,6 +1,7 @@
 export const TASKS = 'tasks';
 export const CURRENT_TASK = 'currentTask';
 export const METHODICAL_MATERIALS = 'methodicalMaterials';
+export const METHODICAL_MATERIAL = 'methodicalMaterial';
 export const STATISTICS = 'statistics';
 export const CURRENT_TASK_ERROR = 'taskError';
 export const COURSE_ROUTE_ID = 'courseRoute';

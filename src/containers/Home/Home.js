@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from "prop-types";
 import get from 'lodash/get';
 import {Redirect} from "react-router";
+import Link from "react-router-dom/Link";
 
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -15,7 +16,6 @@ import UserService from "../../service/user-service";
 
 import connect from './Home.connect';
 import styles from './Home.styles';
-import Link from "react-router-dom/Link";
 
 const userService = UserService.factory();
 

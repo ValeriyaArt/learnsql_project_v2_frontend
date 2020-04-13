@@ -20,3 +20,5 @@ export const getTaskId = (task) => get(task, 'relationships.task_in_set.data.id'
 
 
 export const getMethodicalMaterials = (state) => get(getStateData(state), Enum.METHODICAL_MATERIALS, []);
+export const getCurrentMethodicalMaterial = (state) => get(getStateData(state), Enum.METHODICAL_MATERIAL, []);
+export const getCurrentMethodicalMaterialId = (state) => get(getCurrentMethodicalMaterial(state),'0.relationships.section.data.id', null);

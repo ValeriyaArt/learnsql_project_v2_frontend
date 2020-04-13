@@ -77,7 +77,6 @@ class Course extends React.PureComponent{
 
     render() {
         const {classes, auth} = this.props;
-
         const isAuth = userService.isAuth() && auth;
 
         if (!isAuth) return <Redirect to={appRouter.getSignInRoute()} />;
