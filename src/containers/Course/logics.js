@@ -109,7 +109,7 @@ const getCourseMethodicalMaterial = createLogic({
     process({getState, action}, dispatch, done) {
         const materialId = action.payload;
 
-        if (materialId === null) return done();
+        if (!materialId) return done();
 
         dispatch(actions.fetchingTrue({destination: Enum.GET_COURSE_METHODICAL_MATERIAL_FETCHING}));
 
