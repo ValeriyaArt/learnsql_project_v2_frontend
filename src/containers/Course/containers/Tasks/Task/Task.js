@@ -68,8 +68,10 @@ class Task extends React.PureComponent{
 
     render() {
         const {task, classes, error} = this.props;
-        const taskText = get(task, `attributes.task_text`, '');
+        const taskText = get(task, `attributes.task_text`, null);
         const taskTitle = get(task, `attributes.title`, '');
+
+        if (!taskText) return <></>;
 
         return (
             <div className={classes.taskRoot}>

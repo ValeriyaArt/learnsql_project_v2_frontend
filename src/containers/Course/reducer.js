@@ -35,6 +35,7 @@ const setCourseTask = (state, {payload}) => ({
 const setCourseMethodicalMaterials = (state, {payload}) => ({
     ...state,
     [Enum.METHODICAL_MATERIALS]: payload,
+    [Enum.METHODICAL_MATERIAL]: [],
 });
 const setCurrentMethodicalMaterial = (state, {payload}) => ({
     ...state,
