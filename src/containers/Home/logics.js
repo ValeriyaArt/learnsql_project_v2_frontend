@@ -68,7 +68,7 @@ const joinCourse = createLogic({
 
         service.joinCourse(courseId)
             .then((res) => {
-                dispatch(actions.fetchingSuccess());
+                dispatch(actions.fetchingSuccess(['Вы успешно присоединились к курсу!']));
                 dispatch(homeActions.getMyCourses());
             })
             .catch((err) => {

@@ -4,7 +4,11 @@ export const METHODICAL_MATERIALS = 'methodicalMaterials';
 export const METHODICAL_MATERIAL = 'methodicalMaterial';
 export const STATISTICS = 'statistics';
 export const CURRENT_TASK_ERROR = 'taskError';
+export const CURRENT_TASK_ERROR_TABLE_DATA = 'taskErrorTableData';
 export const COURSE_ROUTE_ID = 'courseRoute';
+
+export const ERROR_REF_RESULT = 'ref_result';
+export const ERROR_STUDENT_RESULT = 'student_result';
 
 export const COURSE_ID = 'COURSE_ID';
 

@@ -30,7 +30,7 @@ const signIn = createLogic({
 
                 userService.setToken(token);
 
-                dispatch(actions.fetchingSuccess());
+                dispatch(actions.fetchingSuccess(['Вы успешно авторизировались!']));
                 dispatch(actions.setAuthTrue());
             })
             .catch((err) => {

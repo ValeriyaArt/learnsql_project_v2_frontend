@@ -19,5 +19,16 @@ export default (theme) => ({
         padding: '20px',
         marginTop: '20px',
         boxShadow: '0px 0px 5px 2px rgba(0,0,0,0.1)'
+    },
+    tableErrors: {
+        display: 'flex',
+        flexWrap: 'wrap'
+    },
+    table: {
+        marginTop: '20px',
+        marginRight: '50px'
+    },
+    taskDescription: {
+        padding: '20px 0px'
     }
 });
