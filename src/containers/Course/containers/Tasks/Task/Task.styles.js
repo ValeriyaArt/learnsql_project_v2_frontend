@@ -1,10 +1,10 @@
 export default (theme) => ({
     taskRoot: {
-        padding: 20,
         width: '100%'
     },
     task: {
-        maxWidth: '600px'
+        maxWidth: '600px',
+        padding: 20
     },
     answerFieldContainer: {
         marginTop: 20,
@@ -30,5 +30,14 @@ export default (theme) => ({
     },
     taskDescription: {
         padding: '20px 0px'
+    },
+    image: {
+        width: '100%'
+    },
+    errorBody: {
+        padding: '20px'
+    },
+    errorTableTitle: {
+        marginBottom: 10
     }
 });

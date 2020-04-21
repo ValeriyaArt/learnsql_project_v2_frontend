@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from "prop-types";
 import get from 'lodash/get';
+
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
@@ -8,7 +9,11 @@ import Button from '@material-ui/core/Button';
 import Table from '@material-ui/core/Table';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import Paper from '@material-ui/core/Paper';
 import withStyles from '@material-ui/core/styles/withStyles';
+
+import Scrollbars from "react-custom-scrollbars";
 
 import * as Enum from '../../../enum';
 
@@ -20,7 +25,16 @@ class Task extends React.PureComponent{
         super();
 
         this.state = {
-            answer: props.solution
+            answer: props.solution,
+            showImage: false
+        }
+    }
+
+    showImageClickHandler = () => {
+        if (this.state.showImage){
+            this.setState({showImage: false});
+        } else {
+            this.setState({showImage: true});
         }
     }
 
@@ -80,39 +94,42 @@ class Task extends React.PureComponent{
         const studentResult = get(tableErrorData, [Enum.ERROR_STUDENT_RESULT, 1, 1], []);
 
         return (
-            <Box className={classes.error}>
+            <Box className={classes.errorBody}>
                 <Typography> Неверно! </Typography>
-                <Typography> Результаты выполнения запросов </Typography>
 
                 <div className={classes.tableErrors}>
                     <div className={classes.table}>
-                        <Typography> Правильный запрос </Typography>
-                        <Table>
-                            {refResult.map(row =>
-                                <TableRow>
-                                    {row.map(cell =>
-                                        <TableCell>
-                                            {cell}
-                                        </TableCell>
-                                    )}
-                                </TableRow>
-                            )}
-                        </Table>
+                        <Typography className={classes.errorTableTitle}> Правильный запрос </Typography>
+                        <TableContainer component={Paper}>
+                            <Table>
+                                {refResult.map(row =>
+                                    <TableRow>
+                                        {row.map(cell =>
+                                            <TableCell>
+                                                {cell}
+                                            </TableCell>
+                                        )}
+                                    </TableRow>
+                                )}
+                            </Table>
+                        </TableContainer>
                     </div>
 
                     <div className={classes.table}>
-                        <Typography> Ваш запрос </Typography>
-                        <Table>
-                            {studentResult.map(row =>
-                                <TableRow>
-                                    {row.map(cell =>
-                                        <TableCell>
-                                            {cell}
-                                        </TableCell>
-                                    )}
-                                </TableRow>
-                            )}
-                        </Table>
+                        <Typography className={classes.errorTableTitle}> Ваш запрос </Typography>
+                        <TableContainer component={Paper}>
+                            <Table>
+                                {studentResult.map(row =>
+                                    <TableRow>
+                                        {row.map(cell =>
+                                            <TableCell>
+                                                {cell}
+                                            </TableCell>
+                                        )}
+                                    </TableRow>
+                                )}
+                            </Table>
+                        </TableContainer>
                     </div>
                 </div>
             </Box>
@@ -120,6 +137,7 @@ class Task extends React.PureComponent{
     }
 
     render() {
+        const {showImage} = this.state;
         const {task, classes, error, tableErrorData} = this.props;
         const taskText = get(task, `attributes.task_text`, null);
         const taskDescription = get(task, `attributes.database_description`, '');
@@ -132,23 +150,30 @@ class Task extends React.PureComponent{
 
         return (
             <div className={classes.taskRoot}>
-                <div className={classes.task}>
-                    <Typography> <b>{taskTitle}:</b> </Typography>
-                    <Typography> {taskText} </Typography>
-                    <Typography className={classes.taskDescription}> {taskDescription} </Typography>
-                    <div className={classes.image}> <img src={taskImage} alt=""/> </div>
+                <Scrollbars minheight={300}>
+                    <div className={classes.task}>
+                        <Typography> <b>{taskTitle}:</b> </Typography>
+                        <Typography> {taskText} </Typography>
+                        <Typography className={classes.taskDescription}> {taskDescription} </Typography>
 
-                    {this.renderAnswerField()}
-                </div>
-                <>
-                    {error &&
-                        <Box className={classes.error}>
-                            <Typography> {error} </Typography>
-                        </Box>
-                    }
+                        <Button onClick={this.showImageClickHandler}>
+                            {showImage ? <> Скрыть БД </> : <> Открыть БД </>}
+                        </Button>
 
-                    {refResult.length > 0 && studentResult.length > 0 && this.renderErrorTables()}
-                </>
+                        {showImage && <div className={classes.image}> <img src={taskImage} alt=""/> </div> }
+
+                        {this.renderAnswerField()}
+                    </div>
+                    <>
+                        {error &&
+                            <Box className={classes.error}>
+                                <Typography> {error} </Typography>
+                            </Box>
+                        }
+
+                        {refResult.length > 0 && studentResult.length > 0 && this.renderErrorTables()}
+                    </>
+                </Scrollbars>
             </div>
         )
     }

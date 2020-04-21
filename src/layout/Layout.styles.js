@@ -2,7 +2,7 @@
 export default (theme) => ({
     root: {
         display: 'flex',
-        marginTop: '64px' //todo: add var from material ui theme
+        marginTop: '64px'
     },
     content: {
         flexGrow: 1,
@@ -13,7 +13,7 @@ export default (theme) => ({
         }),
         marginLeft: 0,
         boxSizing: 'border-box',
-        height: `calc(100vh - 64px)`, //todo: add var from material ui theme
+        height: `calc(100vh - 80px)`,
     },
     contentShift: {
         transition: theme.transitions.create('margin', {
