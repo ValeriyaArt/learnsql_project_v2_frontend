@@ -182,10 +182,11 @@ const completeTask = createLogic({
                     }));
                 } else {
                     dispatch(actions.fetchingSuccess(['Задание успешно выполнено!']));
-                    dispatch(courseActions.removeCurrentTaskError());
                     dispatch(courseActions.removeCurrentTaskErrorTableData());
                     dispatch(courseActions.getCourseTasks());
                 }
+
+                dispatch(courseActions.removeCurrentTaskError());
             })
             .catch((err) => {
                 const error = get(err, 'message', '');

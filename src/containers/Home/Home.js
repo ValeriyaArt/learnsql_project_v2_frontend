@@ -51,6 +51,9 @@ class Home extends React.PureComponent{
                                 </Typography>
                             </CardContent>
                             <CardActions className={classes.actions}>
+                                <Typography color="main">
+                                    {/*Пройдено 10%*/}
+                                </Typography>
                                 {isMyCourse ?
                                     <Link
                                         to={appRouter.getCourseLink(course.id)}

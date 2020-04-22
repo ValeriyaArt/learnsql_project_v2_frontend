@@ -166,9 +166,7 @@ class Task extends React.PureComponent{
                     </div>
                     <>
                         {error &&
-                            <Box className={classes.error}>
-                                <Typography> {error} </Typography>
-                            </Box>
+                            <Typography className={classes.simpleErrorText}> {error} </Typography>
                         }
 
                         {refResult.length > 0 && studentResult.length > 0 && this.renderErrorTables()}

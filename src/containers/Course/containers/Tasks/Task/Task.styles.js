@@ -15,10 +15,10 @@ export default (theme) => ({
     button: {
         marginLeft: 10
     },
-    error: {
+    simpleErrorText: {
         padding: '20px',
         marginTop: '20px',
-        boxShadow: '0px 0px 5px 2px rgba(0,0,0,0.1)'
+        color: theme.palette.secondary.main
     },
     tableErrors: {
         display: 'flex',

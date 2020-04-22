@@ -4,15 +4,19 @@ export default (theme) => ({
         flexWrap: 'wrap',
     },
     card: {
-        minWidth: 275,
+        minWidth: 400,
         maxWidth: 500,
-        marginRight: '50px'
+        marginRight: '50px',
+        marginBottom: '50px'
     },
     description: {
         marginTop: 12,
     },
     actions: {
-        padding: 16
+        padding: 16,
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center'
     },
     link: {
         color: theme.palette.primary.main,
