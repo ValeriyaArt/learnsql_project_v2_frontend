@@ -17,6 +17,9 @@ const setCourseMethodicalMaterials = createAction(C.SET_COURSE_METHODICAL_MATERI
 const getCourseMethodicalMaterial = createAction(C.GET_COURSE_METHODICAL_MATERIAL, 'payload');
 const setCourseMethodicalMaterial = createAction(C.SET_COURSE_METHODICAL_MATERIAL, 'payload');
 
+const setCurrentTaskAnswer = createAction(C.SET_CURRENT_TASK_ANSWER, 'payload');
+const removeCurrentTaskAnswer = createAction(C.REMOVE_CURRENT_TASK_ANSWER, 'payload');
+
 const setCurrentTaskError = createAction(C.SET_CURRENT_TASK_ERROR, 'payload');
 const removeCurrentTaskError = createAction(C.REMOVE_CURRENT_TASK_ERROR, 'payload');
 
@@ -45,4 +48,6 @@ export default {
     setCurrentRouteId,
     setCurrentTaskErrorTableData,
     removeCurrentTaskErrorTableData,
+    setCurrentTaskAnswer,
+    removeCurrentTaskAnswer,
 }

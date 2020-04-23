@@ -10,6 +10,8 @@ export const COURSE_ROUTE_ID = 'courseRoute';
 export const ERROR_REF_RESULT = 'ref_result';
 export const ERROR_STUDENT_RESULT = 'student_result';
 
+export const CURRENT_TASK_ANSWER = 'CURRENT_TASK_ANSWER';
+
 export const COURSE_ID = 'COURSE_ID';
 
 export const GET_COURSE_TASK_FETCHING = 'GET_COURSE_TASK_FETCHING';

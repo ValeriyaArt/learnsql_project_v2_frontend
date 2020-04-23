@@ -33,7 +33,7 @@ class Tasks extends React.PureComponent{
 
     renderMenu = () => {
         const {tasks, classes, currentRouteId} = this.props;
-
+        console.log('currentRouteId', currentRouteId);
         return (
             <MenuList className={classes.menu}>
                 {tasks.map((route, index) =>

@@ -25,7 +25,6 @@ const setCourseId = (state, {payload}) => ({
 const setCourseTasks = (state, {payload}) => ({
     ...state,
     [Enum.TASKS]: payload,
-    [Enum.CURRENT_TASK]: null,
 });
 
 const setCourseTask = (state, {payload}) => ({
@@ -66,6 +65,15 @@ const removeCurrentTaskErrorTableData = (state) => ({
     [Enum.CURRENT_TASK_ERROR_TABLE_DATA]: {},
 });
 
+const setCourseTaskAnswer = (state, {payload}) => ({
+    ...state,
+    [Enum.CURRENT_TASK_ANSWER]: payload,
+});
+const removeCourseTaskAnswer = (state) => ({
+    ...state,
+    [Enum.CURRENT_TASK_ANSWER]: {},
+});
+
 export const reducer = createReducer(initialState, {
     [C.SET_CURRENT_TASK_ERROR]: setCourseTaskError,
     [C.REMOVE_CURRENT_TASK_ERROR]: removeCurrentTaskError,
@@ -78,4 +86,6 @@ export const reducer = createReducer(initialState, {
     [C.SET_COURSE_ROUTE_ID]: setCourseRouteId,
     [C.SET_CURRENT_TASK_ERROR_TABLE_DATA]: setCourseTaskErrorTableData,
     [C.REMOVE_CURRENT_TASK_ERROR_TABLE_DATA]: removeCurrentTaskErrorTableData,
+    [C.SET_CURRENT_TASK_ANSWER]: setCourseTaskAnswer,
+    [C.REMOVE_CURRENT_TASK_ANSWER]: removeCourseTaskAnswer,
 });

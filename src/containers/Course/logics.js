@@ -25,10 +25,14 @@ const getCourseTasks = createLogic({
         service.getCourseTasks(courseId)
             .then((res) => {
                 const firstTaskId = getTaskId(get(res, 'data.0', {}));
+                const currentTask = getCurrentTaskId(state);
 
                 dispatch(courseActions.setCourseTasks(res.data));
-                dispatch(courseActions.getCourseTask(firstTaskId));
-                dispatch(courseActions.setCurrentRouteId(get(res, 'data.0.id', null)));
+
+                if (!currentTask){
+                    dispatch(courseActions.getCourseTask(firstTaskId));
+                    dispatch(courseActions.setCurrentRouteId(get(res, 'data.0.id', null)));
+                }
             })
             .catch((err) => {
                 dispatch(actions.fetchingFailed({
@@ -52,7 +56,10 @@ const getCourseTask = createLogic({
         if (taskId === null) return done();
 
         dispatch(actions.fetchingTrue({destination: Enum.GET_COURSE_TASK_FETCHING}));
+
         dispatch(courseActions.setCurrentTaskError(null));
+        dispatch(courseActions.setCurrentTaskErrorTableData({}));
+        dispatch(courseActions.setCurrentTaskAnswer([]));
 
         service.getCourseTask(taskId)
             .then((res) => {
@@ -180,8 +187,14 @@ const completeTask = createLogic({
                         [Enum.ERROR_REF_RESULT]: get(data, Enum.ERROR_REF_RESULT, []),
                         [Enum.ERROR_STUDENT_RESULT]: get(data, Enum.ERROR_STUDENT_RESULT, []),
                     }));
+
+                    dispatch(actions.fetchingFailed({
+                        message: 'Результат запроса не совпадает с правильным',
+                        errors: [{detail:'Результат запроса не совпадает с правильным'}]
+                    }));
                 } else {
                     dispatch(actions.fetchingSuccess(['Задание успешно выполнено!']));
+                    dispatch(courseActions.setCurrentTaskAnswer(get(data, 'student_result.1.1', [])));
                     dispatch(courseActions.removeCurrentTaskErrorTableData());
                     dispatch(courseActions.getCourseTasks());
                 }
@@ -193,15 +206,18 @@ const completeTask = createLogic({
                 const errorMessage = get(error.split(","),'1', '');
 
                 if (errorMessage.length > 0){
-                    dispatch(courseActions.setCurrentTaskError(errorMessage.replace(/[^A-Za-zА-Яа-яЁё\s]/g, "")));
-                } else {
+                    const message = errorMessage.replace(/[^A-Za-zА-Яа-яЁё\s]/g, "");
+
+                    dispatch(courseActions.setCurrentTaskError(message));
+
                     dispatch(actions.fetchingFailed({
-                        message: '',
-                        errors: [{detail: 'Ошибка запроса'}]
+                        message: message,
+                        errors: [{detail: message}]
                     }));
                 }
 
                 dispatch(courseActions.removeCurrentTaskErrorTableData());
+
             })
             .then(() => {
                 dispatch(actions.fetchingFalse({destination: Enum.COMPLETE_TASK_FETCHING}));

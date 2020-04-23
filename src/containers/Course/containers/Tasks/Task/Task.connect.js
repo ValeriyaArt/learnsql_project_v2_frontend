@@ -1,7 +1,7 @@
 import {connect} from 'react-redux';
 import {bindActionCreators} from "redux";
 import actions from "../../../actions";
-import {getCurrentTask, getCurrentTaskError, getCurrentTaskSolution, getCurrentTaskErrorTableData} from '../../../getters';
+import {getCurrentTask, getCurrentTaskError, getCurrentTaskSolution, getCurrentTaskErrorTableData, getCurrentTaskAnswer} from '../../../getters';
 
 const mapStateToProps = (state) => {
     return {
@@ -9,6 +9,7 @@ const mapStateToProps = (state) => {
         error: getCurrentTaskError(state),
         solution: getCurrentTaskSolution(state),
         tableErrorData: getCurrentTaskErrorTableData(state),
+        answer: getCurrentTaskAnswer(state),
     };
 };
 

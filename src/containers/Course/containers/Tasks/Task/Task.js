@@ -94,12 +94,12 @@ class Task extends React.PureComponent{
         const studentResult = get(tableErrorData, [Enum.ERROR_STUDENT_RESULT, 1, 1], []);
 
         return (
-            <Box className={classes.errorBody}>
+            <Box className={classes.tableWrap}>
                 <Typography> Неверно! </Typography>
 
-                <div className={classes.tableErrors}>
+                <div className={classes.tableBody}>
                     <div className={classes.table}>
-                        <Typography className={classes.errorTableTitle}> Правильный запрос </Typography>
+                        <Typography className={classes.tableTitle}> Правильный запрос </Typography>
                         <TableContainer component={Paper}>
                             <Table>
                                 {refResult.map(row =>
@@ -116,7 +116,7 @@ class Task extends React.PureComponent{
                     </div>
 
                     <div className={classes.table}>
-                        <Typography className={classes.errorTableTitle}> Ваш запрос </Typography>
+                        <Typography className={classes.tableTitle}> Ваш запрос </Typography>
                         <TableContainer component={Paper}>
                             <Table>
                                 {studentResult.map(row =>
@@ -136,9 +136,38 @@ class Task extends React.PureComponent{
         );
     }
 
+    renderAnswerTable = () => {
+        const {classes, answer} = this.props;
+
+        return (
+            <Box className={classes.tableWrap}>
+                <Typography> Правильно! </Typography>
+
+                <div className={classes.tableBody}>
+                    <div className={classes.table}>
+                        <Typography className={classes.tableTitle}> Результат выполнения запроса</Typography>
+                        <TableContainer component={Paper}>
+                            <Table>
+                                {answer.map(row =>
+                                    <TableRow>
+                                        {row.map(cell =>
+                                            <TableCell>
+                                                {cell}
+                                            </TableCell>
+                                        )}
+                                    </TableRow>
+                                )}
+                            </Table>
+                        </TableContainer>
+                    </div>
+                </div>
+            </Box>
+        );
+    }
+
     render() {
         const {showImage} = this.state;
-        const {task, classes, error, tableErrorData} = this.props;
+        const {task, classes, error, tableErrorData, answer} = this.props;
         const taskText = get(task, `attributes.task_text`, null);
         const taskDescription = get(task, `attributes.database_description`, '');
         const taskImage = get(task, `attributes.database_image`, '');
@@ -170,6 +199,8 @@ class Task extends React.PureComponent{
                         }
 
                         {refResult.length > 0 && studentResult.length > 0 && this.renderErrorTables()}
+
+                        {answer.length > 0 && this.renderAnswerTable()}
                     </>
                 </Scrollbars>
             </div>

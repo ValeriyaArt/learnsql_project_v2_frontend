@@ -20,7 +20,7 @@ export default (theme) => ({
         marginTop: '20px',
         color: theme.palette.secondary.main
     },
-    tableErrors: {
+    tableBody: {
         display: 'flex',
         flexWrap: 'wrap'
     },
@@ -34,10 +34,10 @@ export default (theme) => ({
     image: {
         width: '100%'
     },
-    errorBody: {
+    tableWrap: {
         padding: '20px'
     },
-    errorTableTitle: {
+    tableTitle: {
         marginBottom: 10
     }
 });
