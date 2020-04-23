@@ -14,6 +14,24 @@ export const getCurrentTaskAnswer = (state) => get(getStateData(state), Enum.CUR
 export const getCurrentTaskErrorTableData = (state) => get(getStateData(state), Enum.CURRENT_TASK_ERROR_TABLE_DATA, {});
 export const getCurrentTaskId = (state) => get(getCurrentTask(state), 'id');
 export const getCurrentRouteId = (state) => get(getStateData(state), Enum.COURSE_ROUTE_ID, '');
+
+export const getNextRoute = (state) => {
+    const tasks = getTasks(state);
+    const currentRouteId = getCurrentRouteId(state);
+    let lastRouteId;
+    let nextRoute = {};
+
+    tasks.forEach(route => {
+        if (lastRouteId === currentRouteId){
+            nextRoute = route;
+        }
+        lastRouteId = route.id;
+    });
+
+    return nextRoute;
+}
+
+
 export const getCurrentRoute = (state) => get(getTasks(state).filter(route => route.id === getCurrentRouteId(state)), '0', {});
 export const getCurrentTaskSolution = (state) => get(getCurrentRoute(state), 'attributes.status', 0) === '1' ?
     get(getCurrentRoute(state), 'attributes.solution', '') : "";

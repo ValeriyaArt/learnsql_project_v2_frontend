@@ -2,12 +2,13 @@ export default (theme) => ({
     taskRoot: {
         width: '100%'
     },
-    task: {
-        maxWidth: '600px',
+    taskInfo: {
         padding: 20
     },
     answerFieldContainer: {
         marginTop: 20,
+        padding: 20,
+        maxWidth: '600px',
     },
     buttonsContainer: {
         marginTop: 20
@@ -32,12 +33,18 @@ export default (theme) => ({
         padding: '20px 0px'
     },
     image: {
-        width: '100%'
+        width: '100%',
+        '& img': {
+            width: '100%'
+        }
     },
     tableWrap: {
         padding: '20px'
     },
     tableTitle: {
         marginBottom: 10
+    },
+    nextTaskButton: {
+        marginLeft: 'auto'
     }
 });

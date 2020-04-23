@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from "prop-types";
 import get from 'lodash/get';
 
+import Scrollbars from "react-custom-scrollbars";
+
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
@@ -11,14 +13,18 @@ import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import Paper from '@material-ui/core/Paper';
-import withStyles from '@material-ui/core/styles/withStyles';
+import Collapse from '@material-ui/core/Collapse';
 
-import Scrollbars from "react-custom-scrollbars";
+import ArrowForward from '@material-ui/icons/ArrowForward';
+import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
+import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
+import withStyles from '@material-ui/core/styles/withStyles';
 
 import * as Enum from '../../../enum';
 
 import connect from './Task.connect';
 import styles from './Task.styles';
+import {getTaskId} from "../../../getters";
 
 class Task extends React.PureComponent{
     constructor(props) {
@@ -50,8 +56,15 @@ class Task extends React.PureComponent{
         this.props.actions.completeTask(this.state.answer);
     };
 
+    goToNextTaskClickHandler = () => {
+        const {nextRoute} = this.props;
+
+        this.props.actions.setCurrentRouteId(nextRoute.id);
+        this.props.actions.getCourseTask(getTaskId(nextRoute));
+    };
+
     renderAnswerField = () => {
-        const {classes} = this.props;
+        const {classes, isDone, nextRoute} = this.props;
         const {answer} = this.state;
         const splittedAnswer = answer.split(' ');
         const firstWordError = splittedAnswer[0].toLocaleLowerCase() !== 'select'
@@ -83,6 +96,15 @@ class Task extends React.PureComponent{
                     >
                         Выполнить
                     </Button>
+                    {nextRoute.id &&
+                        <Button color={'primary'}
+                                className={classes.nextTaskButton}
+                                onClick={this.goToNextTaskClickHandler}
+                                endIcon={<ArrowForward/>}
+                        >
+                            {isDone ? 'Следующее задание' : 'Пропустить задание'}
+                        </Button>
+                    }
                 </Box>
             </Box>
         );
@@ -180,28 +202,34 @@ class Task extends React.PureComponent{
         return (
             <div className={classes.taskRoot}>
                 <Scrollbars minheight={300}>
-                    <div className={classes.task}>
+                    <div className={classes.taskInfo}>
                         <Typography> <b>{taskTitle}:</b> </Typography>
                         <Typography> {taskText} </Typography>
                         <Typography className={classes.taskDescription}> {taskDescription} </Typography>
 
-                        <Button onClick={this.showImageClickHandler}>
-                            {showImage ? <> Скрыть БД </> : <> Открыть БД </>}
+                        <Button onClick={this.showImageClickHandler}
+                                color={'primary'}
+                                endIcon={
+                                    showImage ? <KeyboardArrowDownIcon /> : <KeyboardArrowRightIcon />
+                                }
+                        >
+                            {showImage ? <> Скрыть схему БД </> : <> Посмотреть схему БД </> }
                         </Button>
 
-                        {showImage && <div className={classes.image}> <img src={taskImage} alt=""/> </div> }
-
-                        {this.renderAnswerField()}
+                        <Collapse in={showImage} collapsedHeight={0}>
+                            <div className={classes.image}> <img src={taskImage} alt=""/> </div>
+                        </Collapse>
                     </div>
-                    <>
-                        {error &&
-                            <Typography className={classes.simpleErrorText}> {error} </Typography>
-                        }
 
-                        {refResult.length > 0 && studentResult.length > 0 && this.renderErrorTables()}
+                    {this.renderAnswerField()}
 
-                        {answer.length > 0 && this.renderAnswerTable()}
-                    </>
+                    {error &&
+                        <Typography className={classes.simpleErrorText}> {error} </Typography>
+                    }
+
+                    {refResult.length > 0 && studentResult.length > 0 && this.renderErrorTables()}
+
+                    {answer.length > 0 && this.renderAnswerTable()}
                 </Scrollbars>
             </div>
         )
@@ -210,10 +238,12 @@ class Task extends React.PureComponent{
 
 Task.propTypes = {
     error: PropTypes.any,
+    isDone: PropTypes.bool,
     task: PropTypes.object,
     actions: PropTypes.object,
     tableErrorData: PropTypes.object,
-    currentTask: PropTypes.string
+    currentTask: PropTypes.string,
+    nextRoute: PropTypes.object,
 };
 
 export default withStyles(styles)(connect(Task));
