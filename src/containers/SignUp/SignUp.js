@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from 'react-router-dom/Link';
+import {Link} from 'react-router-dom';
 import {Redirect} from "react-router";
 import PropTypes from "prop-types";
 import get from "lodash/get";

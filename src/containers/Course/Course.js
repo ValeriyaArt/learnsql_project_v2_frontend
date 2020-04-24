@@ -11,6 +11,7 @@ import Paper from "@material-ui/core/Paper";
 
 import TasksTab from './containers/Tasks';
 import MethodicalMaterialsTab from './containers/Methodical';
+import CourseFinishModal from './containers/CourseFinishModal';
 
 import {appRouter} from "../../service/router-service";
 import UserService from "../../service/user-service";
@@ -89,6 +90,8 @@ class Course extends React.PureComponent{
                         {this.renderTabContent()}
                     </Paper>
                 </Box>
+
+                <CourseFinishModal />
             </>
         );
     }

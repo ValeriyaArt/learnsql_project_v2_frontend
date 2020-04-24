@@ -11,6 +11,9 @@ const setCourseTask = createAction(C.SET_COURSE_TASK, 'payload');
 const getCourseStatistics = createAction(C.GET_COURSE_STATISTICS, 'payload');
 const setCourseStatistics = createAction(C.SET_COURSE_STATISTICS, 'payload');
 
+const openFinishCourseModal = createAction(C.OPEN_FINISH_COURSE_MODAL, 'payload');
+const closeFinishCourseModal = createAction(C.CLOSE_FINISH_COURSE_MODAL, 'payload');
+
 const getCourseMethodicalMaterials = createAction(C.GET_COURSE_METHODICAL_MATERIALS, 'payload');
 const setCourseMethodicalMaterials = createAction(C.SET_COURSE_METHODICAL_MATERIALS, 'payload');
 
@@ -50,4 +53,6 @@ export default {
     removeCurrentTaskErrorTableData,
     setCurrentTaskAnswer,
     removeCurrentTaskAnswer,
+    openFinishCourseModal,
+    closeFinishCourseModal,
 }

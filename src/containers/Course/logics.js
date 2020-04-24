@@ -7,7 +7,7 @@ import courseActions from './actions';
 
 import Service from './service';
 import * as Enum from "./enum";
-import {getCourseId, getCurrentTaskId, getTaskId, getCurrentRouteId} from "./getters";
+import {getCourseId, getCurrentTaskId, getTaskId, getCurrentRouteId, getCurrentTaskSolution} from "./getters";
 
 const service = new Service();
 
@@ -173,6 +173,7 @@ const completeTask = createLogic({
         const answer = action.payload;
         const routeId = getCurrentRouteId(state);
         const currentTaskId = getCurrentTaskId(state);
+        const currentTaskSolution = getCurrentTaskSolution(state);
 
         if (currentTaskId === null || routeId === null) return done();
 
@@ -181,6 +182,7 @@ const completeTask = createLogic({
         service.completeTask(routeId, currentTaskId, answer)
             .then((res) => {
                 const data = get(res, 'data', {});
+                const progres = get(data, 'progres', 0);
 
                 if (data.status === 'error'){
                     dispatch(courseActions.setCurrentTaskErrorTableData({
@@ -193,6 +195,10 @@ const completeTask = createLogic({
                         errors: [{detail:'Результат запроса не совпадает с правильным'}]
                     }));
                 } else {
+                    if (progres === 1 && currentTaskSolution.length === 0){
+                        dispatch(courseActions.openFinishCourseModal());
+                    }
+
                     dispatch(actions.fetchingSuccess(['Задание успешно выполнено!']));
                     dispatch(courseActions.setCurrentTaskAnswer(get(data, 'student_result.1.1', [])));
                     dispatch(courseActions.removeCurrentTaskErrorTableData());

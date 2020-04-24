@@ -67,6 +67,7 @@ Tasks.propTypes = {
     tasks: PropTypes.array,
     courseId: PropTypes.string,
     currentRouteId: PropTypes.string,
+    actions: PropTypes.object,
     isFetchingGet: PropTypes.bool
 };
 

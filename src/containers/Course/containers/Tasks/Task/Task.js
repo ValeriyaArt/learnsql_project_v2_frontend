@@ -79,7 +79,7 @@ class Task extends React.PureComponent{
                            rows={5}
                            variant={'outlined'}
                            fullWidth
-                           maxWidth={500}
+                           maxwidth={500}
                            onChange={this.answerChangeHandler}
                            defaultValue={answer}
                 />

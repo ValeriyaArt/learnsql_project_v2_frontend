@@ -74,6 +74,15 @@ const removeCourseTaskAnswer = (state) => ({
     [Enum.CURRENT_TASK_ANSWER]: {},
 });
 
+const openFinishCourseModal = (state) => ({
+    ...state,
+    [Enum.IS_OPEN_FINISH_COURSE_MODAL]: true,
+});
+const closeFinishCourseModal = (state) => ({
+    ...state,
+    [Enum.IS_OPEN_FINISH_COURSE_MODAL]: false,
+});
+
 export const reducer = createReducer(initialState, {
     [C.SET_CURRENT_TASK_ERROR]: setCourseTaskError,
     [C.REMOVE_CURRENT_TASK_ERROR]: removeCurrentTaskError,
@@ -88,4 +97,6 @@ export const reducer = createReducer(initialState, {
     [C.REMOVE_CURRENT_TASK_ERROR_TABLE_DATA]: removeCurrentTaskErrorTableData,
     [C.SET_CURRENT_TASK_ANSWER]: setCourseTaskAnswer,
     [C.REMOVE_CURRENT_TASK_ANSWER]: removeCourseTaskAnswer,
+    [C.OPEN_FINISH_COURSE_MODAL]: openFinishCourseModal,
+    [C.CLOSE_FINISH_COURSE_MODAL]: closeFinishCourseModal,
 });

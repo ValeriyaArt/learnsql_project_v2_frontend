@@ -11,6 +11,7 @@ export const ERROR_REF_RESULT = 'ref_result';
 export const ERROR_STUDENT_RESULT = 'student_result';
 
 export const CURRENT_TASK_ANSWER = 'CURRENT_TASK_ANSWER';
+export const IS_OPEN_FINISH_COURSE_MODAL = 'IS_OPEN_FINISH_COURSE_MODAL';
 
 export const COURSE_ID = 'COURSE_ID';
 

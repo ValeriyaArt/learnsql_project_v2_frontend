@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from "prop-types";
 import get from 'lodash/get';
 import {Redirect} from "react-router";
-import Link from "react-router-dom/Link";
+import {Link} from "react-router-dom";
 
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -51,7 +51,7 @@ class Home extends React.PureComponent{
                                 </Typography>
                             </CardContent>
                             <CardActions className={classes.actions}>
-                                <Typography color="main">
+                                <Typography color="primary">
                                     {/*Пройдено 10%*/}
                                 </Typography>
                                 {isMyCourse ?
