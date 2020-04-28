@@ -100,7 +100,7 @@ class SignUp extends React.PureComponent{
                             onChange={this.changeField(Enum.GROUP_FIELD)}>
                             {groupOptions.map(group =>
                                 <MenuItem value={group.id} key={`group-${group.id}`}>
-                                    {get(group, 'attributes.title', '')}
+                                    {get(group, 'title', '')}
                                 </MenuItem>
                             )}
                         </Select>

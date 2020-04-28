@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from "prop-types";
-import get from "lodash/get";
 
 import Box from '@material-ui/core/Box';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -44,7 +43,7 @@ class Tasks extends React.PureComponent{
                         className={classes.menuItem}
                     >
                         Задание {index + 1}
-                        {get(route, 'attributes.status', 0) === "1" && <DoneIcon className={classes.doneIcon}/>}
+                        {route.status === "1" && <DoneIcon className={classes.doneIcon}/>}
                     </MenuItem>
                 )}
             </MenuList>

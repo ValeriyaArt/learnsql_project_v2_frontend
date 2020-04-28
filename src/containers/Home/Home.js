@@ -38,16 +38,16 @@ class Home extends React.PureComponent{
         return(
             <div className={classes.root}>
                 {courses.map(course => {
-                    const isMyCourse = myCourses.find(myCourse => get(myCourse, 'relationships.course.data.id') === course.id);
+                    const isMyCourse = myCourses.find(myCourse => myCourse.course === course.id);
 
                     return (
                         <Card className={classes.card} key={`course-${course.id}`}>
                             <CardContent>
                                 <Typography variant="h5" component="h2">
-                                    {get(course, 'attributes.title', '')}
+                                    {get(course, 'title', '')}
                                 </Typography>
                                 <Typography className={classes.description} color="textSecondary">
-                                    {get(course, 'attributes.description', '')}
+                                    {get(course, 'description', '')}
                                 </Typography>
                             </CardContent>
                             <CardActions className={classes.actions}>

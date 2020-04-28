@@ -33,10 +33,10 @@ class Profile extends React.PureComponent{
         if (Object.keys(prevProps.user).length === 0 && Object.keys(this.props.user).length > 0) {
             const {user} = this.props;
 
-            this.props.actions.changeProfileField({destination: Enum.USERNAME_FIELD, value: get(user, ['attributes', Enum.USERNAME_FIELD], '')});
-            this.props.actions.changeProfileField({destination: Enum.FIRST_NAME_FIELD, value: get(user, ['attributes', Enum.FIRST_NAME_FIELD], '')});
-            this.props.actions.changeProfileField({destination: Enum.LAST_NAME_FIELD, value: get(user, ['attributes', Enum.LAST_NAME_FIELD], '')});
-            this.props.actions.changeProfileField({destination: Enum.GROUP_FIELD, value: get(user, ['relationships', Enum.GROUP_FIELD, 'data', 'id'], '')});
+            this.props.actions.changeProfileField({destination: Enum.USERNAME_FIELD, value: get(user, [Enum.USERNAME_FIELD], '')});
+            this.props.actions.changeProfileField({destination: Enum.FIRST_NAME_FIELD, value: get(user, [Enum.FIRST_NAME_FIELD], '')});
+            this.props.actions.changeProfileField({destination: Enum.LAST_NAME_FIELD, value: get(user, [Enum.LAST_NAME_FIELD], '')});
+            this.props.actions.changeProfileField({destination: Enum.GROUP_FIELD, value: get(user, Enum.GROUP_FIELD, '')});
         }
     }
 

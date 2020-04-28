@@ -19,7 +19,7 @@ const getCourses = createLogic({
         service.getCourses()
             .then((res) => {
                 dispatch(actions.fetchingSuccess());
-                dispatch(homeActions.setCourses(res.data));
+                dispatch(homeActions.setCourses(get(res, 'data.results', [])));
             })
             .catch((err) => {
                 dispatch(actions.fetchingFailed({
@@ -43,7 +43,7 @@ const getMyCourses = createLogic({
         service.getMyCourses()
             .then((res) => {
                 dispatch(actions.fetchingSuccess());
-                dispatch(homeActions.setMyCourses(res.data));
+                dispatch(homeActions.setMyCourses(get(res, 'data.results', [])));
             })
             .catch((err) => {
                 dispatch(actions.fetchingFailed({

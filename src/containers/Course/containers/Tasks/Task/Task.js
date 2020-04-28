@@ -190,10 +190,10 @@ class Task extends React.PureComponent{
     render() {
         const {showImage} = this.state;
         const {task, classes, error, tableErrorData, answer} = this.props;
-        const taskText = get(task, `attributes.task_text`, null);
-        const taskDescription = get(task, `attributes.database_description`, '');
-        const taskImage = get(task, `attributes.database_image`, '');
-        const taskTitle = get(task, `attributes.title`, '');
+        const taskText = get(task, `task_text`, null);
+        const taskDescription = get(task, `database_description`, '');
+        const taskImage = get(task, `database_image`, '');
+        const taskTitle = get(task, `title`, '');
         const refResult = get(tableErrorData, [Enum.ERROR_REF_RESULT, 1, 1], []);
         const studentResult = get(tableErrorData, [Enum.ERROR_STUDENT_RESULT, 1, 1], []);
 

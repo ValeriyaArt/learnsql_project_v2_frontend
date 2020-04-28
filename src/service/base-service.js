@@ -28,7 +28,7 @@ export default class BaseService {
     interceptSuccessResponse = (response) => {
         return {
             ...response,
-            data: get(response, 'data.data')
+            data: get(response, 'data')
         }
     };
 

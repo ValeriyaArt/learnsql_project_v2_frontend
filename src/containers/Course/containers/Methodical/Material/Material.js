@@ -12,6 +12,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 
 import connect from './Material.connect';
 import styles from './Material.styles';
+import Scrollbars from "react-custom-scrollbars";
 
 class Material extends React.PureComponent{
     render() {
@@ -19,22 +20,24 @@ class Material extends React.PureComponent{
 
         return (
             <div className={classes.root}>
-                {material.map(item =>
-                    <ExpansionPanel key={`material-item-${item.id}`}>
-                        <ExpansionPanelSummary
-                            expandIcon={<ExpandMoreIcon />}
-                            aria-controls="panel1a-content"
-                            id="panel1a-header"
-                        >
-                            <Typography className={classes.heading}>
-                                {get(item, 'attributes.number')} {get(item, 'attributes.topic_name')}
-                            </Typography>
-                        </ExpansionPanelSummary>
-                        <ExpansionPanelDetails>
-                            <Typography dangerouslySetInnerHTML={{__html: get(item, 'attributes.content')}} />
-                        </ExpansionPanelDetails>
-                    </ExpansionPanel>
-                )}
+                <Scrollbars minheight={300}>
+                    {material.map(item =>
+                        <ExpansionPanel key={`material-item-${item.id}`}>
+                            <ExpansionPanelSummary
+                                expandIcon={<ExpandMoreIcon />}
+                                aria-controls="panel1a-content"
+                                id="panel1a-header"
+                            >
+                                <Typography className={classes.heading}>
+                                    {get(item, 'number')} {get(item, 'topic_name')}
+                                </Typography>
+                            </ExpansionPanelSummary>
+                            <ExpansionPanelDetails>
+                                <Typography dangerouslySetInnerHTML={{__html: get(item, 'content')}} />
+                            </ExpansionPanelDetails>
+                        </ExpansionPanel>
+                    )}
+                </Scrollbars>
             </div>
         )
     }

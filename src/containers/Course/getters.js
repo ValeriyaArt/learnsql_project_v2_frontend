@@ -36,12 +36,12 @@ export const getNextRoute = (state) => {
 
 
 export const getCurrentRoute = (state) => get(getTasks(state).filter(route => route.id === getCurrentRouteId(state)), '0', {});
-export const getCurrentTaskSolution = (state) => get(getCurrentRoute(state), 'attributes.status', 0) === '1' ?
-    get(getCurrentRoute(state), 'attributes.solution', '') : "";
-export const getTaskId = (task) => get(task, 'relationships.task_in_set.data.id', null);
+export const getCurrentTaskSolution = (state) => get(getCurrentRoute(state), 'status', 0) === '1' ?
+    get(getCurrentRoute(state), 'solution', '') : "";
+export const getTaskId = (task) => get(task, 'task_in_set', null);
 
 
 
 export const getMethodicalMaterials = (state) => get(getStateData(state), Enum.METHODICAL_MATERIALS, []);
 export const getCurrentMethodicalMaterial = (state) => get(getStateData(state), Enum.METHODICAL_MATERIAL, []);
-export const getCurrentMethodicalMaterialId = (state) => get(getCurrentMethodicalMaterial(state),'0.relationships.section.data.id', null);
+export const getCurrentMethodicalMaterialId = (state) => parseInt(get(getCurrentMethodicalMaterial(state),'0.section', null));

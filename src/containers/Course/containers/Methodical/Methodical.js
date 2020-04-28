@@ -39,7 +39,7 @@ class Methodical extends React.PureComponent{
                         className={classes.menuItem}
                         selected={currentMaterialId === material.id}
                     >
-                        {index + 1} {get(material, 'attributes.section_name')}
+                        {index + 1} {get(material, 'section_name')}
                     </MenuItem>
                 )}
             </MenuList>

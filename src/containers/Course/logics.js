@@ -24,14 +24,15 @@ const getCourseTasks = createLogic({
 
         service.getCourseTasks(courseId)
             .then((res) => {
-                const firstTaskId = getTaskId(get(res, 'data.0', {}));
+                const tasks = get(res, 'data.results', []);
+                const firstTaskId = getTaskId(tasks[0]);
                 const currentTask = getCurrentTaskId(state);
 
-                dispatch(courseActions.setCourseTasks(res.data));
+                dispatch(courseActions.setCourseTasks(tasks));
 
                 if (!currentTask){
                     dispatch(courseActions.getCourseTask(firstTaskId));
-                    dispatch(courseActions.setCurrentRouteId(get(res, 'data.0.id', null)));
+                    dispatch(courseActions.setCurrentRouteId(get(tasks, '0.id', null)));
                 }
             })
             .catch((err) => {
@@ -91,8 +92,9 @@ const getCourseMethodicalMaterials = createLogic({
 
         service.getCourseMethodicalMaterials(courseId)
             .then((res) => {
-                dispatch(courseActions.getCourseMethodicalMaterial(get(res, 'data.0.id')));
-                dispatch(courseActions.setCourseMethodicalMaterials(res.data));
+                const materials = get(res, 'data');
+                dispatch(courseActions.getCourseMethodicalMaterial(get(materials, '0.id')));
+                dispatch(courseActions.setCourseMethodicalMaterials(materials));
                 dispatch(actions.fetchingSuccess());
             })
             .catch((err) => {

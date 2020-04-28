@@ -1,5 +1,4 @@
 import React from 'react';
-import get from 'lodash/get';
 import Link from "react-router-dom/Link";
 
 import Drawer from '@material-ui/core/Drawer';
@@ -46,9 +45,9 @@ class Menu extends React.PureComponent{
                         <List>
                             {myCourses.map(course =>
                                 <ListItem button key={`course-link-${course.id}`} className={classes.listItem}>
-                                    <Link to={appRouter.getCourseLink(get(course, 'relationships.course.data.id'))} className={classes.link}>
+                                    <Link to={appRouter.getCourseLink(course.course)} className={classes.link}>
                                         <ListItemIcon><SchoolIcon/></ListItemIcon>
-                                        <ListItemText primary={get(course, 'attributes.course_title')}/>
+                                        <ListItemText primary={course.course_title}/>
                                     </Link>
                                 </ListItem>
                             )}
