@@ -2,7 +2,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from "redux";
 import actions from "./actions";
 import * as Enum from './enum';
-import {getFieldValue, isPasswordError} from './getters';
+import {getFieldValue, isPasswordError, isEmailError} from './getters';
 import {getAuth, getGroupOptions} from '../../layout/getters';
 
 const mapStateToProps = (state) => {
@@ -14,9 +14,11 @@ const mapStateToProps = (state) => {
                     || getFieldValue(state, Enum.PASSWORD_REPEAT_FIELD).length === 0
                     || getFieldValue(state, Enum.GROUP_FIELD).length === 0
                     || isPasswordError(state)
+                    || isEmailError(state)
         ,
         groupOptions: getGroupOptions(state),
         isPasswordError: isPasswordError(state),
+        isEmailError: isEmailError(state),
         auth: getAuth(state),
         username: getFieldValue(state, Enum.USERNAME_FIELD),
         firstName: getFieldValue(state, Enum.FIRST_NAME_FIELD),
@@ -24,6 +26,7 @@ const mapStateToProps = (state) => {
         password: getFieldValue(state, Enum.PASSWORD_FIELD),
         passwordRepeat: getFieldValue(state, Enum.PASSWORD_REPEAT_FIELD),
         group: getFieldValue(state, Enum.GROUP_FIELD),
+        email: getFieldValue(state, Enum.EMAIL_FIELD),
     };
 };
 

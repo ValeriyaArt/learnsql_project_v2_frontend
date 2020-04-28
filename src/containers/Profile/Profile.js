@@ -34,6 +34,7 @@ class Profile extends React.PureComponent{
             const {user} = this.props;
 
             this.props.actions.changeProfileField({destination: Enum.USERNAME_FIELD, value: get(user, [Enum.USERNAME_FIELD], '')});
+            this.props.actions.changeProfileField({destination: Enum.EMAIL_FIELD, value: get(user, [Enum.EMAIL_FIELD], '')});
             this.props.actions.changeProfileField({destination: Enum.FIRST_NAME_FIELD, value: get(user, [Enum.FIRST_NAME_FIELD], '')});
             this.props.actions.changeProfileField({destination: Enum.LAST_NAME_FIELD, value: get(user, [Enum.LAST_NAME_FIELD], '')});
             this.props.actions.changeProfileField({destination: Enum.GROUP_FIELD, value: get(user, Enum.GROUP_FIELD, '')});

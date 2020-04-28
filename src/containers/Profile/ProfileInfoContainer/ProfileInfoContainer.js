@@ -48,14 +48,26 @@ class ProfileInfoContainer extends React.PureComponent{
         this.props.actions.changeProfileInfo();
     };
 
+    emailFieldFocus = () => {
+        this.setState({emailFieldIsFocused: true});
+    };
+
+    emailFieldBlur = () => {
+        this.setState({emailFieldIsFocused: false});
+    };
+
     render() {
-        const {classes, username, firstName, lastName, group, groupOptions, disableButton} = this.props;
+        const {classes, username, firstName, lastName, group, groupOptions, disableButton, isEmailError, email} = this.props;
         const {editMode} = this.state;
+
+        const {emailFieldIsFocused} = this.state;
+
+        const showEmailError = isEmailError && !emailFieldIsFocused;
 
         return(
             <>
                 <IconButton onClick={this.editButtonClickHandler}
-                            color={editMode ? 'primary' : ''}
+                            color={editMode ? 'primary' : 'default'}
                             className={classes.iconButton}
                 >
                     <EditIcon />
@@ -65,6 +77,15 @@ class ProfileInfoContainer extends React.PureComponent{
                            onChange={this.changeField(Enum.USERNAME_FIELD)}
                            value={username}
                            disabled
+                />
+                <TextField label="Email"
+                           className={classes.textField}
+                           onChange={this.changeField(Enum.EMAIL_FIELD)}
+                           value={email}
+                           error={showEmailError}
+                           onFocus={this.emailFieldFocus}
+                           onBlur={this.emailFieldBlur}
+                           disabled={!editMode}
                 />
                 <TextField label="Имя"
                            className={classes.textField}
@@ -113,6 +134,11 @@ ProfileInfoContainer.propTypes = {
     classes: PropTypes.object,
     actions: PropTypes.object,
     disableButton: PropTypes.bool,
+    isEmailError: PropTypes.bool,
+    email: PropTypes.string,
+    lastName: PropTypes.string,
+    firstName: PropTypes.string,
+    group: PropTypes.number,
     groupOptions: PropTypes.array,
 };
 

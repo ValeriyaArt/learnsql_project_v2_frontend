@@ -48,11 +48,22 @@ class SignUp extends React.PureComponent{
         this.setState({passwordFieldIsFocused: false});
     };
 
+    emailFieldFocus = () => {
+        this.setState({emailFieldIsFocused: true});
+    };
+
+    emailFieldBlur = () => {
+        this.setState({emailFieldIsFocused: false});
+    };
+
     render() {
         const {classes, disableButton, groupOptions, isPasswordError, auth,
-            username, firstName, lastName, password, passwordRepeat } = this.props;
-        const {passwordFieldIsFocused} = this.state;
+            username, firstName, lastName, password, passwordRepeat, email, isEmailError } = this.props;
+
+        const {passwordFieldIsFocused, emailFieldIsFocused} = this.state;
+
         const showPasswordError = isPasswordError && !passwordFieldIsFocused;
+        const showEmailError = isEmailError && !emailFieldIsFocused;
 
         const isAuth = userService.isAuth() && auth;
 
@@ -65,6 +76,14 @@ class SignUp extends React.PureComponent{
                                className={classes.textField}
                                onChange={this.changeField(Enum.USERNAME_FIELD)}
                                value={username}
+                    />
+                    <TextField label="Email"
+                               className={classes.textField}
+                               onChange={this.changeField(Enum.EMAIL_FIELD)}
+                               value={email}
+                               error={showEmailError}
+                               onFocus={this.emailFieldFocus}
+                               onBlur={this.emailFieldBlur}
                     />
                     <TextField label="Имя"
                                className={classes.textField}
@@ -133,12 +152,14 @@ SignUp.propTypes = {
     firstName: PropTypes.string,
     lastName: PropTypes.string,
     password: PropTypes.string,
+    email: PropTypes.string,
     passwordRepeat: PropTypes.string,
-    group: PropTypes.string,
+    group: PropTypes.number,
     classes: PropTypes.object,
     actions: PropTypes.object,
     disableButton: PropTypes.bool,
     isPasswordError: PropTypes.bool,
+    isEmailError: PropTypes.bool,
     auth: PropTypes.bool,
     groupOptions: PropTypes.array,
 };

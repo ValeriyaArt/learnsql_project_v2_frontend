@@ -11,6 +11,7 @@ export const initialState = {
     [Enum.GROUP_FIELD]: '',
     [Enum.PASSWORD_FIELD]: '',
     [Enum.PASSWORD_REPEAT_FIELD]: '',
+    [Enum.EMAIL_FIELD]: '',
 };
 
 const changeField = (state, {payload}) => ({
