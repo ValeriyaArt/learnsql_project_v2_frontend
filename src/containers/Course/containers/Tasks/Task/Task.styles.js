@@ -46,5 +46,9 @@ export default (theme) => ({
     },
     nextTaskButton: {
         marginLeft: 'auto'
+    },
+    simpleErrorBlock: {
+        margin: 20,
+        maxWidth: 'max-content'
     }
 });

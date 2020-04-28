@@ -224,7 +224,9 @@ class Task extends React.PureComponent{
                     {this.renderAnswerField()}
 
                     {error &&
-                        <Typography className={classes.simpleErrorText}> {error} </Typography>
+                        <Paper className={classes.simpleErrorBlock}>
+                            <Typography className={classes.simpleErrorText}> {error} </Typography>
+                        </Paper>
                     }
 
                     {refResult.length > 0 && studentResult.length > 0 && this.renderErrorTables()}
