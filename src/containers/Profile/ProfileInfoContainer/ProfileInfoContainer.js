@@ -57,7 +57,7 @@ class ProfileInfoContainer extends React.PureComponent{
     };
 
     render() {
-        const {classes, username, firstName, lastName, group, groupOptions, disableButton, isEmailError, email} = this.props;
+        const {classes, username, firstName, lastName, group, groupOptions, disableButton, isEmailError, email, isuNumber} = this.props;
         const {editMode} = this.state;
 
         const {emailFieldIsFocused} = this.state;
@@ -99,6 +99,14 @@ class ProfileInfoContainer extends React.PureComponent{
                            value={lastName}
                            disabled={!editMode}
                 />
+
+                <TextField label="Isu номер"
+                           className={classes.textField}
+                           onChange={this.changeField(Enum.ISU_NUMBER_FIELD)}
+                           type="number"
+                           value={isuNumber}
+                />
+
                 <FormControl>
                     <InputLabel id="group-selector-label">Номер группы</InputLabel>
                     <Select

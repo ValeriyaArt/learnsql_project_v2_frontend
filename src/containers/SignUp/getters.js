@@ -16,6 +16,7 @@ export const getFormDataForSignUp = (state) => {
     formData.append(Enum.GROUP_FIELD, getFieldValue(state, Enum.GROUP_FIELD));
     formData.append(Enum.PASSWORD_REPEAT_FIELD, getFieldValue(state, Enum.PASSWORD_REPEAT_FIELD));
     formData.append(Enum.EMAIL_FIELD, getFieldValue(state, Enum.EMAIL_FIELD));
+    formData.append(Enum.ISU_NUMBER_FIELD, getFieldValue(state, Enum.ISU_NUMBER_FIELD));
 
     return formData;
 };

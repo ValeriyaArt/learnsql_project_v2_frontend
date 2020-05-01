@@ -17,11 +17,13 @@ const mapStateToProps = (state) => {
         firstName: getFieldValue(state, Enum.FIRST_NAME_FIELD),
         lastName: getFieldValue(state, Enum.LAST_NAME_FIELD),
         group: getFieldValue(state, Enum.GROUP_FIELD),
+        isuNumber: getFieldValue(state, Enum.ISU_NUMBER_FIELD),
         email: email,
         isEmailError: isEmailError,
         disableButton: getFieldValue(state, Enum.FIRST_NAME_FIELD).length === 0
             || getFieldValue(state, Enum.LAST_NAME_FIELD).length === 0
             || getFieldValue(state, Enum.GROUP_FIELD).length === 0
+            || getFieldValue(state, Enum.ISU_NUMBER_FIELD).length !== 6
             || email.length === 0
             || isEmailError
         ,

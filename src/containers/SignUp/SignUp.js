@@ -58,7 +58,7 @@ class SignUp extends React.PureComponent{
 
     render() {
         const {classes, disableButton, groupOptions, isPasswordError, auth,
-            username, firstName, lastName, password, passwordRepeat, email, isEmailError } = this.props;
+            username, firstName, lastName, password, passwordRepeat, email, isEmailError, isuNumber } = this.props;
 
         const {passwordFieldIsFocused, emailFieldIsFocused} = this.state;
 
@@ -110,6 +110,12 @@ class SignUp extends React.PureComponent{
                                onBlur={this.passwordFieldBlur}
                                helperText={showPasswordError && 'Пароли не совпадают'}
                                value={passwordRepeat}
+                    />
+                    <TextField label="Isu номер"
+                               className={classes.textField}
+                               onChange={this.changeField(Enum.ISU_NUMBER_FIELD)}
+                               type="number"
+                               value={isuNumber}
                     />
 
                     <FormControl>
