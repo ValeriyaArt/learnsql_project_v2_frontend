@@ -21,11 +21,8 @@ const getGroupOptions = createLogic({
                 dispatch(actions.setGroupOptions(get(res, 'data.results', [])));
                 dispatch(actions.fetchingSuccess());
             })
-            .catch((err) => {
-                dispatch(actions.fetchingFailed({
-                    message: get(err, 'message', ''),
-                    errors: get(err, 'errors', [])
-                }));
+            .catch((errors) => {
+                dispatch(actions.fetchingFailed(errors));
             })
             .then(() => {
                 dispatch(actions.fetchingFalse({destination: Enum.GROUP_OPTIONS_FETCHING}));
@@ -45,11 +42,8 @@ const getUserData = createLogic({
                 dispatch(actions.setUserData(res.data));
                 dispatch(actions.fetchingSuccess());
             })
-            .catch((err) => {
-                dispatch(actions.fetchingFailed({
-                    message: get(err, 'message', ''),
-                    errors: get(err, 'errors', [])
-                }));
+            .catch((errors) => {
+                dispatch(actions.fetchingFailed(errors));
             })
             .then(() => {
                 dispatch(actions.fetchingFalse({destination: Enum.USER_DATA_FETCHING}));

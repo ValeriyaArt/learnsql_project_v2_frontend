@@ -35,11 +35,8 @@ const getCourseTasks = createLogic({
                     dispatch(courseActions.setCurrentRouteId(get(tasks, '0.id', null)));
                 }
             })
-            .catch((err) => {
-                dispatch(actions.fetchingFailed({
-                    message: get(err, 'message', ''),
-                    errors: get(err, 'errors', [])
-                }));
+            .catch((errors) => {
+                dispatch(actions.fetchingFailed(errors));
             })
             .then(() => {
                 dispatch(actions.fetchingFalse({destination: Enum.GET_COURSE_TASKS_FETCHING}));
@@ -66,11 +63,8 @@ const getCourseTask = createLogic({
             .then((res) => {
                 dispatch(courseActions.setCourseTask(res.data));
             })
-            .catch((err) => {
-                dispatch(actions.fetchingFailed({
-                    message: get(err, 'message', ''),
-                    errors: get(err, 'errors', [])
-                }));
+            .catch((errors) => {
+                dispatch(actions.fetchingFailed(errors));
             })
             .then(() => {
                 dispatch(actions.fetchingFalse({destination: Enum.GET_COURSE_TASK_FETCHING}));
@@ -97,11 +91,8 @@ const getCourseMethodicalMaterials = createLogic({
                 dispatch(courseActions.setCourseMethodicalMaterials(materials));
                 dispatch(actions.fetchingSuccess());
             })
-            .catch((err) => {
-                dispatch(actions.fetchingFailed({
-                    message: get(err, 'message', ''),
-                    errors: get(err, 'errors', [])
-                }));
+            .catch((errors) => {
+                dispatch(actions.fetchingFailed(errors));
             })
             .then(() => {
                 dispatch(actions.fetchingFalse({destination: Enum.GET_COURSE_METHODICAL_MATERIALS_FETCHING}));
@@ -125,11 +116,8 @@ const getCourseMethodicalMaterial = createLogic({
                 dispatch(courseActions.setCourseMethodicalMaterial(res.data));
                 dispatch(actions.fetchingSuccess());
             })
-            .catch((err) => {
-                dispatch(actions.fetchingFailed({
-                    message: get(err, 'message', ''),
-                    errors: get(err, 'errors', [])
-                }));
+            .catch((errors) => {
+                dispatch(actions.fetchingFailed(errors));
             })
             .then(() => {
                 dispatch(actions.fetchingFalse({destination: Enum.GET_COURSE_METHODICAL_MATERIAL_FETCHING}));
@@ -154,11 +142,8 @@ const getCourseStatistics = createLogic({
                 dispatch(courseActions.setCourseStatistics(res.data));
                 dispatch(actions.fetchingSuccess());
             })
-            .catch((err) => {
-                dispatch(actions.fetchingFailed({
-                    message: get(err, 'message', ''),
-                    errors: get(err, 'errors', [])
-                }));
+            .catch((errors) => {
+                dispatch(actions.fetchingFailed(errors));
             })
             .then(() => {
                 dispatch(actions.fetchingFalse({destination: Enum.GET_COURSE_STATISTICS_FETCHING}));
@@ -192,10 +177,9 @@ const completeTask = createLogic({
                         [Enum.ERROR_STUDENT_RESULT]: get(data, Enum.ERROR_STUDENT_RESULT, []),
                     }));
 
-                    dispatch(actions.fetchingFailed({
-                        message: 'Результат запроса не совпадает с правильным',
-                        errors: [{detail:'Результат запроса не совпадает с правильным'}]
-                    }));
+                    dispatch(actions.fetchingFailed([
+                        'Результат запроса не совпадает с правильным'
+                    ]));
                 } else {
                     if (progres === 1 && currentTaskSolution.length === 0){
                         dispatch(courseActions.openFinishCourseModal());
@@ -210,7 +194,7 @@ const completeTask = createLogic({
                 dispatch(courseActions.removeCurrentTaskError());
             })
             .catch((err) => {
-                const error = get(err, 'message', '');
+                const error = get(err, '0', '');
                 const errorMessage = get(error.split(","),'1', '');
 
                 if (errorMessage.length > 0){
@@ -218,10 +202,7 @@ const completeTask = createLogic({
 
                     dispatch(courseActions.setCurrentTaskError(message));
 
-                    dispatch(actions.fetchingFailed({
-                        message: message,
-                        errors: [{detail: message}]
-                    }));
+                    dispatch(actions.fetchingFailed([message]));
                 }
 
                 dispatch(courseActions.removeCurrentTaskErrorTableData());

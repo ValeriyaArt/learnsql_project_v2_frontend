@@ -6,7 +6,6 @@ export const GENERAL_PATH = 'main';
 
 export const initialState = {
     [Enum.FETCHING]: {},
-    [Enum.ERROR_MESSAGE]: '',
     [Enum.ERRORS]: [],
     [Enum.SUCCESS_MESSAGES]: [],
     [Enum.GROUP_OPTIONS]: [],
@@ -32,8 +31,7 @@ const fetchingFalse = (state, {payload}) => ({
 
 const fetchingFailed = (state, {payload}) => ({
     ...state,
-    [Enum.ERROR_MESSAGE]: payload.message,
-    [Enum.ERRORS]: payload.errors,
+    [Enum.ERRORS]: payload,
 });
 
 const fetchingSuccess = (state, {payload}) => ({
@@ -64,7 +62,7 @@ const setAuthFalse = (state) => ({
 export const reducer = createReducer(initialState, {
     [C.FETCHING_TRUE]: fetchingTrue,
     [C.FETCHING_FALSE]: fetchingFalse,
-    // [C.FETCHING_FAILED]: fetchingFailed,
+    [C.FETCHING_FAILED]: fetchingFailed,
     [C.FETCHING_SUCCESS]: fetchingSuccess,
     [C.SET_USER_DATA]: setUserData,
     [C.SET_GROUP_OPTIONS]: setGroupOptions,

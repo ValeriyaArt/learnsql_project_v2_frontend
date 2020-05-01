@@ -21,11 +21,8 @@ const getCourses = createLogic({
                 dispatch(actions.fetchingSuccess());
                 dispatch(homeActions.setCourses(get(res, 'data.results', [])));
             })
-            .catch((err) => {
-                dispatch(actions.fetchingFailed({
-                    message: get(err, 'message', ''),
-                    errors: get(err, 'errors', [])
-                }));
+            .catch((errors) => {
+                dispatch(actions.fetchingFailed(errors));
             })
             .then(() => {
                 dispatch(actions.fetchingFalse({destination: Enum.GET_COURSES_FETCHING}));
@@ -45,11 +42,8 @@ const getMyCourses = createLogic({
                 dispatch(actions.fetchingSuccess());
                 dispatch(homeActions.setMyCourses(get(res, 'data.results', [])));
             })
-            .catch((err) => {
-                dispatch(actions.fetchingFailed({
-                    message: get(err, 'message', ''),
-                    errors: get(err, 'errors', [])
-                }));
+            .catch((errors) => {
+                dispatch(actions.fetchingFailed(errors));
             })
             .then(() => {
                 dispatch(actions.fetchingFalse({destination: Enum.GET_MY_COURSES_FETCHING}));
@@ -71,11 +65,8 @@ const joinCourse = createLogic({
                 dispatch(actions.fetchingSuccess(['Вы успешно присоединились к курсу!']));
                 dispatch(homeActions.getMyCourses());
             })
-            .catch((err) => {
-                dispatch(actions.fetchingFailed({
-                    message: get(err, 'message', ''),
-                    errors: get(err, 'errors', [])
-                }));
+            .catch((errors) => {
+                dispatch(actions.fetchingFailed(errors));
             })
             .then(() => {
                 dispatch(actions.fetchingFalse({destination: Enum.JOIN_COURSE_FETCHING}));

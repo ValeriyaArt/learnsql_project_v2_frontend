@@ -79,8 +79,8 @@ class Statistics extends React.PureComponent{
                 <div className={classes.usersList}>
                     <Typography className={classes.title}> Не начали курс </Typography>
 
-                    {usersWhoHaveNotStartedCourse.map(user =>
-                        <Typography> {user.fio} </Typography>
+                    {usersWhoHaveNotStartedCourse.map((user, index) =>
+                        <Typography key={`user-${index}`}> {user.fio} </Typography>
                     )}
                 </div>
             </Box>

@@ -124,10 +124,10 @@ class Task extends React.PureComponent{
                         <Typography className={classes.tableTitle}> Правильный запрос </Typography>
                         <TableContainer component={Paper}>
                             <Table>
-                                {refResult.map(row =>
-                                    <TableRow>
-                                        {row.map(cell =>
-                                            <TableCell>
+                                {refResult.map((row, index) =>
+                                    <TableRow key={`right-answer-row-${index}`}>
+                                        {row.map((cell, index) =>
+                                            <TableCell key={`right-answer-cell-${index}`}>
                                                 {cell}
                                             </TableCell>
                                         )}
@@ -141,10 +141,10 @@ class Task extends React.PureComponent{
                         <Typography className={classes.tableTitle}> Ваш запрос </Typography>
                         <TableContainer component={Paper}>
                             <Table>
-                                {studentResult.map(row =>
-                                    <TableRow>
-                                        {row.map(cell =>
-                                            <TableCell>
+                                {studentResult.map((row, index) =>
+                                    <TableRow key={`wrong-answer-row-${index}`}>
+                                        {row.map((cell, index) =>
+                                            <TableCell key={`wrong-answer-cell-${index}`}>
                                                 {cell}
                                             </TableCell>
                                         )}

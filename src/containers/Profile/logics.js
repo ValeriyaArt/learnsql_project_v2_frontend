@@ -1,5 +1,4 @@
 import {createLogic} from "redux-logic";
-import get from 'lodash/get';
 
 import * as C from './constants';
 import actions from '../../layout/actions';
@@ -30,11 +29,8 @@ const changeProfileInfo = createLogic({
                 dispatch(actions.setUserData(res.data));
                 dispatch(actions.fetchingSuccess(['Данные успешно изменены.']));
             })
-            .catch((err) => {
-                dispatch(actions.fetchingFailed({
-                    message: get(err, 'message', ''),
-                    errors: get(err, 'errors', [])
-                }));
+            .catch((errors) => {
+                dispatch(actions.fetchingFailed(errors));
             })
             .then(() => {
                 dispatch(actions.fetchingFalse({destination: Enum.CHANGE_PROFILE_FETCHING}));
@@ -56,11 +52,8 @@ const changePassword = createLogic({
             .then((res) => {
                 dispatch(actions.fetchingSuccess(['Пароль успешно изменен.']));
             })
-            .catch((err) => {
-                dispatch(actions.fetchingFailed({
-                    message: get(err, 'message', ''),
-                    errors: get(err, 'errors', [])
-                }));
+            .catch((errors) => {
+                dispatch(actions.fetchingFailed(errors));
             })
             .then(() => {
                 dispatch(actions.fetchingFalse({destination: Enum.CHANGE_PASSWORD_FETCHING}));

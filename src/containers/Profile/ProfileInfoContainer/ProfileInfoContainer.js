@@ -105,6 +105,7 @@ class ProfileInfoContainer extends React.PureComponent{
                            onChange={this.changeField(Enum.ISU_NUMBER_FIELD)}
                            type="number"
                            value={isuNumber}
+                           disabled={!editMode}
                 />
 
                 <FormControl>

@@ -11,17 +11,17 @@ class Notificator extends React.Component{
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps.errors !== this.props.errors){
+        if (!shallowEqual(this.props.errors, prevProps.errors)){
             // eslint-disable-next-line
             this.props.errors.map(error => {
-                this.props.enqueueSnackbar(error.detail, {
+                this.props.enqueueSnackbar(error, {
                     variant: 'error',
                     autoHideDuration: 3000,
                 });
             })
         }
 
-        if (prevProps.successMessages !== this.props.successMessages){
+        if (!shallowEqual(this.props.successMessages, prevProps.successMessages)){
             // eslint-disable-next-line
             this.props.successMessages.map(message => {
                 this.props.enqueueSnackbar(message, {

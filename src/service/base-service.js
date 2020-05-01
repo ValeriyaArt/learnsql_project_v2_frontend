@@ -33,15 +33,10 @@ export default class BaseService {
     };
 
     interceptFailResponse = (error) => {
-        console.log('error', error);
-        debugger
-        const response = {
-            ...error,
-            errors: error,
-            message: get(error, 'response.data.errors[0].detail')
-        };
+        const errors = get(error, 'response.data', {});
+        const errorsArray = Object.keys(errors).map(key => errors[key]);
 
-        return Promise.reject(response);
+        return Promise.reject(errorsArray);
     };
 
     createInstance = () => {

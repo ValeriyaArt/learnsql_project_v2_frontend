@@ -61,7 +61,7 @@ class Methodical extends React.PureComponent{
 Methodical.propTypes = {
     materials: PropTypes.array,
     courseId: PropTypes.string,
-    currentMaterialId: PropTypes.string,
+    currentMaterialId: PropTypes.number,
     isFetchingGet: PropTypes.bool
 };
 

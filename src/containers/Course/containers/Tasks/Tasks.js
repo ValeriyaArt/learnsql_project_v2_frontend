@@ -65,7 +65,7 @@ class Tasks extends React.PureComponent{
 Tasks.propTypes = {
     tasks: PropTypes.array,
     courseId: PropTypes.string,
-    currentRouteId: PropTypes.string,
+    currentRouteId: PropTypes.number,
     actions: PropTypes.object,
     isFetchingGet: PropTypes.bool
 };

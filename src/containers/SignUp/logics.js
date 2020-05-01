@@ -1,5 +1,4 @@
 import {createLogic} from "redux-logic";
-import get from 'lodash/get';
 
 import * as C from './constants';
 import actions from '../../layout/actions';
@@ -26,11 +25,8 @@ const signUp = createLogic({
                 dispatch(actions.fetchingSuccess(['Вы успешно зарегистрированы!']));
                 dispatch(signUpPageActions.signUpClearAllFields());
             })
-            .catch((err) => {
-                dispatch(actions.fetchingFailed({
-                    message: get(err, 'message', ''),
-                    errors: get(err, 'errors', [])
-                }));
+            .catch((errors) => {
+                dispatch(actions.fetchingFailed(errors));
             })
             .then(() => {
                 dispatch(actions.fetchingFalse({destination: Enum.SIGN_UP_FETCHING}));

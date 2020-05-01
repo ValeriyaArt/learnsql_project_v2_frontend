@@ -33,11 +33,8 @@ const signIn = createLogic({
                 dispatch(actions.fetchingSuccess(['Вы успешно авторизировались!']));
                 dispatch(actions.setAuthTrue());
             })
-            .catch((err) => {
-                dispatch(actions.fetchingFailed({
-                    message: get(err, 'message', ''),
-                    errors: get(err, 'errors', [])
-                }));
+            .catch((errors) => {
+                dispatch(actions.fetchingFailed(errors));
             })
             .then(() => {
                 dispatch(actions.fetchingFalse({destination: Enum.SIGN_IN_FETCHING}));
