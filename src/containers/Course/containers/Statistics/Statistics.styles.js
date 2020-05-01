@@ -5,5 +5,13 @@ export default (theme) => ({
     },
     graph: {
         width: '50vw'
+    },
+    usersList: {
+        display: 'flex',
+        flexDirection: 'column',
+        marginTop: '20px'
+    },
+    title: {
+        fontWeight: 'bold'
     }
 });

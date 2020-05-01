@@ -64,7 +64,7 @@ const setAuthFalse = (state) => ({
 export const reducer = createReducer(initialState, {
     [C.FETCHING_TRUE]: fetchingTrue,
     [C.FETCHING_FALSE]: fetchingFalse,
-    [C.FETCHING_FAILED]: fetchingFailed,
+    // [C.FETCHING_FAILED]: fetchingFailed,
     [C.FETCHING_SUCCESS]: fetchingSuccess,
     [C.SET_USER_DATA]: setUserData,
     [C.SET_GROUP_OPTIONS]: setGroupOptions,

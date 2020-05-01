@@ -5,6 +5,7 @@ import get from 'lodash/get';
 import { HorizontalBar } from 'react-chartjs-2';
 
 import Box from '@material-ui/core/Box';
+import Typography from "@material-ui/core/Typography";
 import withStyles from '@material-ui/core/styles/withStyles';
 
 import connect from './Statistics.connect';
@@ -29,9 +30,17 @@ class Statistics extends React.PureComponent{
         };
     }
 
+    getUsersWhoHaveNotStartedCourse = () => {
+        const {statistics} = this.props;
+        const leader_board = get(statistics, 'lider_board', []);
+
+        return leader_board.filter(person => person.all_tasks === 0);
+    }
+
     render() {
         const {classes} = this.props;
         const mappedDataWithLabels = this.getMappedDataWithLabels();
+        const usersWhoHaveNotStartedCourse = this.getUsersWhoHaveNotStartedCourse();
 
         const data = {
             labels: mappedDataWithLabels.labels,
@@ -60,12 +69,19 @@ class Statistics extends React.PureComponent{
         };
 
         return(
-            <Box display={'flex'} className={classes.root}>
+            <Box className={classes.root}>
                 <div className={classes.graph}>
                     <HorizontalBar
                         data={data}
                         options={options}
                     />
+                </div>
+                <div className={classes.usersList}>
+                    <Typography className={classes.title}> Не начали курс </Typography>
+
+                    {usersWhoHaveNotStartedCourse.map(user =>
+                        <Typography> {user.fio} </Typography>
+                    )}
                 </div>
             </Box>
         );

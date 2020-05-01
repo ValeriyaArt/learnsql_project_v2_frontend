@@ -33,9 +33,11 @@ export default class BaseService {
     };
 
     interceptFailResponse = (error) => {
+        console.log('error', error);
+        debugger
         const response = {
             ...error,
-            errors: get(error, 'response.data.errors'),
+            errors: error,
             message: get(error, 'response.data.errors[0].detail')
         };
 
