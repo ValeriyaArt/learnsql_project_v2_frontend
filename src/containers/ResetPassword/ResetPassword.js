@@ -14,30 +14,26 @@ import UserService from "../../service/user-service";
 
 import * as Enum from './enum';
 
-import connect from './SignIn.connect';
-import styles from './SignIn.styles';
+import connect from './ResetPassword.connect';
+import styles from './ResetPassword.styles';
 
 const userService = UserService.factory();
 
-class SignIn extends React.PureComponent{
+class ResetPassword extends React.PureComponent{
     componentWillUnmount() {
-        this.props.actions.signInPageDown();
+        this.props.actions.resetPasswordPageDown();
     }
 
-    changeLogin = (e) => {
-        this.props.actions.signInChangeField({destination: Enum.USERNAME_FIELD, value: get(e, 'target.value', '')})
-    };
-
-    changePassword = (e) => {
-        this.props.actions.signInChangeField({destination: Enum.PASSWORD_FIELD, value: get(e, 'target.value', '')})
+    changeEmail = (e) => {
+        this.props.actions.resetPasswordChangeField({destination: Enum.EMAIL_FIELD, value: get(e, 'target.value', '')})
     };
 
     clickButtonHandler = () => {
-        this.props.actions.signIn();
+        this.props.actions.resetPassword();
     };
 
     render() {
-        const {classes, disableButton, auth} = this.props;
+        const {classes, disableButton, auth, email} = this.props;
         const isAuth = userService.isAuth() && auth;
 
         if (isAuth) return <Redirect to={appRouter.getHomeRoute()} />;
@@ -45,14 +41,10 @@ class SignIn extends React.PureComponent{
         return(
             <div className={classes.root}>
                 <div className={classes.form}>
-                    <TextField label="Логин"
+                    <TextField label="Email"
                                className={classes.textField}
-                               onChange={this.changeLogin}
-                    />
-                    <TextField label="Пароль"
-                               className={classes.textField}
-                               type="password"
-                               onChange={this.changePassword}
+                               onChange={this.changeEmail}
+                               value={email}
                     />
                     <Button color="primary"
                             variant="contained"
@@ -60,21 +52,21 @@ class SignIn extends React.PureComponent{
                             disabled={disableButton}
                             onClick={this.clickButtonHandler}
                     >
-                        Войти
+                        Восстановить пароль
                     </Button>
 
+                    <Typography className={classes.noAccount}>
+                        Есть аккаунт?&nbsp;
+                        <Link to={appRouter.getSignInRoute()}
+                              className={classes.link}>
+                            Войти
+                        </Link>
+                    </Typography>
                     <Typography className={classes.noAccount}>
                         Нет аккаунта?&nbsp;
                         <Link to={appRouter.getSignUpRoute()}
                               className={classes.link}>
                             Регистрация
-                        </Link>
-                    </Typography>
-                    <Typography className={classes.noAccount}>
-                        Забыли пароль?&nbsp;
-                        <Link to={appRouter.getResetPasswordRoute()}
-                              className={classes.link}>
-                            Восстановить пароль
                         </Link>
                     </Typography>
                 </div>
@@ -83,11 +75,11 @@ class SignIn extends React.PureComponent{
     }
 }
 
-SignIn.propTypes = {
+ResetPassword.propTypes = {
     classes: PropTypes.object,
     actions: PropTypes.object,
     disableButton: PropTypes.bool,
     auth: PropTypes.bool,
 };
 
-export default withStyles(styles)(connect(SignIn));
+export default withStyles(styles)(connect(ResetPassword));

@@ -4,6 +4,7 @@ import {GENERAL_PATH as signUpPath, reducer as signUpReducer} from "../container
 import {GENERAL_PATH as coursePath, reducer as courseReducer} from "../containers/Course/reducer";
 import {GENERAL_PATH as profilePath, reducer as profileReducer} from "../containers/Profile/reducer";
 import {GENERAL_PATH as homePath, reducer as homeReducer} from "../containers/Home/reducer";
+import {GENERAL_PATH as resetPasswordPath, reducer as resetPasswordReducer} from "../containers/ResetPassword/reducer";
 import {GENERAL_PATH as mainPath, reducer as mainReducer} from "../layout/reducer";
 
 export default combineReducers({
@@ -13,4 +14,5 @@ export default combineReducers({
     [coursePath]: courseReducer,
     [profilePath]: profileReducer,
     [homePath]: homeReducer,
+    [resetPasswordPath]: resetPasswordReducer,
 });

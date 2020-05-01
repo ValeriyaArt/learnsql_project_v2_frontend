@@ -2,6 +2,8 @@ let routerServiceInstance = null;
 
 const SIGN_IN = 'sign-in';
 const SIGN_UP = 'sign-up';
+const RESET_PASSWORD = 'reset-password';
+const RESET_PASSWORD_CONFIRM = 'password/reset/confirm/:uid/:token';
 const COURSE = 'course';
 const PROFILE = 'profile';
 const FAQ = 'faq';
@@ -23,6 +25,14 @@ export default class RouterService {
 
     getSignUpRoute = () => {
         return SEPARATOR + SIGN_UP;
+    };
+
+    getResetPasswordRoute = () => {
+        return SEPARATOR + RESET_PASSWORD;
+    };
+
+    getResetPasswordConfirmRoute = () => {
+        return SEPARATOR + RESET_PASSWORD_CONFIRM;
     };
 
     getCourseRoute = () => {
