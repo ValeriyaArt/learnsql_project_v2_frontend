@@ -17,7 +17,7 @@ class SignInService extends BaseService{
         formData.append(Enum.TOKEN, token);
         formData.append(Enum.UID, uid);
 
-        return this.post('/auth/users/reset_password/', formData);
+        return this.post('/auth/users/reset_password_confirm/', formData);
     }
 }
 
