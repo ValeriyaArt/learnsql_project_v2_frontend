@@ -13,8 +13,8 @@ class CourseService extends BaseService{
     getCourseMethodicalMaterial(sectionId){
         return this.get(`/api/topicsofsection/${sectionId}`);
     }
-    getCourseStatistics(id){
-        return this.get(`/api/course/${id}/`);
+    getCourseStatistics(courseId){
+        return this.get(`/api/userresultsincourse/course/${courseId}`);
     }
     completeTask(routeId, taskId, answer){
         const formData = new FormData();

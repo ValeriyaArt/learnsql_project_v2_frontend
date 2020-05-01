@@ -11,6 +11,7 @@ import Paper from "@material-ui/core/Paper";
 
 import TasksTab from './containers/Tasks';
 import MethodicalMaterialsTab from './containers/Methodical';
+import StatisticsTab from './containers/Statistics';
 import CourseFinishModal from './containers/CourseFinishModal';
 
 import {appRouter} from "../../service/router-service";
@@ -65,7 +66,7 @@ class Course extends React.PureComponent{
 
         switch (currentTab) {
             case 0:
-                return <> Cтатистика </>;
+                return <StatisticsTab />;
             case 1:
                 return <MethodicalMaterialsTab />;
             case 2:
