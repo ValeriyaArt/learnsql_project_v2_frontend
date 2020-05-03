@@ -205,18 +205,19 @@ class Task extends React.PureComponent{
                     <div className={classes.taskInfo}>
                         <Typography> <b>{taskTitle}:</b> </Typography>
                         <Typography> {taskText} </Typography>
-                        <Typography className={classes.taskDescription}> {taskDescription} </Typography>
 
                         <Button onClick={this.showImageClickHandler}
                                 color={'primary'}
                                 endIcon={
                                     showImage ? <KeyboardArrowDownIcon /> : <KeyboardArrowRightIcon />
                                 }
+                                className={classes.showDBButton}
                         >
                             {showImage ? <> Скрыть схему БД </> : <> Посмотреть схему БД </> }
                         </Button>
 
                         <Collapse in={showImage} collapsedHeight={0}>
+                            <Typography> {taskDescription} </Typography>
                             <div className={classes.image}> <img src={taskImage} alt=""/> </div>
                         </Collapse>
                     </div>

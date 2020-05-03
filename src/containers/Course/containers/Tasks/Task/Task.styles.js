@@ -50,5 +50,8 @@ export default (theme) => ({
     simpleErrorBlock: {
         margin: 20,
         maxWidth: 'max-content'
+    },
+    showDBButton: {
+        margin: '20px 0px'
     }
 });
