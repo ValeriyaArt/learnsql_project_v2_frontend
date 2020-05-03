@@ -12,6 +12,9 @@ export default (theme) => ({
         marginTop: '20px'
     },
     title: {
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+    },
+    courseInfo: {
+        marginBottom: '40px'
     }
 });

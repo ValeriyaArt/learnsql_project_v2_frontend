@@ -30,17 +30,10 @@ class Statistics extends React.PureComponent{
         };
     }
 
-    getUsersWhoHaveNotStartedCourse = () => {
-        const {statistics} = this.props;
-        const leader_board = get(statistics, 'lider_board', []);
-
-        return leader_board.filter(person => person.all_tasks === 0);
-    }
-
     render() {
-        const {classes} = this.props;
+        const {classes, statistics} = this.props;
+
         const mappedDataWithLabels = this.getMappedDataWithLabels();
-        const usersWhoHaveNotStartedCourse = this.getUsersWhoHaveNotStartedCourse();
 
         const data = {
             labels: mappedDataWithLabels.labels,
@@ -65,23 +58,26 @@ class Statistics extends React.PureComponent{
                         unit: 1
                     },
                 }]
-            }
+            },
+            legend: {
+                display: false,
+            },
         };
 
         return(
             <Box className={classes.root}>
+                <div className={classes.courseInfo}>
+                    <Typography className={classes.title} component={'h1'}> {statistics.course} </Typography>
+                    <Typography> Выполнено {statistics.completed_tasks} из {statistics.all_tasks} заданий</Typography>
+                </div>
+
+                <Typography className={classes.title} component={'h2'}> Статистика учебной группы </Typography>
+
                 <div className={classes.graph}>
                     <HorizontalBar
                         data={data}
                         options={options}
                     />
-                </div>
-                <div className={classes.usersList}>
-                    <Typography className={classes.title}> Не начали курс </Typography>
-
-                    {usersWhoHaveNotStartedCourse.map((user, index) =>
-                        <Typography key={`user-${index}`}> {user.fio} </Typography>
-                    )}
                 </div>
             </Box>
         );
