@@ -6,7 +6,6 @@ export default (theme) => ({
         padding: 20
     },
     answerFieldContainer: {
-        marginTop: 20,
         padding: 20,
         maxWidth: '600px',
     },
@@ -53,5 +52,15 @@ export default (theme) => ({
     },
     showDBButton: {
         margin: '20px 0px'
+    },
+    materialSubItem: {
+        marginLeft: '20px',
+        cursor: 'pointer',
+        '&:hover': {
+            color: theme.palette.primary.main
+        }
+    },
+    materialItem: {
+        fontWeight: 'bold',
     }
 });

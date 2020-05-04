@@ -8,6 +8,7 @@ export const getCourseId = (state) => get(getStateData(state), Enum.COURSE_ID, '
 
 
 export const isOpenCourseFinishModal = (state) => get(getStateData(state), Enum.IS_OPEN_FINISH_COURSE_MODAL, false);
+export const getCurrentCourseTab = (state) => get(getStateData(state), Enum.CURRENT_COURSE_TAB, 0);
 
 
 export const getTasks = (state) => get(getStateData(state), Enum.TASKS, '');
@@ -17,6 +18,7 @@ export const getCurrentTaskAnswer = (state) => get(getStateData(state), Enum.CUR
 export const getCurrentTaskErrorTableData = (state) => get(getStateData(state), Enum.CURRENT_TASK_ERROR_TABLE_DATA, {});
 export const getCurrentTaskId = (state) => get(getCurrentTask(state), 'id');
 export const getCurrentRouteId = (state) => get(getStateData(state), Enum.COURSE_ROUTE_ID, '');
+export const getThemes = (state) => get(getCurrentTask(state), 'themes', []);
 
 export const getNextRoute = (state) => {
     const tasks = getTasks(state);
@@ -48,4 +50,5 @@ export const getStatistics = (state) => get(getStateData(state), Enum.STATISTICS
 
 export const getMethodicalMaterials = (state) => get(getStateData(state), Enum.METHODICAL_MATERIALS, []);
 export const getCurrentMethodicalMaterial = (state) => get(getStateData(state), Enum.METHODICAL_MATERIAL, []);
+export const getCurrentMethodicalSubMaterial = (state) => get(getStateData(state), Enum.METHODICAL_SUB_MATERIAL, '');
 export const getCurrentMethodicalMaterialId = (state) => parseInt(get(getCurrentMethodicalMaterial(state),'0.section', null));

@@ -1,5 +1,6 @@
 import React from 'react';
 import get from 'lodash/get';
+import PropTypes from "prop-types";
 import {Redirect} from "react-router";
 import {withRouter} from 'react-router-dom';
 
@@ -41,16 +42,15 @@ class Course extends React.PureComponent{
     }
 
     changeTabHandler = (event, tabNumber) => {
-        this.setState({currentTab: tabNumber});
+        this.props.actions.setCurrentCourseTab(tabNumber);
     };
 
     renderTabMenu = () => {
-        const {currentTab} = this.state;
-        const {classes} = this.props;
+        const {classes, currentCourseTab} = this.props;
 
         return (
             <div className={classes.tabMenu}>
-                <Tabs value={currentTab}
+                <Tabs value={currentCourseTab}
                       onChange={this.changeTabHandler}
                 >
                     <Tab label={'Статистика'} />
@@ -62,9 +62,9 @@ class Course extends React.PureComponent{
     };
 
     renderTabContent = () => {
-        const {currentTab} = this.state;
+        const {currentCourseTab} = this.props;
 
-        switch (currentTab) {
+        switch (currentCourseTab) {
             case 0:
                 return <StatisticsTab />;
             case 1:
@@ -86,6 +86,7 @@ class Course extends React.PureComponent{
         return(
             <>
                 {this.renderTabMenu()}
+
                 <Box className={classes.courseTabContent}>
                     <Paper className={classes.paper}>
                         {this.renderTabContent()}
@@ -99,7 +100,7 @@ class Course extends React.PureComponent{
 }
 
 Course.propTypes = {
-
+    actions: PropTypes.object
 };
 
 export default withStyles(styles)(connect(withRouter(Course)));

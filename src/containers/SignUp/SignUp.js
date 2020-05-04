@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import {Redirect} from "react-router";
 import PropTypes from "prop-types";
 import get from "lodash/get";
+import { ReCaptcha } from 'react-recaptcha-v3'
 
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -25,7 +26,8 @@ const userService = UserService.factory();
 
 class SignUp extends React.PureComponent{
     state = {
-        passwordFieldIsFocused: false
+        passwordFieldIsFocused: false,
+        captchaValid: false
     };
 
     componentWillUnmount() {
@@ -54,6 +56,10 @@ class SignUp extends React.PureComponent{
 
     emailFieldBlur = () => {
         this.setState({emailFieldIsFocused: false});
+    };
+
+    captchaValidTrue = () => {
+        this.setState({captchaValid: true});
     };
 
     render() {
@@ -116,6 +122,12 @@ class SignUp extends React.PureComponent{
                                onChange={this.changeField(Enum.ISU_NUMBER_FIELD)}
                                type="number"
                                value={isuNumber}
+                    />
+
+                    <ReCaptcha
+                        sitekey="your_site_key"
+                        action='action_name'
+                        verifyCallback={this.captchaValidTrue}
                     />
 
                     <FormControl>

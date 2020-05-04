@@ -21,10 +21,10 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 import * as Enum from '../../../enum';
+import {getTaskId} from "../../../getters";
 
 import connect from './Task.connect';
 import styles from './Task.styles';
-import {getTaskId} from "../../../getters";
 
 class Task extends React.PureComponent{
     constructor(props) {
@@ -32,7 +32,8 @@ class Task extends React.PureComponent{
 
         this.state = {
             answer: props.solution,
-            showImage: false
+            showImage: false,
+            showTheme: false,
         }
     }
 
@@ -41,6 +42,14 @@ class Task extends React.PureComponent{
             this.setState({showImage: false});
         } else {
             this.setState({showImage: true});
+        }
+    }
+
+    showThemeClickHandler = () => {
+        if (this.state.showTheme){
+            this.setState({showTheme: false});
+        } else {
+            this.setState({showTheme: true});
         }
     }
 
@@ -187,12 +196,76 @@ class Task extends React.PureComponent{
         );
     }
 
-    render() {
+    changeTabToMethodical = (id, subMaterialId) => () => {
+        this.props.actions.setCurrentCourseTab(1);
+        this.props.actions.getCourseMethodicalMaterial(id);
+        this.props.actions.setCourseMethodicalSubMaterial(subMaterialId);
+    }
+
+    themes = () => {
+        const {showTheme} = this.state;
+        const {classes, themes} = this.props;
+
+        return (
+            <>
+                <Button onClick={this.showThemeClickHandler}
+                        color={'primary'}
+                        endIcon={
+                            showTheme ? <KeyboardArrowDownIcon /> : <KeyboardArrowRightIcon />
+                        }
+                        className={classes.showDBButton}
+                >
+                    Темы для изучения
+                </Button>
+
+
+                <Collapse in={showTheme} collapsedHeight={0}>
+                    {themes.map(item => <div key={item.theme.id}>
+                            <Typography className={classes.materialItem}>{item.theme.title}</Typography>
+                            {item.theme.topic_in_themes.map(topic =>
+                                <div key={`topic-${topic.id}`}
+                                     className={classes.materialSubItem}
+                                     onClick={this.changeTabToMethodical(item.theme.id, topic.id)}>
+                                    <Typography>{topic.topic_name}</Typography>
+                                </div>
+                            )}
+                        </div>
+                    )}
+                </Collapse>
+            </>
+        )
+    }
+
+    databaseStructure = () => {
         const {showImage} = this.state;
-        const {task, classes, error, tableErrorData, answer} = this.props;
-        const taskText = get(task, `task_text`, null);
+        const {classes, task} = this.props;
+
         const taskDescription = get(task, `database_description`, '');
         const taskImage = get(task, `database_image`, '');
+
+        return (
+            <>
+                <Button onClick={this.showImageClickHandler}
+                        color={'primary'}
+                        endIcon={
+                            showImage ? <KeyboardArrowDownIcon /> : <KeyboardArrowRightIcon />
+                        }
+                        className={classes.showDBButton}
+                >
+                    {showImage ? <> Скрыть схему БД </> : <> Посмотреть схему БД </> }
+                </Button>
+
+                <Collapse in={showImage} collapsedHeight={0}>
+                    <Typography> {taskDescription} </Typography>
+                    <div className={classes.image}> <img src={taskImage} alt=""/> </div>
+                </Collapse>
+            </>
+        )
+    }
+
+    render() {
+        const {task, classes, error, tableErrorData, answer} = this.props;
+        const taskText = get(task, `task_text`, null);
         const taskTitle = get(task, `title`, '');
         const refResult = get(tableErrorData, [Enum.ERROR_REF_RESULT, 1, 1], []);
         const studentResult = get(tableErrorData, [Enum.ERROR_STUDENT_RESULT, 1, 1], []);
@@ -206,20 +279,9 @@ class Task extends React.PureComponent{
                         <Typography> <b>{taskTitle}:</b> </Typography>
                         <Typography> {taskText} </Typography>
 
-                        <Button onClick={this.showImageClickHandler}
-                                color={'primary'}
-                                endIcon={
-                                    showImage ? <KeyboardArrowDownIcon /> : <KeyboardArrowRightIcon />
-                                }
-                                className={classes.showDBButton}
-                        >
-                            {showImage ? <> Скрыть схему БД </> : <> Посмотреть схему БД </> }
-                        </Button>
+                        {this.databaseStructure()}
+                        {this.themes()}
 
-                        <Collapse in={showImage} collapsedHeight={0}>
-                            <Typography> {taskDescription} </Typography>
-                            <div className={classes.image}> <img src={taskImage} alt=""/> </div>
-                        </Collapse>
                     </div>
 
                     {this.renderAnswerField()}
@@ -240,6 +302,7 @@ class Task extends React.PureComponent{
 }
 
 Task.propTypes = {
+    changeTabToMethodical: PropTypes.func,
     error: PropTypes.any,
     isDone: PropTypes.bool,
     task: PropTypes.object,

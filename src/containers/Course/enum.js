@@ -2,10 +2,12 @@ export const TASKS = 'tasks';
 export const CURRENT_TASK = 'currentTask';
 export const METHODICAL_MATERIALS = 'methodicalMaterials';
 export const METHODICAL_MATERIAL = 'methodicalMaterial';
+export const METHODICAL_SUB_MATERIAL = 'methodicalSubMaterial';
 export const STATISTICS = 'statistics';
 export const CURRENT_TASK_ERROR = 'taskError';
 export const CURRENT_TASK_ERROR_TABLE_DATA = 'taskErrorTableData';
 export const COURSE_ROUTE_ID = 'courseRoute';
+export const CURRENT_COURSE_TAB = 'currentCourseTab';
 
 export const ERROR_REF_RESULT = 'ref_result';
 export const ERROR_STUDENT_RESULT = 'student_result';

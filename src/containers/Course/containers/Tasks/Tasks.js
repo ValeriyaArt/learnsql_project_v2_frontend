@@ -63,6 +63,7 @@ class Tasks extends React.PureComponent{
 }
 
 Tasks.propTypes = {
+    changeTabToMethodical: PropTypes.func,
     tasks: PropTypes.array,
     courseId: PropTypes.string,
     currentRouteId: PropTypes.number,

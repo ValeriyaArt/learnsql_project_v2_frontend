@@ -59,6 +59,7 @@ class Methodical extends React.PureComponent{
 }
 
 Methodical.propTypes = {
+    actions: PropTypes.object,
     materials: PropTypes.array,
     courseId: PropTypes.string,
     currentMaterialId: PropTypes.number,

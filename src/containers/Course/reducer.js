@@ -9,6 +9,8 @@ export const initialState = {
     [Enum.CURRENT_TASK_ERROR]: null,
     [Enum.COURSE_ROUTE_ID]: null,
     [Enum.CURRENT_TASK_ERROR_TABLE_DATA]: {},
+    [Enum.METHODICAL_SUB_MATERIAL]: '',
+    [Enum.CURRENT_COURSE_TAB]: 0,
 };
 
 
@@ -40,6 +42,16 @@ const setCourseMethodicalMaterials = (state, {payload}) => ({
 const setCurrentMethodicalMaterial = (state, {payload}) => ({
     ...state,
     [Enum.METHODICAL_MATERIAL]: payload,
+});
+const setCurrentMethodicalSubMaterial = (state, {payload}) => ({
+    ...state,
+    [Enum.METHODICAL_SUB_MATERIAL]: payload,
+});
+
+
+const setCurrentCourseTab = (state, {payload}) => ({
+    ...state,
+    [Enum.CURRENT_COURSE_TAB]: payload,
 });
 
 const setCourseStatistics = (state, {payload}) => ({
@@ -90,6 +102,8 @@ export const reducer = createReducer(initialState, {
     [C.SET_COURSE_TASK]: setCourseTask,
     [C.SET_COURSE_METHODICAL_MATERIALS]: setCourseMethodicalMaterials,
     [C.SET_COURSE_METHODICAL_MATERIAL]: setCurrentMethodicalMaterial,
+    [C.SET_COURSE_METHODICAL_SUB_MATERIAL]: setCurrentMethodicalSubMaterial,
+    [C.SET_CURRENT_COURSE_TAB]: setCurrentCourseTab,
     [C.SET_COURSE_STATISTICS]: setCourseStatistics,
     [C.SET_COURSE_ID]: setCourseId,
     [C.SET_COURSE_ROUTE_ID]: setCourseRouteId,
