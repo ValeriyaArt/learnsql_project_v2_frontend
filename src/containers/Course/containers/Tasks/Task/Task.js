@@ -256,7 +256,7 @@ class Task extends React.PureComponent{
                 </Button>
 
                 <Collapse in={showImage} collapsedHeight={0}>
-                    <Typography> {taskDescription} </Typography>
+                    <Typography dangerouslySetInnerHTML={{__html: taskDescription}} />
                     <div className={classes.image}> <img src={taskImage} alt=""/> </div>
                 </Collapse>
             </>

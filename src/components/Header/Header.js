@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from "prop-types";
+import Link from "react-router-dom/Link";
 
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -16,7 +17,6 @@ import UserService from "../../service/user-service";
 
 import styles from './Header.styles';
 import {appRouter} from "../../service/router-service";
-import Link from "react-router-dom/Link";
 
 const userService = UserService.factory();
 

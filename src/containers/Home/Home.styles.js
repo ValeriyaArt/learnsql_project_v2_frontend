@@ -4,8 +4,8 @@ export default (theme) => ({
         flexWrap: 'wrap',
     },
     card: {
-        minWidth: 400,
-        maxWidth: 500,
+        maxWidth: 700,
+        width: '45%',
         marginRight: '50px',
         marginBottom: '50px'
     },

@@ -46,9 +46,10 @@ class Home extends React.PureComponent{
                                 <Typography variant="h5" component="h2">
                                     {get(course, 'title', '')}
                                 </Typography>
-                                <Typography className={classes.description} color="textSecondary">
-                                    {get(course, 'description', '')}
-                                </Typography>
+                                <Typography className={classes.description}
+                                            color="textSecondary"
+                                            dangerouslySetInnerHTML={{__html: get(course, 'description', '')}}
+                                />
                             </CardContent>
                             <CardActions className={classes.actions}>
                                 <Typography color="primary">
