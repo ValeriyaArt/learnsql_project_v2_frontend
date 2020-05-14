@@ -43,6 +43,10 @@ class Course extends React.PureComponent{
 
     changeTabHandler = (event, tabNumber) => {
         this.props.actions.setCurrentCourseTab(tabNumber);
+
+        if (tabNumber === 1){
+            this.props.actions.getCourseMethodicalMaterials();
+        }
     };
 
     renderTabMenu = () => {

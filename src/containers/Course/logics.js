@@ -7,7 +7,14 @@ import courseActions from './actions';
 
 import Service from './service';
 import * as Enum from "./enum";
-import {getCourseId, getCurrentTaskId, getTaskId, getCurrentRouteId, getCurrentTaskSolution} from "./getters";
+import {
+    getCourseId,
+    getCurrentTaskId,
+    getTaskId,
+    getCurrentRouteId,
+    getCurrentTaskSolution,
+    getCurrentMethodicalSubMaterial
+} from "./getters";
 
 const service = new Service();
 
@@ -79,6 +86,7 @@ const getCourseMethodicalMaterials = createLogic({
     process({getState, action}, dispatch, done) {
         const state = getState();
         const courseId = getCourseId(state);
+        const subMaterial = getCurrentMethodicalSubMaterial(state);
 
         if (courseId === null) return done();
 
@@ -87,7 +95,11 @@ const getCourseMethodicalMaterials = createLogic({
         service.getCourseMethodicalMaterials(courseId)
             .then((res) => {
                 const materials = get(res, 'data');
-                dispatch(courseActions.getCourseMethodicalMaterial(get(materials, '0.id')));
+
+                if (!subMaterial || subMaterial.length === 0){
+                    dispatch(courseActions.getCourseMethodicalMaterial(get(materials, '0.id')));
+                }
+
                 dispatch(courseActions.setCourseMethodicalMaterials(materials));
                 dispatch(actions.fetchingSuccess());
             })

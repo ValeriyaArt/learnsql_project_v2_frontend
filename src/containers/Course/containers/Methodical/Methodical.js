@@ -20,7 +20,11 @@ class Methodical extends React.PureComponent{
     }
 
     componentDidMount() {
-        this.props.actions.getCourseMethodicalMaterials();
+
+    }
+
+    componentWillUnmount() {
+        this.props.actions.resetCourseMethodicalSubMaterial();
     }
 
     changeMaterialHandler = (id) => () => {

@@ -21,6 +21,7 @@ const getCourseMethodicalMaterial = createAction(C.GET_COURSE_METHODICAL_MATERIA
 const setCourseMethodicalMaterial = createAction(C.SET_COURSE_METHODICAL_MATERIAL, 'payload');
 
 const setCourseMethodicalSubMaterial = createAction(C.SET_COURSE_METHODICAL_SUB_MATERIAL, 'payload');
+const resetCourseMethodicalSubMaterial = createAction(C.RESET_COURSE_METHODICAL_SUB_MATERIALS, 'payload');
 
 const setCurrentCourseTab = createAction(C.SET_CURRENT_COURSE_TAB, 'payload');
 
@@ -50,6 +51,7 @@ export default {
     getCourseMethodicalMaterial,
     setCourseMethodicalMaterial,
     setCourseMethodicalSubMaterial,
+    resetCourseMethodicalSubMaterial,
     setCurrentCourseTab,
     completeTask,
     setCurrentTaskError,
