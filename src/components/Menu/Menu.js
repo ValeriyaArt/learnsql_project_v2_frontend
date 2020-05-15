@@ -1,25 +1,26 @@
 import React from 'react';
 import Link from "react-router-dom/Link";
+import {withRouter} from "react-router-dom";
 
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 import HomeIcon from '@material-ui/icons/HomeOutlined';
-import QuestionIcon from '@material-ui/icons/HelpOutlined';
+import QuestionIcon from '@material-ui/icons/HelpOutlineOutlined';
 import SchoolIcon from '@material-ui/icons/SchoolOutlined';
+
 import withStyles from '@material-ui/core/styles/withStyles';
 
 import {appRouter} from "../../service/router-service";
 
 import styles from './Menu.styles';
+import MenuItem from "@material-ui/core/MenuItem";
 
 class Menu extends React.PureComponent{
     render() {
         const {classes, isOpen, myCourses} = this.props;
-
+        const {pathname} = this.props.location;
+        console.log('pathname', pathname);
         return(
             <Drawer
                 variant="persistent"
@@ -29,44 +30,62 @@ class Menu extends React.PureComponent{
                     paper: classes.drawerPaper,
                 }}
             >
-                <List>
-                    <ListItem button className={classes.listItem}>
-                        <Link to={appRouter.getHomeRoute()} className={classes.link}>
-                            <ListItemIcon><HomeIcon /></ListItemIcon>
-                            <ListItemText primary={'Главная'} />
-                        </Link>
-                    </ListItem>
+                <List className={classes.menuList}>
+                    <Link to={appRouter.getHomeRoute()} className={classes.link}>
+                        <MenuItem
+                            selected={pathname === '/'}
+                            classes={{
+                                selected: classes.selectedMenuItem,
+                                root: classes.menuItem,
+                            }}
+                        >
+                            <HomeIcon className={classes.icon} />
+                            &nbsp;Главная
+                        </MenuItem>
+                    </Link>
                 </List>
 
                 <Divider className={classes.divider}/>
 
                 {myCourses.length > 0 &&
                     <>
-                        <List>
+                        <List className={classes.menuList}>
                             {myCourses.map(course =>
-                                <ListItem button key={`course-link-${course.id}`} className={classes.listItem}>
-                                    <Link to={appRouter.getCourseLink(course.course)} className={classes.link}>
-                                        <ListItemIcon><SchoolIcon/></ListItemIcon>
-                                        <ListItemText primary={course.course_title}/>
-                                    </Link>
-                                </ListItem>
+                                <Link to={appRouter.getCourseLink(course.course)} className={classes.link} key={`course-link-${course.id}`}>
+                                    <MenuItem
+                                        selected={pathname === `/course/${course.course}`}
+                                        classes={{
+                                            selected: classes.selectedMenuItem,
+                                            root: classes.menuItem,
+                                        }}
+                                    >
+                                        <SchoolIcon className={classes.icon}/>
+                                        &nbsp;{course.course_title}
+                                    </MenuItem>
+                                </Link>
                             )}
                         </List>
                         <Divider className={classes.divider}/>
                     </>
                 }
 
-                <List>
-                    <ListItem button className={classes.listItem}>
-                        <Link to={appRouter.getFAQLink()} className={classes.link}>
-                            <ListItemIcon><QuestionIcon /></ListItemIcon>
-                            <ListItemText primary={'FAQ'} />
-                        </Link>
-                    </ListItem>
+                <List className={classes.menuList}>
+                    <Link to={appRouter.getFAQLink()} className={classes.link}>
+                        <MenuItem
+                            selected={pathname === appRouter.getFAQLink()}
+                            classes={{
+                                selected: classes.selectedMenuItem,
+                                root: classes.menuItem,
+                            }}
+                        >
+                            <QuestionIcon className={classes.icon}/>
+                            &nbsp;FAQ
+                        </MenuItem>
+                    </Link>
                 </List>
             </Drawer>
         );
     }
 }
 
-export default withStyles(styles)(Menu);
+export default withStyles(styles)(withRouter(Menu));
