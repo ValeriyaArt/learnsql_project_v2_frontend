@@ -43,7 +43,13 @@ const muiTheme = createMuiTheme({
             primary: TEXT_COLOR,
         },
     },
-    appBarHeight: 64
+    overrides: {
+        MuiButton: {
+            root: {
+                padding: '5px 25px !important'
+            },
+        },
+    },
 });
 
 export default muiTheme;

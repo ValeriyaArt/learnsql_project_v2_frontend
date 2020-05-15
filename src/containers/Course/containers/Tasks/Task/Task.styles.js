@@ -3,10 +3,10 @@ export default (theme) => ({
         width: '100%'
     },
     taskInfo: {
-        padding: 20
+        padding: 50
     },
     answerFieldContainer: {
-        padding: 20,
+        padding: 50,
         maxWidth: '600px',
     },
     buttonsContainer: {
@@ -16,7 +16,7 @@ export default (theme) => ({
         marginLeft: 10
     },
     simpleErrorText: {
-        padding: '20px',
+        padding: '50px',
         marginTop: '20px',
         color: theme.palette.secondary.main
     },
