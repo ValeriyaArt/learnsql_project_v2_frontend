@@ -19,7 +19,21 @@ export default (theme) => ({
     doneIcon: {
         color: 'green'
     },
+    selectedMenuItem: {
+        color: theme.palette.secondary.main,
+        backgroundColor: 'transparent !important',
+        borderLeft: '2px solid #ec1946',
+        padding: '10px 16px',
+        ':&hover': {
+            backgroundColor: '#f4f4f4 !important'
+        }
+    },
     menuItem: {
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        padding: '10px 16px',
+        ':&hover': {
+            backgroundColor: '#f4f4f4 !important',
+            color: theme.palette.secondary.main,
+        }
     }
 });

@@ -38,7 +38,7 @@ class Menu extends React.PureComponent{
                     </ListItem>
                 </List>
 
-                <Divider />
+                <Divider className={classes.divider}/>
 
                 {myCourses.length > 0 &&
                     <>
@@ -52,7 +52,7 @@ class Menu extends React.PureComponent{
                                 </ListItem>
                             )}
                         </List>
-                        <Divider />
+                        <Divider className={classes.divider}/>
                     </>
                 }
 

@@ -10,9 +10,15 @@ export default (theme) => ({
         alignItems: 'center',
         color: theme.palette.text.primary,
         width: '100%',
-        padding: '6px 16px'
     },
     listItem: {
-        padding: 0
-    }
+        padding: '10px 16px',
+        ':&hover': {
+            backgroundColor: '#f4f4f4 !important',
+            color: theme.palette.secondary.main,
+        }
+    },
+    divider: {
+        backgroundColor: '#f4f4f4'
+    },
 });

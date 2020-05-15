@@ -34,7 +34,7 @@ export default (theme) => ({
     image: {
         width: '100%',
         '& img': {
-            width: '100%'
+            maxWidth: '800px'
         }
     },
     tableWrap: {

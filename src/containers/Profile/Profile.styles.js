@@ -5,7 +5,7 @@ export default (theme) => ({
         height: '100%'
     },
     form: {
-        boxShadow: '0px 0px 5px 2px rgba(0,0,0,0.1)',
+        boxShadow: '0px 0px 6px 1px rgba(194,194,194,0.3)',
         background: 'white',
         margin: 'auto',
         width: '300px',
@@ -18,5 +18,8 @@ export default (theme) => ({
         cursor: 'pointer',
         marginTop: '15px',
         marginBottom: '15px',
+        '&:hover': {
+            color: theme.palette.primary.dark,
+        }
     }
 });

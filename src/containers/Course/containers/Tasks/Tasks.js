@@ -41,6 +41,10 @@ class Tasks extends React.PureComponent{
                         key={`task-${index}`}
                         selected={currentRouteId === route.id}
                         className={classes.menuItem}
+                        classes={{
+                            selected: classes.selectedMenuItem,
+                            root: classes.menuItem,
+                        }}
                     >
                         Задание {index + 1}
                         {route.status === "1" && <DoneIcon className={classes.doneIcon}/>}

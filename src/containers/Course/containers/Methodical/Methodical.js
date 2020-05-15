@@ -40,10 +40,13 @@ class Methodical extends React.PureComponent{
                     <MenuItem
                         onClick={this.changeMaterialHandler(material.id)}
                         key={`material-${index}`}
-                        className={classes.menuItem}
                         selected={currentMaterialId === material.id}
+                        classes={{
+                            selected: classes.selectedMenuItem,
+                            root: classes.menuItem,
+                        }}
                     >
-                        {index + 1} {get(material, 'section_name')}
+                        {get(material, 'section_name')}
                     </MenuItem>
                 )}
             </MenuList>
