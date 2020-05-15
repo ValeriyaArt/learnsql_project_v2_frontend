@@ -38,7 +38,11 @@ class Material extends React.PureComponent{
                     {material.map(item =>
                         <ExpansionPanel key={`material-item-${item.id}`}
                                         expanded={subMaterialId === item.id}
-                                        onChange={this.handleChangeCurrentPanel(item.id)}>
+                                        onChange={this.handleChangeCurrentPanel(item.id)}
+                                        classes={{
+                                            root: classes.expansionPanel
+                                        }}
+                        >
                             <ExpansionPanelSummary
                                 expandIcon={<ExpandMoreIcon />}
                                 aria-controls="panel1a-content"

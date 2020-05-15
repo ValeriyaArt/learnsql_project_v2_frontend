@@ -10,6 +10,10 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import Box from "@material-ui/core/Box";
 import Paper from "@material-ui/core/Paper";
 
+import StatisticsIcon from "@material-ui/icons/BarChartOutlined";
+import MethodicalIcon from "@material-ui/icons/LibraryBooksOutlined";
+import TasksIcon from "@material-ui/icons/RateReviewOutlined";
+
 import TasksTab from './containers/Tasks';
 import MethodicalMaterialsTab from './containers/Methodical';
 import StatisticsTab from './containers/Statistics';
@@ -56,10 +60,32 @@ class Course extends React.PureComponent{
             <div className={classes.tabMenu}>
                 <Tabs value={currentCourseTab}
                       onChange={this.changeTabHandler}
+                      className={classes.tabs}
                 >
-                    <Tab label={'Статистика'} />
-                    <Tab label={'Методические материалы'} />
-                    <Tab label={'Задания'} />
+                    <Tab label={'Статистика'}
+                         className={classes.tab}
+                         icon={<StatisticsIcon />}
+                         classes={{
+                             wrapper: classes.tabRoot,
+                             selected: classes.tabSelected,
+                         }}
+                    />
+                    <Tab label={'Методические материалы'}
+                         className={classes.tab}
+                         icon={<MethodicalIcon />}
+                         classes={{
+                             wrapper: classes.tabRoot,
+                             selected: classes.tabSelected,
+                         }}
+                    />
+                    <Tab label={'Задания'}
+                         className={classes.tab}
+                         icon={<TasksIcon />}
+                         classes={{
+                             wrapper: classes.tabRoot,
+                             selected: classes.tabSelected,
+                         }}
+                    />
                 </Tabs>
             </div>
         );
@@ -89,10 +115,10 @@ class Course extends React.PureComponent{
 
         return(
             <>
-                {this.renderTabMenu()}
-
                 <Box className={classes.courseTabContent}>
                     <Paper className={classes.paper}>
+                        {this.renderTabMenu()}
+
                         {this.renderTabContent()}
                     </Paper>
                 </Box>

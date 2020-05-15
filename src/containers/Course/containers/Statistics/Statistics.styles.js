@@ -1,7 +1,7 @@
 export default (theme) => ({
     root: {
         height: '100%',
-        padding: 20
+        padding: 50
     },
     graph: {
         width: '50vw'

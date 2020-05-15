@@ -8,6 +8,7 @@ import Box from '@material-ui/core/Box';
 import Typography from "@material-ui/core/Typography";
 import withStyles from '@material-ui/core/styles/withStyles';
 
+import colors from './colors';
 import connect from './Statistics.connect';
 import styles from './Statistics.styles';
 
@@ -40,11 +41,11 @@ class Statistics extends React.PureComponent{
             datasets: [
                 {
                     label: 'Выполненные задания',
-                    backgroundColor: 'rgba(29,81,163,0.2)',
-                    borderColor: 'rgba(29,81,163,0.2)',
-                    borderWidth: 1,
-                    hoverBackgroundColor: 'rgba(29,81,163,0.4)',
-                    hoverBorderColor: 'rgba(29,81,163,0.4)',
+                    backgroundColor: colors.map(color => color.backgroundColor),
+                    borderColor: colors.map(color => color.borderColor),
+                    borderWidth: colors.map(color => color.borderWidth),
+                    hoverBackgroundColor: colors.map(color => color.hoverBackgroundColor),
+                    hoverBorderColor: colors.map(color => color.hoverBorderColor),
                     data: mappedDataWithLabels.data
                 }
             ],
