@@ -17,6 +17,7 @@ import UserService from "../../service/user-service";
 
 import connect from './Home.connect';
 import styles from './Home.styles';
+import moment from "moment";
 
 const userService = UserService.factory();
 
@@ -44,7 +45,7 @@ class Home extends React.PureComponent{
                     return (
                         <Card className={classes.card} key={`course-${course.id}`}>
                             <CardContent>
-                                <Typography variant="h5" component="h2">
+                                <Typography className={classes.title}>
                                     {get(course, 'title', '')}
                                 </Typography>
                                 <Typography className={classes.description}
@@ -53,8 +54,10 @@ class Home extends React.PureComponent{
                                 />
                             </CardContent>
                             <CardActions className={classes.actions}>
-                                <Typography color="primary">
+                                <Typography>
                                     {/*Пройдено 10%*/}
+                                    Дата старта курса:&nbsp;
+                                    <span className={classes.startDate}>{isMyCourse && moment(isMyCourse.date_start).format('DD.MM.YYYY')}</span>
                                 </Typography>
                                 {isMyCourse ?
                                     <Link
@@ -62,6 +65,7 @@ class Home extends React.PureComponent{
                                         className={classes.link}>
                                         <Button color="primary"
                                                 variant="outlined"
+                                                size="small"
                                         >
                                             На страницу курса
                                             <KeyboardArrowRightIcon />
@@ -71,6 +75,7 @@ class Home extends React.PureComponent{
                                     <Button color="primary"
                                             variant="outlined"
                                             onClick={this.joinCourse(course.id)}
+                                            size="small"
                                     >
                                         Присоединиться
                                     </Button>

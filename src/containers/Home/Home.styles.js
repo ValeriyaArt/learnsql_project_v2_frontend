@@ -4,6 +4,9 @@ export default (theme) => ({
         flexWrap: 'wrap',
         padding: 50,
     },
+    startDate: {
+        color: theme.palette.primary.main
+    },
     card: {
         boxShadow: '0px 0px 6px 1px rgba(194,194,194,0.3)',
         padding: 25,
@@ -12,6 +15,10 @@ export default (theme) => ({
         marginRight: '50px',
         marginBottom: '50px',
         boxSizing: 'border-box'
+    },
+    title: {
+        fontSize: 20,
+        fontWeight: 500,
     },
     description: {
         marginTop: 20,
