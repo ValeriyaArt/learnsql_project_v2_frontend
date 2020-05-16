@@ -3,11 +3,6 @@ import PropTypes from "prop-types";
 import get from 'lodash/get';
 
 import Typography from '@material-ui/core/Typography';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-
 import withStyles from '@material-ui/core/styles/withStyles';
 
 import connect from './Material.connect';
@@ -30,33 +25,12 @@ class Material extends React.PureComponent{
     };
 
     render() {
-        const {material, classes, subMaterialId} = this.props;
+        const {material, classes} = this.props;
 
         return (
             <div className={classes.root}>
                 <Scrollbars minheight={300}>
-                    {material.map(item =>
-                        <ExpansionPanel key={`material-item-${item.id}`}
-                                        expanded={subMaterialId === item.id}
-                                        onChange={this.handleChangeCurrentPanel(item.id)}
-                                        classes={{
-                                            root: classes.expansionPanel
-                                        }}
-                        >
-                            <ExpansionPanelSummary
-                                expandIcon={<ExpandMoreIcon />}
-                                aria-controls="panel1a-content"
-                                id="panel1a-header"
-                            >
-                                <Typography className={classes.heading}>
-                                    {get(item, 'number')} {get(item, 'topic_name')}
-                                </Typography>
-                            </ExpansionPanelSummary>
-                            <ExpansionPanelDetails>
-                                <Typography dangerouslySetInnerHTML={{__html: get(item, 'content')}} />
-                            </ExpansionPanelDetails>
-                        </ExpansionPanel>
-                    )}
+                    <Typography className={classes.content} dangerouslySetInnerHTML={{__html: get(material, 'content')}} />
                 </Scrollbars>
             </div>
         )

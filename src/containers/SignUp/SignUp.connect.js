@@ -1,6 +1,7 @@
 import {connect} from 'react-redux';
 import {bindActionCreators} from "redux";
 import actions from "./actions";
+import layoutActions from "../../layout/actions";
 import * as Enum from './enum';
 import {getIsPasswordError, getIsEmailError} from '../../utils';
 import {getFieldValue} from './getters';
@@ -39,7 +40,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    actions: bindActionCreators(actions, dispatch),
+    actions: bindActionCreators({...actions, ...layoutActions}, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps);

@@ -35,10 +35,6 @@ class Layout extends React.Component {
         }
     }
 
-    componentDidMount() {
-        this.props.actions.getGroupOptions();
-    }
-
     shouldComponentUpdate(nextProps, nextState){
         return !shallowEqual(this.props.errors, nextProps.errors)
             || !shallowEqual(this.props.children, nextProps.children)

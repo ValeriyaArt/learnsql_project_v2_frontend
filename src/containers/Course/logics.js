@@ -13,7 +13,7 @@ import {
     getTaskId,
     getCurrentRouteId,
     getCurrentTaskSolution,
-    getCurrentMethodicalSubMaterial
+    getCurrentMethodicalMaterialId
 } from "./getters";
 
 const service = new Service();
@@ -86,7 +86,7 @@ const getCourseMethodicalMaterials = createLogic({
     process({getState, action}, dispatch, done) {
         const state = getState();
         const courseId = getCourseId(state);
-        const subMaterial = getCurrentMethodicalSubMaterial(state);
+        const subMaterial = getCurrentMethodicalMaterialId(state);
 
         if (courseId === null) return done();
 
@@ -95,9 +95,10 @@ const getCourseMethodicalMaterials = createLogic({
         service.getCourseMethodicalMaterials(courseId)
             .then((res) => {
                 const materials = get(res, 'data');
+                const materialId = get(materials, [0, 'topics_of_this_section', 0,'id']);
 
                 if (!subMaterial || subMaterial.length === 0){
-                    dispatch(courseActions.getCourseMethodicalMaterial(get(materials, '0.id')));
+                    dispatch(courseActions.getCourseMethodicalMaterial(materialId));
                 }
 
                 dispatch(courseActions.setCourseMethodicalMaterials(materials));

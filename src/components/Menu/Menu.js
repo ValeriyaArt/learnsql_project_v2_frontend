@@ -20,7 +20,7 @@ class Menu extends React.PureComponent{
     render() {
         const {classes, isOpen, myCourses} = this.props;
         const {pathname} = this.props.location;
-        console.log('pathname', pathname);
+
         return(
             <Drawer
                 variant="persistent"
@@ -51,9 +51,9 @@ class Menu extends React.PureComponent{
                     <>
                         <List className={classes.menuList}>
                             {myCourses.map(course =>
-                                <Link to={appRouter.getCourseLink(course.course)} className={classes.link} key={`course-link-${course.id}`}>
+                                <Link to={appRouter.getCourseStatisticsLink(course.course)} className={classes.link} key={`course-link-${course.id}`}>
                                     <MenuItem
-                                        selected={pathname === `/course/${course.course}`}
+                                        selected={pathname.includes(`/course/${course.course}`)}
                                         classes={{
                                             selected: classes.selectedMenuItem,
                                             root: classes.menuItem,

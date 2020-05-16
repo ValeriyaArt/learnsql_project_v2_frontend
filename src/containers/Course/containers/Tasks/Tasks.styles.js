@@ -14,10 +14,13 @@ export default (theme) => ({
     },
     menu: {
         minWidth: 250,
-        borderRight: '1px solid #f4f4f4'
+        borderRight: '1px solid #f4f4f4',
+        '&:focus': {
+            outline: 'none'
+        }
     },
     doneIcon: {
-        color: 'green'
+        color: theme.palette.secondary.main
     },
     selectedMenuItem: {
         color: theme.palette.secondary.main,

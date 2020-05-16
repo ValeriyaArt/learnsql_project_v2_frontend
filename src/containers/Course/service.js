@@ -10,8 +10,8 @@ class CourseService extends BaseService{
     getCourseMethodicalMaterials(courseId){
         return this.get(`/api/sectionsofmethodologicalmaterials/${courseId}`);
     }
-    getCourseMethodicalMaterial(sectionId){
-        return this.get(`/api/topicsofsection/${sectionId}`);
+    getCourseMethodicalMaterial(materialId){
+        return this.get(`/api/topicsofsection/detail/${materialId}`);
     }
     getCourseStatistics(courseId){
         return this.get(`/api/userresultsincourse/course/${courseId}`);

@@ -28,11 +28,17 @@ import styles from './Course.styles';
 const userService = UserService.factory();
 
 class Course extends React.PureComponent{
-    state = {
-        currentTab: 0,
-    };
-
     componentDidMount() {
+        const pathname = this.props.location.pathname;
+
+        if (pathname.includes('materials')){
+            this.props.actions.setCurrentCourseTab(1);
+        }
+
+        if (pathname.includes('tasks')){
+            this.props.actions.setCurrentCourseTab(2);
+        }
+
         this.props.actions.setCourseId(get(this, 'props.match.params.id', null));
     }
 
@@ -46,10 +52,20 @@ class Course extends React.PureComponent{
     }
 
     changeTabHandler = (event, tabNumber) => {
+        const {courseId} = this.props;
         this.props.actions.setCurrentCourseTab(tabNumber);
 
-        if (tabNumber === 1){
-            this.props.actions.getCourseMethodicalMaterials();
+        switch (tabNumber) {
+            default:
+            case 0:
+                this.props.history.push(appRouter.getCourseStatisticsLink(courseId));
+                break;
+            case 1:
+                this.props.history.push(appRouter.getCourseMaterialsLink(courseId));
+                break;
+            case 2:
+                this.props.history.push(appRouter.getCourseTasksLink(courseId));
+                break;
         }
     };
 

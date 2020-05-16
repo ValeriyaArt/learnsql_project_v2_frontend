@@ -1,8 +1,8 @@
 export default (theme) => ({
     drawerPaper: {
         width: 250,
-        height: `calc(100vh - ${theme.appBarHeight})`,
         marginTop: 64,
+        borderRight: '1px solid #f4f4f4'
     },
     divider: {
         backgroundColor: '#f4f4f4'
@@ -10,7 +10,7 @@ export default (theme) => ({
     selectedMenuItem: {
         color: `${theme.palette.secondary.main} !important`,
         backgroundColor: 'transparent !important',
-        borderLeft: '2px solid #ec1946',
+        borderLeft: `4px solid ${theme.palette.secondary.main}`,
         padding: '10px 16px',
         '&:hover': {
             backgroundColor: '#f4f4f4 !important'
@@ -20,6 +20,7 @@ export default (theme) => ({
         padding: 0
     },
     menuItem: {
+        whiteSpace: 'normal !important',
         transition: 'all 0.2s',
         margin: '5px 2px',
         padding: '10px 16px',

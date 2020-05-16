@@ -94,13 +94,6 @@ const closeFinishCourseModal = (state) => ({
     [Enum.IS_OPEN_FINISH_COURSE_MODAL]: false,
 });
 
-const resetCourseMethodicalSubMaterials = (state) => ({
-    ...state,
-    [Enum.METHODICAL_SUB_MATERIAL]: null,
-    [Enum.METHODICAL_MATERIALS]: [],
-    [Enum.METHODICAL_MATERIAL]: [],
-});
-
 export const reducer = createReducer(initialState, {
     [C.SET_CURRENT_TASK_ERROR]: setCourseTaskError,
     [C.REMOVE_CURRENT_TASK_ERROR]: removeCurrentTaskError,
@@ -109,7 +102,6 @@ export const reducer = createReducer(initialState, {
     [C.SET_COURSE_METHODICAL_MATERIALS]: setCourseMethodicalMaterials,
     [C.SET_COURSE_METHODICAL_MATERIAL]: setCurrentMethodicalMaterial,
     [C.SET_COURSE_METHODICAL_SUB_MATERIAL]: setCurrentMethodicalSubMaterial,
-    [C.RESET_COURSE_METHODICAL_SUB_MATERIALS]: resetCourseMethodicalSubMaterials,
     [C.SET_CURRENT_COURSE_TAB]: setCurrentCourseTab,
     [C.SET_COURSE_STATISTICS]: setCourseStatistics,
     [C.SET_COURSE_ID]: setCourseId,

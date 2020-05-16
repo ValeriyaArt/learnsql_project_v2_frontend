@@ -13,13 +13,33 @@ export default (theme) => ({
         marginLeft: 10
     },
     menu: {
+        paddingBottom: 100,
         minWidth: 250,
-        borderRight: '1px solid #f4f4f4'
+        width: 320,
+        borderRight: '1px solid #f4f4f4',
+        '&:focus': {
+            outline: 'none !important'
+        },
+        '& div': {
+            '&:focus': {
+                outline: 'none !important'
+            },
+        }
+    },
+    subMenu: {
+        padding: 0,
+        '& li': {
+            padding: '10px 26px 10px 40px',
+        }
+    },
+    noClick: {
+        pointerEvents: 'none'
     },
     doneIcon: {
         color: 'green'
     },
     selectedMenuItem: {
+        whiteSpace: 'normal !important',
         color: theme.palette.secondary.main,
         backgroundColor: 'transparent !important',
         borderLeft: '2px solid #ec1946',
@@ -29,6 +49,7 @@ export default (theme) => ({
         }
     },
     menuItem: {
+        whiteSpace: 'normal !important',
         justifyContent: 'space-between',
         padding: '10px 16px',
         '&:hover': {

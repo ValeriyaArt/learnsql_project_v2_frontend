@@ -9,6 +9,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 import {appRouter} from "../../service/router-service";
@@ -57,12 +58,13 @@ class Home extends React.PureComponent{
                                 </Typography>
                                 {isMyCourse ?
                                     <Link
-                                        to={appRouter.getCourseLink(course.id)}
+                                        to={appRouter.getCourseStatisticsLink(course.id)}
                                         className={classes.link}>
                                         <Button color="primary"
                                                 variant="outlined"
                                         >
                                             На страницу курса
+                                            <KeyboardArrowRightIcon />
                                         </Button>
                                     </Link>
                                     :

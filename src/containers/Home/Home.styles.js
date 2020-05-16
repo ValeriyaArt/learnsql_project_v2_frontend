@@ -14,7 +14,7 @@ export default (theme) => ({
         boxSizing: 'border-box'
     },
     description: {
-        marginTop: 12,
+        marginTop: 20,
     },
     actions: {
         padding: 16,

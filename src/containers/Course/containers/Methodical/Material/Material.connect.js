@@ -1,12 +1,11 @@
 import {connect} from 'react-redux';
 import {bindActionCreators} from "redux";
 import actions from '../../../actions';
-import {getCurrentMethodicalMaterial, getCurrentMethodicalSubMaterial} from '../../../getters';
+import {getCurrentMethodicalMaterial} from '../../../getters';
 
 const mapStateToProps = (state) => {
     return {
         material: getCurrentMethodicalMaterial(state),
-        subMaterialId: getCurrentMethodicalSubMaterial(state),
     };
 };
 

@@ -30,6 +30,10 @@ class SignUp extends React.PureComponent{
         captchaValid: false
     };
 
+    componentDidMount() {
+        this.props.actions.getGroupOptions();
+    }
+
     componentWillUnmount() {
         this.props.actions.signUpPageDown();
     }

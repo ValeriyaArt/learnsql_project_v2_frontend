@@ -49,6 +49,5 @@ export const getStatistics = (state) => get(getStateData(state), Enum.STATISTICS
 
 
 export const getMethodicalMaterials = (state) => get(getStateData(state), Enum.METHODICAL_MATERIALS, []);
-export const getCurrentMethodicalMaterial = (state) => get(getStateData(state), Enum.METHODICAL_MATERIAL, []);
-export const getCurrentMethodicalSubMaterial = (state) => get(getStateData(state), Enum.METHODICAL_SUB_MATERIAL, '');
-export const getCurrentMethodicalMaterialId = (state) => parseInt(get(getCurrentMethodicalMaterial(state),'0.section', null));
+export const getCurrentMethodicalMaterial = (state) => get(getStateData(state), Enum.METHODICAL_MATERIAL, {});
+export const getCurrentMethodicalMaterialId = (state) => get(getCurrentMethodicalMaterial(state),'id', null);

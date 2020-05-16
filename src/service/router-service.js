@@ -39,6 +39,18 @@ export default class RouterService {
         return SEPARATOR + COURSE + SEPARATOR + ':id';
     };
 
+    getCourseTasksLink = (id) => {
+        return SEPARATOR + COURSE + SEPARATOR + id + SEPARATOR + 'tasks';
+    };
+
+    getCourseMaterialsLink = (id) => {
+        return SEPARATOR + COURSE + SEPARATOR + id + SEPARATOR + 'materials';
+    };
+
+    getCourseStatisticsLink = (id) => {
+        return SEPARATOR + COURSE + SEPARATOR + id + SEPARATOR + 'statistics';
+    };
+
     getProfileRoute = () => {
         return SEPARATOR + PROFILE;
     };

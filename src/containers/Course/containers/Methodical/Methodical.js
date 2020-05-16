@@ -11,20 +11,17 @@ import Material from "./Material/Material";
 
 import connect from './Methodical.connect';
 import styles from './Methodical.styles';
+import Scrollbars from "react-custom-scrollbars";
 
 class Methodical extends React.PureComponent{
+    componentDidMount() {
+        this.props.actions.getCourseMethodicalMaterials();
+    }
+
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (this.props.courseId !== prevProps.courseId){
             this.props.actions.getCourseMethodicalMaterials();
         }
-    }
-
-    componentDidMount() {
-
-    }
-
-    componentWillUnmount() {
-        this.props.actions.resetCourseMethodicalSubMaterial();
     }
 
     changeMaterialHandler = (id) => () => {
@@ -35,21 +32,41 @@ class Methodical extends React.PureComponent{
         const {materials, classes, currentMaterialId} = this.props;
 
         return (
-            <MenuList className={classes.menu}>
-                {materials.map((material, index) =>
-                    <MenuItem
-                        onClick={this.changeMaterialHandler(material.id)}
-                        key={`material-${index}`}
-                        selected={currentMaterialId === material.id}
-                        classes={{
-                            selected: classes.selectedMenuItem,
-                            root: classes.menuItem,
-                        }}
-                    >
-                        {get(material, 'section_name')}
-                    </MenuItem>
-                )}
-            </MenuList>
+                <MenuList className={classes.menu}>
+                    <Scrollbars minheight={300}>
+                        {materials.map((section, index) =>
+                            <>
+                                <MenuItem
+                                    className={classes.noClick}
+                                    key={`section-${index}`}
+                                    classes={{
+                                        root: classes.menuItem,
+                                    }}
+                                >
+                                    {get(section, 'section_name')}
+                                </MenuItem>
+
+                                {section.topics_of_this_section.length > 0 &&
+                                    <MenuList className={classes.subMenu}>
+                                        {section.topics_of_this_section.map((theme, themeIndex) =>
+                                            <MenuItem
+                                                onClick={this.changeMaterialHandler(theme.id)}
+                                                key={`theme-${index}-${themeIndex}`}
+                                                selected={currentMaterialId === theme.id}
+                                                classes={{
+                                                    selected: classes.selectedMenuItem,
+                                                    root: classes.menuItem,
+                                                }}
+                                            >
+                                                {get(theme, 'topic_name')}
+                                            </MenuItem>
+                                        )}
+                                    </MenuList>
+                                }
+                            </>
+                        )}
+                    </Scrollbars>
+                </MenuList>
         )
     };
 
