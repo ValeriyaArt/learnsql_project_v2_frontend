@@ -13,6 +13,7 @@ import {getTaskId} from "../../getters";
 
 import connect from './Tasks.connect';
 import styles from './Tasks.styles';
+import Scrollbars from "react-custom-scrollbars";
 
 class Tasks extends React.PureComponent{
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -35,21 +36,23 @@ class Tasks extends React.PureComponent{
 
         return (
             <MenuList className={classes.menu}>
-                {tasks.map((route, index) =>
-                    <MenuItem
-                        onClick={this.changeTaskHandler(route.id, getTaskId(route))}
-                        key={`task-${index}`}
-                        selected={currentRouteId === route.id}
-                        className={classes.menuItem}
-                        classes={{
-                            selected: classes.selectedMenuItem,
-                            root: classes.menuItem,
-                        }}
-                    >
-                        Задание {index + 1}
-                        {route.status === "1" && <DoneIcon className={classes.doneIcon}/>}
-                    </MenuItem>
-                )}
+                <Scrollbars minheight={300}>
+                    {tasks.map((route, index) =>
+                        <MenuItem
+                            onClick={this.changeTaskHandler(route.id, getTaskId(route))}
+                            key={`task-${index}`}
+                            selected={currentRouteId === route.id}
+                            className={classes.menuItem}
+                            classes={{
+                                selected: classes.selectedMenuItem,
+                                root: classes.menuItem,
+                            }}
+                        >
+                            Задание {index + 1}
+                            {route.status === "1" && <DoneIcon className={classes.doneIcon}/>}
+                        </MenuItem>
+                    )}
+                </Scrollbars>
             </MenuList>
         )
     };

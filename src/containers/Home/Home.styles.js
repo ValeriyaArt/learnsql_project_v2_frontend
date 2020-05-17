@@ -35,5 +35,10 @@ export default (theme) => ({
         '&:hover': {
             color: theme.palette.primary.dark,
         }
+    },
+    date: {
+        color: theme.palette.primary.main,
+        display: 'flex',
+        alignItems: 'center'
     }
 });

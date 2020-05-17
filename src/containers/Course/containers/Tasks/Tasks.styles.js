@@ -17,7 +17,8 @@ export default (theme) => ({
         borderRight: '1px solid #f4f4f4',
         '&:focus': {
             outline: 'none'
-        }
+        },
+        paddingBottom: 100,
     },
     doneIcon: {
         color: theme.palette.secondary.main

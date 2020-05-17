@@ -1,6 +1,7 @@
 export default (theme) => ({
     taskRoot: {
-        width: '100%'
+        width: '100%',
+        paddingBottom: '100px'
     },
     taskInfo: {
         padding: 50

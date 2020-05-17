@@ -9,8 +9,10 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import withStyles from '@material-ui/core/styles/withStyles';
+
+import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
+import DateRangeIcon from '@material-ui/icons/DateRange';
 
 import {appRouter} from "../../service/router-service";
 import UserService from "../../service/user-service";
@@ -54,10 +56,15 @@ class Home extends React.PureComponent{
                                 />
                             </CardContent>
                             <CardActions className={classes.actions}>
-                                <Typography>
-                                    {/*Пройдено 10%*/}
-                                    Дата старта курса:&nbsp;
-                                    <span className={classes.startDate}>{isMyCourse && moment(isMyCourse.date_start).format('DD.MM.YYYY')}</span>
+                                <Typography className={classes.dates}>
+                                    {/*<div className={classes.date}>*/}
+                                    {/*    <DateRangeIcon color="primary"/> Старт:&nbsp;*/}
+                                    {/*    <span className={classes.startDate}>{isMyCourse && moment(isMyCourse.date_start).format('DD.MM.YYYY')}</span>*/}
+                                    {/*</div>*/}
+                                    {/*<div className={classes.date}>*/}
+                                    {/*    <DateRangeIcon color="primary"/> Финиш:&nbsp;*/}
+                                    {/*    <span className={classes.startDate}>{isMyCourse && moment(isMyCourse.date_end).format('DD.MM.YYYY')}</span>*/}
+                                    {/*</div>*/}
                                 </Typography>
                                 {isMyCourse ?
                                     <Link
