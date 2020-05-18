@@ -14,16 +14,6 @@ class Material extends React.PureComponent{
         currentItem: ''
     };
 
-    handleChangeCurrentPanel = (id) => () => {
-        const {subMaterialId} = this.props;
-
-        if (subMaterialId === id){
-            this.props.actions.setCourseMethodicalSubMaterial('');
-        } else {
-            this.props.actions.setCourseMethodicalSubMaterial(id);
-        }
-    };
-
     render() {
         const {material, classes} = this.props;
 

@@ -196,10 +196,9 @@ class Task extends React.PureComponent{
         );
     }
 
-    changeTabToMethodical = (id, subMaterialId) => () => {
+    changeTabToMethodical = (subMaterialId) => () => {
         this.props.actions.setCurrentCourseTab(1);
-        this.props.actions.getCourseMethodicalMaterial(id);
-        this.props.actions.setCourseMethodicalSubMaterial(subMaterialId);
+        this.props.actions.getCourseMethodicalMaterial(subMaterialId);
         this.props.actions.getCourseMethodicalMaterials();
     }
 
@@ -226,7 +225,7 @@ class Task extends React.PureComponent{
                             {item.theme.topic_in_themes.map(topic =>
                                 <div key={`topic-${topic.id}`}
                                      className={classes.materialSubItem}
-                                     onClick={this.changeTabToMethodical(item.theme.id, topic.id)}>
+                                     onClick={this.changeTabToMethodical(topic.id)}>
                                     <Typography>{topic.topic_name}</Typography>
                                 </div>
                             )}

@@ -42,6 +42,10 @@ const setCurrentMethodicalMaterial = (state, {payload}) => ({
     ...state,
     [Enum.METHODICAL_MATERIAL]: payload,
 });
+const setMaterialId = (state, {payload}) => ({
+    ...state,
+    [Enum.METHODICAL_MATERIAL]: {id: payload},
+});
 const setCurrentMethodicalSubMaterial = (state, {payload}) => ({
     ...state,
     [Enum.METHODICAL_SUB_MATERIAL]: payload,
@@ -112,4 +116,5 @@ export const reducer = createReducer(initialState, {
     [C.REMOVE_CURRENT_TASK_ANSWER]: removeCourseTaskAnswer,
     [C.OPEN_FINISH_COURSE_MODAL]: openFinishCourseModal,
     [C.CLOSE_FINISH_COURSE_MODAL]: closeFinishCourseModal,
+    [C.GET_COURSE_METHODICAL_MATERIAL]: setMaterialId,
 });

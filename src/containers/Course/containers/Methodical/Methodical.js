@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from "prop-types";
 import get from "lodash/get";
 
 import Box from '@material-ui/core/Box';
@@ -35,7 +34,7 @@ class Methodical extends React.PureComponent{
                 <MenuList className={classes.menu}>
                     <Scrollbars minheight={300}>
                         {materials.map((section, index) =>
-                            <>
+                            <div key={`material-${index}`}>
                                 <MenuItem
                                     className={classes.noClick}
                                     key={`section-${index}`}
@@ -63,7 +62,7 @@ class Methodical extends React.PureComponent{
                                         )}
                                     </MenuList>
                                 }
-                            </>
+                            </div>
                         )}
                     </Scrollbars>
                 </MenuList>
@@ -81,13 +80,5 @@ class Methodical extends React.PureComponent{
         );
     }
 }
-
-Methodical.propTypes = {
-    actions: PropTypes.object,
-    materials: PropTypes.array,
-    courseId: PropTypes.string,
-    currentMaterialId: PropTypes.number,
-    isFetchingGet: PropTypes.bool
-};
 
 export default withStyles(styles)(connect(Methodical));

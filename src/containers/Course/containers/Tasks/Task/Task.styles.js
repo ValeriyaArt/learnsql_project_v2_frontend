@@ -4,7 +4,7 @@ export default (theme) => ({
         paddingBottom: '100px'
     },
     taskInfo: {
-        padding: 50
+        padding: '50px 50px 0px 50px'
     },
     answerFieldContainer: {
         padding: 50,
