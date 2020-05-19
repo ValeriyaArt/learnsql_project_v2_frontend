@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from "prop-types";
 import get from 'lodash/get';
+import hljs from "highlight.js";
 
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -12,6 +13,20 @@ import Scrollbars from "react-custom-scrollbars";
 class Material extends React.PureComponent{
     state = {
         currentItem: ''
+    };
+
+    componentDidMount() {
+        this.updateCodeSyntaxHighlighting();
+    }
+
+    componentDidUpdate() {
+        this.updateCodeSyntaxHighlighting();
+    }
+
+    updateCodeSyntaxHighlighting = () => {
+        document.querySelectorAll("pre code").forEach(block => {
+            hljs.highlightBlock(block);
+        });
     };
 
     render() {

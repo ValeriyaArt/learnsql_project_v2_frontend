@@ -12,14 +12,14 @@ import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
-import DateRangeIcon from '@material-ui/icons/DateRange';
+// import DateRangeIcon from '@material-ui/icons/DateRange';
 
 import {appRouter} from "../../service/router-service";
 import UserService from "../../service/user-service";
 
 import connect from './Home.connect';
 import styles from './Home.styles';
-import moment from "moment";
+// import moment from "moment";
 
 const userService = UserService.factory();
 
