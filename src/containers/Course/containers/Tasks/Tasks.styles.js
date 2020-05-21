@@ -1,6 +1,7 @@
 export default (theme) => ({
     root: {
-        height: '100%'
+        height: '100%',
+        position: 'relative'
     },
     answerFieldContainer: {
         marginTop: 20,
@@ -13,7 +14,7 @@ export default (theme) => ({
         marginLeft: 10
     },
     menu: {
-        minWidth: 250,
+        minWidth: 200,
         borderRight: '1px solid #f4f4f4',
         '&:focus': {
             outline: 'none'

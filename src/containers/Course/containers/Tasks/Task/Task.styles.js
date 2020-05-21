@@ -1,14 +1,40 @@
 export default (theme) => ({
     taskRoot: {
         width: '100%',
-        paddingBottom: '100px'
+        height: 'calc(100% - 100px)',
+        paddingBottom: '100px',
+        display: 'flex'
+    },
+    leftSide: {
+        width: '50%',
+        display: 'flex',
+        justifyContent: 'space-between',
+        flexDirection: 'column',
+        padding: '86px 50px 50px 50px',
+        boxSizing: 'border-box'
     },
     taskInfo: {
-        padding: '50px 50px 0px 50px'
+        padding: '50px 50px 50px 50px',
+        height: '100%',
+        width: '50%',
+        display: 'flex',
+        boxSizing: 'border-box',
+        flexDirection: 'column',
+    },
+    taskAnswerInfoBlock: {
+        display: 'flex',
+        flexDirection: 'column',
+        height: '50%',
+        boxSizing: 'border-box',
+        paddingTop: '20px'
+    },
+    answerFieldBlock: {
+        display: 'flex',
+        flexDirection: 'column'
     },
     answerFieldContainer: {
-        padding: 50,
-        maxWidth: '600px',
+        width: '100%',
+        marginTop: 20
     },
     buttonsContainer: {
         marginTop: 20
@@ -35,14 +61,13 @@ export default (theme) => ({
     image: {
         width: '100%',
         '& img': {
-            maxWidth: '800px'
+            maxWidth: '690px',
+            width: '100%'
         }
     },
-    tableWrap: {
-        padding: '20px'
-    },
     tableTitle: {
-        marginBottom: 10
+        marginBottom: 10,
+        fontWeight: 'bold'
     },
     nextTaskButton: {
         marginLeft: 'auto'
@@ -50,9 +75,6 @@ export default (theme) => ({
     simpleErrorBlock: {
         margin: 20,
         maxWidth: 'max-content'
-    },
-    showDBButton: {
-        margin: '20px 0px'
     },
     materialSubItem: {
         marginLeft: '20px',
@@ -63,5 +85,16 @@ export default (theme) => ({
     },
     materialItem: {
         fontWeight: 'bold',
+    },
+    themesContainer: {
+        marginBottom: 50
+    },
+    title: {
+        fontSize: 20,
+        marginBottom: 10,
+        color: theme.palette.secondary.main
+    },
+    tableCell: {
+        border: '1px solid rgba(224, 224, 224, 1)'
     }
 });

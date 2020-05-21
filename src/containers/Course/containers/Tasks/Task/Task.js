@@ -13,11 +13,8 @@ import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import Paper from '@material-ui/core/Paper';
-import Collapse from '@material-ui/core/Collapse';
 
 import ArrowForward from '@material-ui/icons/ArrowForward';
-import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
-import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 import * as Enum from '../../../enum';
@@ -32,8 +29,6 @@ class Task extends React.PureComponent{
 
         this.state = {
             answer: props.solution,
-            showImage: false,
-            showTheme: false,
         }
     }
 
@@ -42,14 +37,6 @@ class Task extends React.PureComponent{
             this.setState({showImage: false});
         } else {
             this.setState({showImage: true});
-        }
-    }
-
-    showThemeClickHandler = () => {
-        if (this.state.showTheme){
-            this.setState({showTheme: false});
-        } else {
-            this.setState({showTheme: true});
         }
     }
 
@@ -73,7 +60,7 @@ class Task extends React.PureComponent{
     };
 
     renderAnswerField = () => {
-        const {classes, isDone, nextRoute} = this.props;
+        const {classes} = this.props;
         const {answer} = this.state;
         const splittedAnswer = answer.split(' ');
         const firstWordError = splittedAnswer[0].toLocaleLowerCase() !== 'select'
@@ -85,7 +72,7 @@ class Task extends React.PureComponent{
                 <TextField label={'Запрос'}
                            multiline
                            rowsMax={10}
-                           rows={5}
+                           rows={7}
                            variant={'outlined'}
                            fullWidth
                            maxwidth={500}
@@ -105,15 +92,6 @@ class Task extends React.PureComponent{
                     >
                         Выполнить
                     </Button>
-                    {nextRoute.id &&
-                        <Button color={'primary'}
-                                className={classes.nextTaskButton}
-                                onClick={this.goToNextTaskClickHandler}
-                                endIcon={<ArrowForward/>}
-                        >
-                            {isDone ? 'Следующее задание' : 'Пропустить задание'}
-                        </Button>
-                    }
                 </Box>
             </Box>
         );
@@ -125,18 +103,18 @@ class Task extends React.PureComponent{
         const studentResult = get(tableErrorData, [Enum.ERROR_STUDENT_RESULT, 1, 1], []);
 
         return (
-            <Box className={classes.tableWrap}>
-                <Typography> Неверно! </Typography>
+            <div>
+                <Typography className={classes.title}> Ошибка! </Typography>
 
                 <div className={classes.tableBody}>
                     <div className={classes.table}>
                         <Typography className={classes.tableTitle}> Правильный запрос </Typography>
-                        <TableContainer component={Paper}>
+                        <TableContainer>
                             <Table>
                                 {refResult.map((row, index) =>
                                     <TableRow key={`right-answer-row-${index}`}>
                                         {row.map((cell, index) =>
-                                            <TableCell key={`right-answer-cell-${index}`}>
+                                            <TableCell key={`right-answer-cell-${index}`} className={classes.tableCell}>
                                                 {cell}
                                             </TableCell>
                                         )}
@@ -148,12 +126,12 @@ class Task extends React.PureComponent{
 
                     <div className={classes.table}>
                         <Typography className={classes.tableTitle}> Ваш запрос </Typography>
-                        <TableContainer component={Paper}>
+                        <TableContainer>
                             <Table>
                                 {studentResult.map((row, index) =>
                                     <TableRow key={`wrong-answer-row-${index}`}>
                                         {row.map((cell, index) =>
-                                            <TableCell key={`wrong-answer-cell-${index}`}>
+                                            <TableCell key={`wrong-answer-cell-${index}`} className={classes.tableCell}>
                                                 {cell}
                                             </TableCell>
                                         )}
@@ -163,7 +141,7 @@ class Task extends React.PureComponent{
                         </TableContainer>
                     </div>
                 </div>
-            </Box>
+            </div>
         );
     }
 
@@ -203,41 +181,28 @@ class Task extends React.PureComponent{
     }
 
     themes = () => {
-        const {showTheme} = this.state;
         const {classes, themes} = this.props;
 
         return (
-            <>
-                <Button onClick={this.showThemeClickHandler}
-                        color={'primary'}
-                        endIcon={
-                            showTheme ? <KeyboardArrowDownIcon /> : <KeyboardArrowRightIcon />
-                        }
-                        className={classes.showDBButton}
-                >
-                    Темы для изучения
-                </Button>
+            <div className={classes.themesContainer}>
+                <Typography className={classes.title}> Темы для изучения </Typography>
 
-
-                <Collapse in={showTheme} collapsedHeight={0}>
-                    {themes.map(item => <div key={item.theme.id}>
-                            <Typography className={classes.materialItem}>{item.theme.title}</Typography>
-                            {item.theme.topic_in_themes.map(topic =>
-                                <div key={`topic-${topic.id}`}
-                                     className={classes.materialSubItem}
-                                     onClick={this.changeTabToMethodical(topic.id)}>
-                                    <Typography>{topic.topic_name}</Typography>
-                                </div>
-                            )}
-                        </div>
-                    )}
-                </Collapse>
-            </>
+                {themes.map(item => <div key={item.theme.id}>
+                        <Typography className={classes.materialItem}>{item.theme.title}</Typography>
+                        {item.theme.topic_in_themes.map(topic =>
+                            <div key={`topic-${topic.id}`}
+                                 className={classes.materialSubItem}
+                                 onClick={this.changeTabToMethodical(topic.id)}>
+                                <Typography>{topic.topic_name}</Typography>
+                            </div>
+                        )}
+                    </div>
+                )}
+            </div>
         )
     }
 
     databaseStructure = () => {
-        const {showImage} = this.state;
         const {classes, task} = this.props;
 
         const taskDescription = get(task, `database_description`, '');
@@ -245,26 +210,18 @@ class Task extends React.PureComponent{
 
         return (
             <>
-                <Button onClick={this.showImageClickHandler}
-                        color={'primary'}
-                        endIcon={
-                            showImage ? <KeyboardArrowDownIcon /> : <KeyboardArrowRightIcon />
-                        }
-                        className={classes.showDBButton}
-                >
-                    {showImage ? <> Скрыть схему БД </> : <> Посмотреть схему БД </> }
-                </Button>
+                <Typography className={classes.title}> Описание базы данных </Typography>
+                <Scrollbars minheight={300}>
 
-                <Collapse in={showImage} collapsedHeight={0}>
                     <Typography dangerouslySetInnerHTML={{__html: taskDescription}} />
                     <div className={classes.image}> <img src={taskImage} alt=""/> </div>
-                </Collapse>
+                </Scrollbars>
             </>
         )
     }
 
     render() {
-        const {task, classes, error, tableErrorData, answer} = this.props;
+        const {task, classes, error, tableErrorData, answer, nextRoute, isDone} = this.props;
         const taskText = get(task, `task_text`, null);
         const taskTitle = get(task, `title`, '');
         const refResult = get(tableErrorData, [Enum.ERROR_REF_RESULT, 1, 1], []);
@@ -274,28 +231,45 @@ class Task extends React.PureComponent{
 
         return (
             <div className={classes.taskRoot}>
-                <Scrollbars minheight={300}>
-                    <div className={classes.taskInfo}>
-                        <Typography> <b>{taskTitle}:</b> </Typography>
-                        <Typography> {taskText} </Typography>
+                 <div className={classes.leftSide}>
+                     <div>
+                         <Typography className={classes.title}> {taskTitle}: </Typography>
+                         <Typography> {taskText} </Typography>
 
-                        {this.databaseStructure()}
-                        {this.themes()}
+                         <div className={classes.answerFieldBlock}>
+                            {this.renderAnswerField()}
+                         </div>
+                     </div>
 
+                    <div className={classes.taskAnswerInfoBlock}>
+                        <Scrollbars minheight={300}>
+                            {error &&
+                            <Paper className={classes.simpleErrorBlock}>
+                                <Typography className={classes.simpleErrorText}> {error} </Typography>
+                            </Paper>
+                            }
+
+                            {refResult.length > 0 && studentResult.length > 0 && this.renderErrorTables()}
+
+                            {answer.length > 0 && this.renderAnswerTable()}
+                        </Scrollbars>
                     </div>
+                </div>
 
-                    {this.renderAnswerField()}
-
-                    {error &&
-                        <Paper className={classes.simpleErrorBlock}>
-                            <Typography className={classes.simpleErrorText}> {error} </Typography>
-                        </Paper>
+                <div className={classes.taskInfo}>
+                    {nextRoute.id &&
+                        <Button color={'primary'}
+                                className={classes.nextTaskButton}
+                                onClick={this.goToNextTaskClickHandler}
+                                endIcon={<ArrowForward/>}
+                        >
+                            {isDone ? 'Следующее задание' : 'Пропустить задание'}
+                        </Button>
                     }
 
-                    {refResult.length > 0 && studentResult.length > 0 && this.renderErrorTables()}
-
-                    {answer.length > 0 && this.renderAnswerTable()}
-                </Scrollbars>
+                    {this.themes()}
+                    {this.databaseStructure()}
+                </div>
             </div>
         )
     }
