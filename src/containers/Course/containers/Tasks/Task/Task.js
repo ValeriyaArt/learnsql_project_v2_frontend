@@ -22,6 +22,7 @@ import {getTaskId} from "../../../getters";
 
 import connect from './Task.connect';
 import styles from './Task.styles';
+import BigImageModal from "../../BigImageModal";
 
 class Task extends React.PureComponent{
     constructor(props) {
@@ -29,15 +30,16 @@ class Task extends React.PureComponent{
 
         this.state = {
             answer: props.solution,
+            openBigImage: false
         }
     }
 
-    showImageClickHandler = () => {
-        if (this.state.showImage){
-            this.setState({showImage: false});
-        } else {
-            this.setState({showImage: true});
-        }
+    openBigImageClickHandler = () => {
+        this.setState({openBigImage: true});
+    }
+
+    closeBigImageClickHandler = () => {
+        this.setState({openBigImage: false});
     }
 
     answerChangeHandler = (event) => {
@@ -211,11 +213,9 @@ class Task extends React.PureComponent{
         return (
             <>
                 <Typography className={classes.title}> Описание базы данных </Typography>
-                <Scrollbars minheight={300}>
 
-                    <Typography dangerouslySetInnerHTML={{__html: taskDescription}} />
-                    <div className={classes.image}> <img src={taskImage} alt=""/> </div>
-                </Scrollbars>
+                <Typography dangerouslySetInnerHTML={{__html: taskDescription}} />
+                <div className={classes.image} onClick={this.openBigImageClickHandler}> <img src={taskImage} alt=""/> </div>
             </>
         )
     }
@@ -226,34 +226,39 @@ class Task extends React.PureComponent{
         const taskTitle = get(task, `title`, '');
         const refResult = get(tableErrorData, [Enum.ERROR_REF_RESULT, 1, 1], []);
         const studentResult = get(tableErrorData, [Enum.ERROR_STUDENT_RESULT, 1, 1], []);
+        const taskImage = get(task, `database_image`, '');
+
+        const {openBigImage} = this.state;
 
         if (!taskText) return <></>;
 
         return (
             <div className={classes.taskRoot}>
-                 <div className={classes.leftSide}>
-                     <div>
-                         <Typography className={classes.title}> {taskTitle}: </Typography>
-                         <Typography> {taskText} </Typography>
 
-                         <div className={classes.answerFieldBlock}>
-                            {this.renderAnswerField()}
+                <div className={classes.leftSide}>
+
+                    <Scrollbars minheight={300}>
+                         <div>
+                             <Typography className={classes.title}> {taskTitle}: </Typography>
+                             <Typography> {taskText} </Typography>
+
+                             <div className={classes.answerFieldBlock}>
+                                {this.renderAnswerField()}
+                             </div>
                          </div>
-                     </div>
 
-                    <div className={classes.taskAnswerInfoBlock}>
-                        <Scrollbars minheight={300}>
-                            {error &&
-                            <Paper className={classes.simpleErrorBlock}>
-                                <Typography className={classes.simpleErrorText}> {error} </Typography>
-                            </Paper>
-                            }
+                        <div className={classes.taskAnswerInfoBlock}>
+                                {error &&
+                                <Paper className={classes.simpleErrorBlock}>
+                                    <Typography className={classes.simpleErrorText}> {error} </Typography>
+                                </Paper>
+                                }
 
-                            {refResult.length > 0 && studentResult.length > 0 && this.renderErrorTables()}
+                                {refResult.length > 0 && studentResult.length > 0 && this.renderErrorTables()}
 
-                            {answer.length > 0 && this.renderAnswerTable()}
-                        </Scrollbars>
-                    </div>
+                                {answer.length > 0 && this.renderAnswerTable()}
+                        </div>
+                    </Scrollbars>
                 </div>
 
                 <div className={classes.taskInfo}>
@@ -267,9 +272,18 @@ class Task extends React.PureComponent{
                         </Button>
                     }
 
-                    {this.themes()}
-                    {this.databaseStructure()}
+                    <Scrollbars minheight={300}>
+                        <div className={classes.taskInfoContent}>
+                            {this.themes()}
+                            {this.databaseStructure()}
+                        </div>
+                    </Scrollbars>
                 </div>
+
+                <BigImageModal isOpen={openBigImage}
+                               closeImage={this.closeBigImageClickHandler}
+                               taskImage={taskImage}
+                />
             </div>
         )
     }

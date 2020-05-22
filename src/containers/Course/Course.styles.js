@@ -3,7 +3,7 @@ export default (theme) => ({
         borderBottom: '1px solid #f4f4f4'
     },
     courseTabContent: {
-        height: 'calc(100vh - 180px)'
+        height: '100%',
     },
     paper: {
         height: '100%',

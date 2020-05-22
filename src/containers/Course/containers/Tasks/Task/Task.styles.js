@@ -8,13 +8,12 @@ export default (theme) => ({
     leftSide: {
         width: '50%',
         display: 'flex',
-        justifyContent: 'space-between',
         flexDirection: 'column',
-        padding: '86px 50px 50px 50px',
+        padding: '61px 50px 25px 50px',
         boxSizing: 'border-box'
     },
     taskInfo: {
-        padding: '50px 50px 50px 50px',
+        padding: '25px 50px',
         height: '100%',
         width: '50%',
         display: 'flex',
@@ -24,9 +23,13 @@ export default (theme) => ({
     taskAnswerInfoBlock: {
         display: 'flex',
         flexDirection: 'column',
-        height: '50%',
         boxSizing: 'border-box',
-        paddingTop: '20px'
+        paddingTop: 20,
+        paddingRight: 10,
+    },
+    taskInfoContent: {
+        paddingRight: 10,
+        boxSizing: 'border-box',
     },
     answerFieldBlock: {
         display: 'flex',
@@ -34,7 +37,9 @@ export default (theme) => ({
     },
     answerFieldContainer: {
         width: '100%',
-        marginTop: 20
+        marginTop: 20,
+        paddingRight: 20,
+        boxSizing: 'border-box'
     },
     buttonsContainer: {
         marginTop: 20
@@ -53,13 +58,13 @@ export default (theme) => ({
     },
     table: {
         marginTop: '20px',
-        marginRight: '50px'
     },
     taskDescription: {
         padding: '20px 0px'
     },
     image: {
         width: '100%',
+        cursor: "pointer",
         '& img': {
             maxWidth: '690px',
             width: '100%'

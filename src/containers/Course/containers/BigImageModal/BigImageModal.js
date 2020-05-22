@@ -1,47 +1,40 @@
 import React from 'react';
 
-import PropTypes from "prop-types";
-
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import withStyles from '@material-ui/core/styles/withStyles';
 
-import connect from './CourseFinishModal.connect';
-import styles from './CourseFinishModal.styles';
+import styles from './BidImageModal.styles';
 
-class CourseFinishModal extends React.PureComponent{
+class BigImageModal extends React.PureComponent{
     handleCloseDialog = () => {
-        this.props.actions.closeFinishCourseModal();
+        this.props.closeImage();
     };
 
     render() {
-        const {isOpen, classes} = this.props;
+        const {isOpen, taskImage, classes} = this.props;
         
         return (
             <Dialog
                 open={isOpen}
                 onClose={this.handleCloseDialog}
-                maxWidth={'sm'}
-                fullWidth
+                maxWidth={'xl'}
                 classes={{
                     paper: classes.dialog
                 }}
             >
-                <DialogTitle> Поздравляем! </DialogTitle>
+                <DialogTitle> Структура базы данных </DialogTitle>
                 <DialogContent>
-                    <DialogContentText>
-                        Вы успешно завершили курс!
-                    </DialogContentText>
+                    <img src={taskImage} alt="" />
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={this.handleCloseDialog}
                             color="secondary"
                             autoFocus>
-                        Ок
+                        Закрыть
                     </Button>
                 </DialogActions>
             </Dialog>
@@ -49,9 +42,4 @@ class CourseFinishModal extends React.PureComponent{
     }
 }
 
-CourseFinishModal.propTypes = {
-    isOpen: PropTypes.bool,
-    actions: PropTypes.object
-}
-
-export default withStyles(styles)(connect(CourseFinishModal));
+export default withStyles(styles)(BigImageModal);

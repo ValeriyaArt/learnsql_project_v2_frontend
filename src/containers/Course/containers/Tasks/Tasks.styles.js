@@ -22,7 +22,8 @@ export default (theme) => ({
         paddingBottom: 100,
     },
     doneIcon: {
-        color: theme.palette.secondary.main
+        color: theme.palette.secondary.main,
+        marginRight: 10,
     },
     selectedMenuItem: {
         color: theme.palette.secondary.main,
