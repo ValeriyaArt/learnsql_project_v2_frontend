@@ -14,9 +14,11 @@ import Menu from '@material-ui/core/Menu';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 import UserService from "../../service/user-service";
+import {appRouter} from "../../service/router-service";
+
+import logo from './logo.svg'
 
 import styles from './Header.styles';
-import {appRouter} from "../../service/router-service";
 
 const userService = UserService.factory();
 
@@ -65,9 +67,7 @@ class Header extends React.PureComponent{
                             {openGeneralMenu ? <CloseIcon /> : <MenuIcon />}
                         </IconButton>
                     }
-                    <Typography variant="h6">
-                        SQL Learn
-                    </Typography>
+                    <img src={logo} className={classes.logo} />
                     {isAuth &&
                         <div className={classes.avatar}>
                             <IconButton

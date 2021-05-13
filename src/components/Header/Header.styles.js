@@ -16,6 +16,8 @@ export default (theme) => ({
         }
     },
     logo: {
-
+        width: '210px',
+        position: 'relative',
+        top: '2px',
     }
 });
