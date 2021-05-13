@@ -127,6 +127,6 @@ export default (theme) => ({
         marginTop: '10px'
     },
     historyTitle: {
-        marginTop: '20px'
+        marginBottom: '10px'
     }
 });

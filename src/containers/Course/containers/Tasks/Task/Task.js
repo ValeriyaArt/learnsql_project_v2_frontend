@@ -255,8 +255,6 @@ class Task extends React.PureComponent{
                                 </div>
                             </div>
 
-                            <Typography className={classes.historyTitle}><b>История выполнения</b></Typography>
-
                             <div className={classes.taskAnswerInfoBlock}>
                                 {error &&
                                 <Paper className={classes.simpleErrorBlock}>
@@ -270,6 +268,7 @@ class Task extends React.PureComponent{
                             </div>
 
                             <div className={classes.errorsList}>
+                                <Typography className={classes.historyTitle}><b>История выполнения</b></Typography>
                                 {errors.map((item, index) =>
                                   <div className={classes.errorBlock}>
                                       <Typography className={classes.errorTitle}>
