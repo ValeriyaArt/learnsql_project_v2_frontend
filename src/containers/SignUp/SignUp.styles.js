@@ -8,12 +8,16 @@ export default (theme) => ({
         boxShadow: '0px 0px 6px 1px rgba(194,194,194,0.3)',
         background: 'white',
         margin: 'auto',
-        width: '300px',
+        width: '430px',
         display: 'flex',
         flexDirection: 'column',
         padding: '50px'
     },
     textField: {
+        marginBottom: '15px'
+    },
+    selectField: {
+        width: '196px',
         marginBottom: '15px'
     },
     button: {
@@ -27,5 +31,15 @@ export default (theme) => ({
         '&:hover': {
             color: theme.palette.primary.dark,
         }
+    },
+    student: {
+        display: 'flex',
+        alignItems: 'center',
+        marginLeft: '-12px'
+    },
+    row: {
+        display: 'flex',
+        justifyContent: 'space-between'
     }
+
 });
