@@ -233,7 +233,7 @@ class Task extends React.PureComponent{
         const refResult = get(tableErrorData, [Enum.ERROR_REF_RESULT, 1, 1], []);
         const studentResult = get(tableErrorData, [Enum.ERROR_STUDENT_RESULT, 1, 1], []);
         const taskImage = get(task, `database_image`, '');
-        const errors = this.getCurrentTaskErrors();
+        const errors = this.getCurrentTaskErrors().reverse();
 
         const {openBigImage} = this.state;
 
@@ -255,6 +255,8 @@ class Task extends React.PureComponent{
                                 </div>
                             </div>
 
+                            <Typography className={classes.historyTitle}><b>История выполнения</b></Typography>
+
                             <div className={classes.taskAnswerInfoBlock}>
                                 {error &&
                                 <Paper className={classes.simpleErrorBlock}>
@@ -267,14 +269,14 @@ class Task extends React.PureComponent{
                                 {answer.length > 0 && this.renderAnswerTable()}
                             </div>
 
-                            <div>
-                                {errors.map(item =>
+                            <div className={classes.errorsList}>
+                                {errors.map((item, index) =>
                                   <div className={classes.errorBlock}>
-                                      <Typography className={item.message === 'Задание успешно выполнено' ? classes.errorTitle : classes.successTitle}>
-                                          {item.message === 'Задание успешно выполнено' ? 'Правильно!' : 'Ошибка'}
+                                      <Typography className={classes.errorTitle}>
+                                          Ошибка
                                       </Typography>
                                       <Typography> {item.message} </Typography>
-                                      <Typography> {item.answer} </Typography>
+                                      {index !== 0 ? <Typography> {item.answer} </Typography> : <></>}
                                   </div>
                                 )}
                             </div>

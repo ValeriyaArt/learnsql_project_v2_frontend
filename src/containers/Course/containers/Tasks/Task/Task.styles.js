@@ -122,5 +122,11 @@ export default (theme) => ({
     successTitle: {
         color: 'green',
         fontSize: '18px'
+    },
+    errorsList: {
+        marginTop: '10px'
+    },
+    historyTitle: {
+        marginTop: '20px'
     }
 });

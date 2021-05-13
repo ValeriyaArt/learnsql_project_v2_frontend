@@ -21,7 +21,11 @@ export default function configureStore() {
         reducers,
         composeEnhancers(applyMiddleware(
             thunk,
-            reduxImmutableStateInvariant(),
+            reduxImmutableStateInvariant({
+                ignore: [
+                    "course",
+                ]
+            }),
             permanentLogicMiddleware
         ))
     );
