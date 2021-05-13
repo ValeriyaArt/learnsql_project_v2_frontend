@@ -35,7 +35,10 @@ const setCourseId = createAction(C.SET_COURSE_ID, 'payload');
 const setCurrentRouteId = createAction(C.SET_COURSE_ROUTE_ID, 'payload');
 const completeTask = createAction(C.COMPLETE_TASK, 'payload');
 
+const setCourseTasksErrors = createAction(C.SET_COURSE_TASKS_ERRORS, 'payload');
+
 export default {
+    setCourseTasksErrors,
     setCourseId,
     getCourseTask,
     setCourseTask,

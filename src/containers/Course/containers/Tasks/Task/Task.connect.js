@@ -1,8 +1,10 @@
 import {connect} from 'react-redux';
 import {bindActionCreators} from "redux";
 import actions from "../../../actions";
-import {getCurrentTask, getCurrentTaskError, getCurrentTaskSolution, getCurrentTaskErrorTableData,
-    getCurrentTaskAnswer, getNextRoute, getThemes} from '../../../getters';
+import {
+    getCurrentTask, getCurrentTaskError, getCurrentTaskSolution, getCurrentTaskErrorTableData,
+    getCurrentTaskAnswer, getNextRoute, getThemes, getCourseTasksErrors, getCurrentRouteId
+} from '../../../getters';
 
 const mapStateToProps = (state) => {
     const solution = getCurrentTaskSolution(state);
@@ -16,6 +18,8 @@ const mapStateToProps = (state) => {
         isDone: solution.length > 0,
         nextRoute: getNextRoute(state),
         themes: getThemes(state),
+        errors: getCourseTasksErrors(state),
+        courseId: getCurrentRouteId(state)
     };
 };
 

@@ -11,6 +11,7 @@ export const isOpenCourseFinishModal = (state) => get(getStateData(state), Enum.
 export const getCurrentCourseTab = (state) => get(getStateData(state), Enum.CURRENT_COURSE_TAB, 0);
 
 
+export const getCourseTasksErrors = (state) => get(getStateData(state), Enum.COURSE_TASKS_ERRORS, []);
 export const getTasks = (state) => get(getStateData(state), Enum.TASKS, '');
 export const getCurrentTask = (state) => get(getStateData(state), Enum.CURRENT_TASK, {});
 export const getCurrentTaskError = (state) => get(getStateData(state), Enum.CURRENT_TASK_ERROR, null);

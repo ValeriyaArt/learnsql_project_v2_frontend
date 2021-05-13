@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from "prop-types";
 import get from 'lodash/get';
 
+import Scrollbars from "react-custom-scrollbars";
 import { HorizontalBar } from 'react-chartjs-2';
 
 import Box from '@material-ui/core/Box';
@@ -66,21 +67,23 @@ class Statistics extends React.PureComponent{
         };
 
         return(
-            <Box className={classes.root}>
-                <div className={classes.courseInfo}>
-                    <Typography className={classes.title} component={'h1'}> {statistics.course} </Typography>
-                    <Typography> Выполнено {statistics.completed_tasks} из {statistics.all_tasks} заданий</Typography>
-                </div>
+            <Scrollbars minheight={300}>
+                <Box className={classes.root}>
+                    <div className={classes.courseInfo}>
+                        <Typography className={classes.title} component={'h1'}> {statistics.course} </Typography>
+                        <Typography> Выполнено {statistics.completed_tasks} из {statistics.all_tasks} заданий</Typography>
+                    </div>
 
-                <Typography className={classes.title} component={'h2'}> Статистика учебной группы </Typography>
+                    <Typography className={classes.title} component={'h2'}> Статистика учебной группы </Typography>
 
-                <div className={classes.graph}>
-                    <HorizontalBar
-                        data={data}
-                        options={options}
-                    />
-                </div>
-            </Box>
+                    <div className={classes.graph}>
+                        <HorizontalBar
+                            data={data}
+                            options={options}
+                        />
+                    </div>
+                </Box>
+            </Scrollbars>
         );
     }
 }

@@ -79,7 +79,7 @@ class Task extends React.PureComponent{
                            fullWidth
                            maxwidth={500}
                            onChange={this.answerChangeHandler}
-                           defaultValue={answer}
+                           value={answer}
                 />
                 <Box display={'flex'}
                      justifyContent={'flex-end'}
@@ -220,6 +220,12 @@ class Task extends React.PureComponent{
         )
     }
 
+    getCurrentTaskErrors = () => {
+        const {courseId, task, errors} = this.props;
+
+        return errors[courseId]?.[task.id] || []
+    }
+
     render() {
         const {task, classes, error, tableErrorData, answer, nextRoute, isDone} = this.props;
         const taskText = get(task, `task_text`, null);
@@ -227,6 +233,7 @@ class Task extends React.PureComponent{
         const refResult = get(tableErrorData, [Enum.ERROR_REF_RESULT, 1, 1], []);
         const studentResult = get(tableErrorData, [Enum.ERROR_STUDENT_RESULT, 1, 1], []);
         const taskImage = get(task, `database_image`, '');
+        const errors = this.getCurrentTaskErrors();
 
         const {openBigImage} = this.state;
 
@@ -238,16 +245,17 @@ class Task extends React.PureComponent{
                 <div className={classes.leftSide}>
 
                     <Scrollbars minheight={300}>
-                         <div>
-                             <Typography className={classes.title}> {taskTitle}: </Typography>
-                             <Typography> {taskText} </Typography>
+                        <div style={{marginRight: '10px'}}>
+                            <div>
+                                <Typography className={classes.title}> {taskTitle}: </Typography>
+                                <Typography> {taskText} </Typography>
 
-                             <div className={classes.answerFieldBlock}>
-                                {this.renderAnswerField()}
-                             </div>
-                         </div>
+                                <div className={classes.answerFieldBlock}>
+                                    {this.renderAnswerField()}
+                                </div>
+                            </div>
 
-                        <div className={classes.taskAnswerInfoBlock}>
+                            <div className={classes.taskAnswerInfoBlock}>
                                 {error &&
                                 <Paper className={classes.simpleErrorBlock}>
                                     <Typography className={classes.simpleErrorText}> {error} </Typography>
@@ -257,6 +265,19 @@ class Task extends React.PureComponent{
                                 {refResult.length > 0 && studentResult.length > 0 && this.renderErrorTables()}
 
                                 {answer.length > 0 && this.renderAnswerTable()}
+                            </div>
+
+                            <div>
+                                {errors.map(item =>
+                                  <div className={classes.errorBlock}>
+                                      <Typography className={item.message === 'Задание успешно выполнено' ? classes.errorTitle : classes.successTitle}>
+                                          {item.message === 'Задание успешно выполнено' ? 'Правильно!' : 'Ошибка'}
+                                      </Typography>
+                                      <Typography> {item.message} </Typography>
+                                      <Typography> {item.answer} </Typography>
+                                  </div>
+                                )}
+                            </div>
                         </div>
                     </Scrollbars>
                 </div>

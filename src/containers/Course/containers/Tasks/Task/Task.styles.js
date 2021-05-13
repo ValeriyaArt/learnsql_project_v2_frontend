@@ -101,5 +101,26 @@ export default (theme) => ({
     },
     tableCell: {
         border: '1px solid rgba(224, 224, 224, 1)'
+    },
+    errorBlock: {
+        marginRight: '15px',
+        borderBottom: '1px solid #ec1946',
+        paddingBottom: '10px',
+        paddingTop: '10px',
+        '&:first-child': {
+            paddingTop: '0px'
+        },
+        '&:last-child': {
+            borderBottom: 'none',
+            paddingBottom: '0px'
+        }
+    },
+    errorTitle: {
+        color: '#ec1946',
+        fontSize: '18px'
+    },
+    successTitle: {
+        color: 'green',
+        fontSize: '18px'
     }
 });

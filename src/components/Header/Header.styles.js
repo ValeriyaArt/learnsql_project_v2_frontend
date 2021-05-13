@@ -14,5 +14,8 @@ export default (theme) => ({
         '&:hover': {
             color: theme.palette.text.primary
         }
+    },
+    logo: {
+
     }
 });

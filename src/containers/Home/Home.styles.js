@@ -10,8 +10,7 @@ export default (theme) => ({
     card: {
         boxShadow: '0px 0px 6px 1px rgba(194,194,194,0.3)',
         padding: 25,
-        maxWidth: 700,
-        width: '45%',
+        width: '100%',
         marginRight: '50px',
         marginBottom: '50px',
         boxSizing: 'border-box'
