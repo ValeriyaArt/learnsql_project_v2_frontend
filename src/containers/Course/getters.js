@@ -39,8 +39,7 @@ export const getNextRoute = (state) => {
 
 
 export const getCurrentRoute = (state) => get(getTasks(state).filter(route => route.id === getCurrentRouteId(state)), '0', {});
-export const getCurrentTaskSolution = (state) => get(getCurrentRoute(state), 'status', 0) === '1' ?
-    get(getCurrentRoute(state), 'solution', '') : "";
+export const getCurrentTaskSolution = (state) => get(getCurrentRoute(state), 'solution', '');
 export const getTaskId = (task) => get(task, 'task_in_set', null);
 
 
