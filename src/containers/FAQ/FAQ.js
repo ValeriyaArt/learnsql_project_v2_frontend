@@ -4,7 +4,7 @@ import CardContent from '@material-ui/core/CardContent';
 import styles from './FAQ.module.css';
 import Typography from "@material-ui/core/Typography";
 
-export const FAQ = () => {
+export default () => {
     return (
         <div className={styles.root}>
             <Card className={styles.card}>
@@ -61,5 +61,6 @@ export const FAQ = () => {
                     </Typography>
                 </CardContent>
             </Card>
-        </div>)
+        </div>
+    )
 }
