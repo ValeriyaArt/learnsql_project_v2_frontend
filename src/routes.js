@@ -12,6 +12,7 @@ import Home from './containers/Home';
 import RouterService from './service/router-service';
 import UserService from './service/user-service';
 import ResetPasswordConfirm from "./containers/ResetPassword/ResetPasswordConfirm/ResetPasswordConfirm";
+import {FAQ} from "./containers/FAQ/FAQ";
 
 const routerService = RouterService.factory();
 const userService = UserService.factory();
@@ -28,6 +29,9 @@ export default () => (
                 </Route>
                 <Route path={routerService.getResetPasswordRoute()}>
                     <ResetPassword />
+                </Route>
+                <Route path={routerService.getFAQLink()}>
+                    <FAQ/>
                 </Route>
                 <Route path={routerService.getResetPasswordConfirmRoute()}
                        children={() => (
