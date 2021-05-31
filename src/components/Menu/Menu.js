@@ -8,6 +8,7 @@ import Divider from '@material-ui/core/Divider';
 import HomeIcon from '@material-ui/icons/HomeOutlined';
 import QuestionIcon from '@material-ui/icons/HelpOutlineOutlined';
 import SchoolIcon from '@material-ui/icons/SchoolOutlined';
+import FeedbackIcon from '@material-ui/icons/Feedback';
 
 import withStyles from '@material-ui/core/styles/withStyles';
 
@@ -80,6 +81,20 @@ class Menu extends React.PureComponent{
                         >
                             <QuestionIcon className={classes.icon}/>
                             &nbsp;FAQ
+                        </MenuItem>
+                    </Link>
+                </List>
+                <List className={classes.menuList}>
+                    <Link to={appRouter.getFeedbackLink()} className={classes.link}>
+                        <MenuItem
+                            selected={pathname === appRouter.getFeedbackLink()}
+                            classes={{
+                                selected: classes.selectedMenuItem,
+                                root: classes.menuItem,
+                            }}
+                        >
+                            <FeedbackIcon className={classes.icon}/>
+                            &nbsp;Обратная связь
                         </MenuItem>
                     </Link>
                 </List>
