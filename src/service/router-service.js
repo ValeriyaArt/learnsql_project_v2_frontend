@@ -7,6 +7,7 @@ const RESET_PASSWORD_CONFIRM = 'password/reset/confirm/:uid/:token';
 const COURSE = 'course';
 const PROFILE = 'profile';
 const FAQ = 'faq';
+const FEEDBACK = 'feedback';
 
 const SEPARATOR = '/';
 
@@ -57,6 +58,10 @@ export default class RouterService {
 
     getFAQLink = () => {
         return SEPARATOR + FAQ;
+    };
+
+    getFeedbackLink = () => {
+        return SEPARATOR + FEEDBACK;
     };
 
     getHomeRoute = () => {
