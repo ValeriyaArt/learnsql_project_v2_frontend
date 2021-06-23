@@ -67,6 +67,7 @@ class Task extends React.PureComponent{
         const splittedAnswer = answer.split(' ');
         const firstWordError = splittedAnswer[0].toLocaleLowerCase() !== 'select'
             && splittedAnswer[0].toLocaleLowerCase() !== 'update'
+            && splittedAnswer[0].toLocaleLowerCase() !== 'insert'
             && splittedAnswer[0].toLocaleLowerCase() !== 'delete';
 
         return (
