@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import get from 'lodash/get';
 import {Redirect} from "react-router";
 import {Link} from "react-router-dom";
+import ReactStars from "react-rating-stars-component";
 
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -22,6 +23,12 @@ import styles from './Home.styles';
 // import moment from "moment";
 
 const userService = UserService.factory();
+
+const tasksTypes = {
+    1: 'статическая выдача заданий',
+    2: 'индивидуальный маршрут между заданиями',
+    3: 'задания подбираются случайным образом'
+}
 
 class Home extends React.PureComponent{
     componentDidMount() {
@@ -50,10 +57,20 @@ class Home extends React.PureComponent{
                                 <Typography className={classes.title}>
                                     {get(course, 'title', '')}
                                 </Typography>
-                                <Typography className={classes.description}
-                                            color="textSecondary"
-                                            dangerouslySetInnerHTML={{__html: get(course, 'description', '')}}
-                                />
+                                <Typography className={classes.ratingSubtitle}>
+                                    <b className={classes.subTitle}>Сложность курса:</b> <ReactStars edit={false} value={course.difficulty} size={30} />
+                                </Typography>
+                                <Typography>
+                                    <b className={classes.subTitle}>Выбор заданий в курсе:</b> {tasksTypes[course.type]}
+                                </Typography>
+                                <Typography className={classes.themesSubtitle}>
+                                    Темы курса:
+                                </Typography>
+                                <div className={classes.themeGrid}>
+                                    {course.themes.map(theme => (
+                                      <Typography> {theme} </Typography>
+                                    ))}
+                                </div>
                             </CardContent>
                             <CardActions className={classes.actions}>
                                 <Typography className={classes.dates}>
@@ -71,8 +88,9 @@ class Home extends React.PureComponent{
                                         to={appRouter.getCourseStatisticsLink(course.id)}
                                         className={classes.link}>
                                         <Button color="primary"
-                                                variant="outlined"
                                                 size="small"
+                                                className={classes.button}
+                                                variant="contained"
                                         >
                                             На страницу курса
                                             <KeyboardArrowRightIcon />
@@ -80,8 +98,9 @@ class Home extends React.PureComponent{
                                     </Link>
                                     :
                                     <Button color="primary"
-                                            variant="outlined"
+                                            variant="contained"
                                             onClick={this.joinCourse(course.id)}
+                                            className={classes.button}
                                             size="small"
                                     >
                                         Присоединиться

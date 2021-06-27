@@ -3,7 +3,8 @@ export default (theme) => ({
         marginLeft: 'auto'
     },
     header: {
-        zIndex: 10000
+        zIndex: 10000,
+        boxShadow: 'none',
     },
     popper: {
         zIndex: '10000 !important'

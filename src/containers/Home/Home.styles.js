@@ -1,18 +1,45 @@
 export default (theme) => ({
     root: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        padding: 50,
+        display: 'grid',
+        gridTemplateColumns: '1fr 1fr',
+        gridGap: '20px',
+        padding: 20,
     },
     startDate: {
         color: theme.palette.primary.main
     },
+    button: {
+        borderRadius: '35px',
+        boxShadow: 'none',
+    },
+    ratingSubtitle: {
+        display: 'flex',
+        alignItems: 'center'
+    },
+    themeGrid: {
+        display: 'grid',
+        gridTemplateColumns: '1fr 1fr',
+        gridGap: '0px 10px',
+        '& p': {
+            fontSize: '14px'
+        }
+    },
+    themesSubtitle: {
+        fontWeight: 'bold',
+        marginTop: '10px'
+    },
+    subTitle: {
+        marginRight: '10px',
+        fontSize: '16px',
+        '& p': {
+            fontSize: '16px'
+        }
+    },
     card: {
-        boxShadow: '0px 0px 6px 1px rgba(194,194,194,0.3)',
+        boxShadow: 'none',
+        border: `2px solid #E5E5E5`,
         padding: 25,
-        width: '100%',
-        marginRight: '50px',
-        marginBottom: '50px',
+        borderRadius: '8px',
         boxSizing: 'border-box'
     },
     title: {
