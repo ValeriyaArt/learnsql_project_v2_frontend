@@ -12,3 +12,5 @@ class SignInService extends BaseService{
 }
 
 export default SignInService;
+
+export const service = new SignInService()

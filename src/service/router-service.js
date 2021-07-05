@@ -8,6 +8,7 @@ const COURSE = 'course';
 const PROFILE = 'profile';
 const FAQ = 'faq';
 const FEEDBACK = 'feedback';
+const HOME = 'home';
 
 const SEPARATOR = '/';
 
@@ -65,6 +66,10 @@ export default class RouterService {
     };
 
     getHomeRoute = () => {
+        return SEPARATOR + HOME;
+    };
+
+    getLandingPath = () => {
         return SEPARATOR;
     };
 

@@ -44,7 +44,7 @@ class Home extends React.PureComponent{
         const {classes, auth, courses, myCourses} = this.props;
         const isAuth = userService.isAuth() && auth;
 
-        if (!isAuth) return <Redirect to={appRouter.getSignInRoute()} />;
+        if (!isAuth) return <Redirect to={appRouter.getLandingPath()} />;
 
         return(
             <div className={classes.root}>

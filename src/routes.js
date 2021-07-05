@@ -14,68 +14,72 @@ import UserService from './service/user-service';
 import ResetPasswordConfirm from "./containers/ResetPassword/ResetPasswordConfirm/ResetPasswordConfirm";
 import FAQ from "./containers/FAQ";
 import Feedback from "./containers/Feedback";
+import Landing from './containers/Landing'
 
 const routerService = RouterService.factory();
 const userService = UserService.factory();
 
 export default () => (
-    <Router>
-        <Layout>
-            <Switch>
-                <Route path={routerService.getSignInRoute()}>
-                    <SignIn />
-                </Route>
-                <Route path={routerService.getSignUpRoute()}>
-                    <SignUp />
-                </Route>
-                <Route path={routerService.getResetPasswordRoute()}>
-                    <ResetPassword />
-                </Route>
-                <Route path={routerService.getFAQLink()}>
-                    <FAQ />
-                </Route>
-                <Route path={routerService.getFeedbackLink()}>
-                    <Feedback />
-                </Route>
-                <Route path={routerService.getResetPasswordConfirmRoute()}
-                       children={() => (
-                            <Route
-                                render={({ match }) => (
-                                    <ResetPasswordConfirm match={match}/>
-                                )}
-                            />
-                )      }
-                />
-                <PrivateRoute path={routerService.getProfileRoute()}>
-                    <Profile />
-                </PrivateRoute>
-                <PrivateRoute path={routerService.getCourseRoute()}>
-                    <Course />
-                </PrivateRoute>
-                <PrivateRoute path={routerService.getHomeRoute()}>
-                    <Home />
-                </PrivateRoute>
-            </Switch>
-        </Layout>
-    </Router>
+  <Router>
+    <Layout>
+      <Switch>
+        <Route path={routerService.getSignInRoute()}>
+          <SignIn/>
+        </Route>
+        <Route path={routerService.getSignUpRoute()}>
+          <SignUp/>
+        </Route>
+        <Route path={routerService.getResetPasswordRoute()}>
+          <ResetPassword/>
+        </Route>
+        <Route path={routerService.getFAQLink()}>
+          <FAQ/>
+        </Route>
+        <Route path={routerService.getFeedbackLink()}>
+          <Feedback/>
+        </Route>
+        <Route path={routerService.getResetPasswordConfirmRoute()}
+               children={() => (
+                 <Route
+                   render={({match}) => (
+                     <ResetPasswordConfirm match={match}/>
+                   )}
+                 />
+               )}
+        />
+        <PrivateRoute path={routerService.getProfileRoute()}>
+          <Profile/>
+        </PrivateRoute>
+        <PrivateRoute path={routerService.getCourseRoute()}>
+          <Course/>
+        </PrivateRoute>
+        <PrivateRoute path={routerService.getHomeRoute()}>
+          <Home/>
+        </PrivateRoute>
+        <Route path={routerService.getLandingPath()}>
+          <Landing />
+        </Route>
+      </Switch>
+    </Layout>
+  </Router>
 );
 
-function PrivateRoute({ children, ...rest }) {
-    return (
-        <Route
-            {...rest}
-            render={({ location }) =>
-                userService.isAuth() ? (
-                    children
-                ) : (
-                    <Redirect
-                        to={{
-                            pathname: routerService.getSignInRoute(),
-                            state: { from: location }
-                        }}
-                    />
-                )
-            }
-        />
-    );
+function PrivateRoute({children, ...rest}) {
+  return (
+    <Route
+      {...rest}
+      render={({location}) =>
+        userService.isAuth() ? (
+          children
+        ) : (
+          <Redirect
+            to={{
+              pathname: routerService.getSignInRoute(),
+              state: {from: location}
+            }}
+          />
+        )
+      }
+    />
+  );
 }

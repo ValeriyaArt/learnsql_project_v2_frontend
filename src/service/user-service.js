@@ -29,3 +29,5 @@ export default class UserService {
         return this.getToken() !== null && this.getToken() !== undefined;
     }
 }
+
+export const service = new UserService()
