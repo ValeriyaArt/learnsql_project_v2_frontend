@@ -232,9 +232,8 @@ export default () => {
         type="outlined"
         color="primary"
         className={classes.button}
-        onClick={handleClickButton}
         disabled={disableButton && !(activeStep === 1 && isStudent)}
-        onClick={handleSignUp}
+        onClick={() => activeStep === 1 && isStudent ? handleClickButton() : handleSignUp()}
       >
         {activeStep === 1 && isStudent ? 'Далее' : 'Зарегистрироваться'}
       </Button>

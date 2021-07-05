@@ -39,7 +39,7 @@ export default () => {
 
   return (
     <div>
-      <div style={{backgroundImage: `url(${mainBG})`, paddingBottom: '150px'}}>
+      <div style={{backgroundImage: `url(${mainBG})`, paddingBottom: '100px'}}>
         <div className={classes.wrap}>
           <div className={classes.header}>
             <img src={logo} />
@@ -51,9 +51,9 @@ export default () => {
           </div>
           <div className={classes.mainScreen}>
               <div>
-              <Typography className={classes.title}>ОНЛАЙН КУРС <br/> ПО ИЗУЧЕНИЮ SQL</Typography>
+              <Typography className={classes.title}>ОНЛАЙН ПЛАТФОРМА <br/> ПО ИЗУЧЕНИЮ SQL</Typography>
               <Typography className={classes.description}>
-                Платформа для тренировки умений написания <br/> SQL-запросов <br/>
+                Курсы для тренировки умений написания <br/> SQL-запросов <br/>
               </Typography>
               <Button type="secondary" onClick={handleOpenSignUpForm} className={classes.getAccessButton}>
                 Получить доступ
@@ -172,7 +172,7 @@ export default () => {
       </div>
       <div className={classes.footer}>
         <div className={classes.wrap}>
-          <Typography className={classes.footerLink}>learningsql@gmail.com</Typography>
+          <Typography className={classes.footerLink}>antongovorov@gmail.com</Typography>
         </div>
       </div>
     </div>
