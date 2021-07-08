@@ -20,4 +20,12 @@ export const useStyles = makeStyles((theme) => createStyles({
     flexDirection: 'column',
     height: 'fit-content'
   },
+  link: {
+    cursor: 'pointer',
+    color: theme.palette.primary.main,
+    textDecoration: 'none',
+    '&:hover': {
+      color: theme.palette.primary.dark,
+    }
+  },
 }))

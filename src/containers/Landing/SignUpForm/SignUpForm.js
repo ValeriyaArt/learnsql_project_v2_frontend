@@ -15,7 +15,7 @@ import {getFieldValue} from '../../SignUp/getters'
 import actions from '../../SignUp/actions'
 import layoutActions from '../../../layout/actions';
 import { useStyles } from './SignUpForm.styles'
-import { service } from "../../SignUp/service";
+import { service } from '../service'
 
 export default () => {
   const classes = useStyles()
@@ -114,7 +114,7 @@ export default () => {
         <CheckCircleRoundedIcon className={classes.successIcon} />
         <Typography className={classes.successTitle}>Готово!</Typography>
         <Typography className={classes.successDescription}>
-          Письмо о подтверждении регистрации направлено  на указанный почтовый адрес
+          Вы успешно зарегистрированы в системе
         </Typography>
       </div>
     )

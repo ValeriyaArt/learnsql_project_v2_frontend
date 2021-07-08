@@ -38,6 +38,7 @@ class Layout extends React.Component {
 
   shouldComponentUpdate(nextProps, nextState) {
     return !shallowEqual(this.props.errors, nextProps.errors)
+      || !shallowEqual(this.props.successMessages, nextProps.successMessages)
       || !shallowEqual(this.props.children, nextProps.children)
       || this.props.fetching !== nextProps.fetching
       || this.props.auth !== nextProps.auth
@@ -73,7 +74,7 @@ class Layout extends React.Component {
     return (
       <SnackbarProvider maxSnack={3}>
         <MuiThemeProvider theme={theme}>
-          <AbsoluteLoader isFetching={fetching}/>
+          {!isLanding && <AbsoluteLoader isFetching={fetching}/>}
           <Notificator errors={errors} successMessages={successMessages}/>
           {!isLanding &&
           <>
