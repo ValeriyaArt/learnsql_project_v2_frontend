@@ -23,6 +23,18 @@ export const useStyles = makeStyles((theme) => createStyles({
     flexDirection: 'column',
     backdropFilter: 'blur(10px)',
     color: '#525252',
+    '@media (max-width: 768px)': {
+      width: '100%',
+      height: '100%',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      background: 'rgb(247 247 247)',
+      '& div': {
+        width: '100%',
+      }
+    }
 },
   student: {
     display: 'flex',

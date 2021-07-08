@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 import {useDispatch} from 'react-redux'
 import Link from 'react-router-dom/Link'
 import Typography from '@material-ui/core/Typography'
+import CloseButton from '@material-ui/icons/CloseOutlined'
 import Button from '../../components/Button'
 import SignInForm from './SignInForm'
 import SignUpForm from './SignUpForm'
@@ -37,9 +38,14 @@ export default () => {
     dispatch(actions.signUpGetPeriods())
   })
 
+  const handleCloseForms = () => {
+    setOpenSignUpForm(false)
+    setOpenSignInForm(false)
+  }
+
   return (
     <div>
-      <div style={{backgroundImage: `url(${mainBG})`, paddingBottom: '100px'}}>
+      <div style={{backgroundImage: `url(${mainBG})`, paddingBottom: '100px'}} className={classes.mainBackground}>
         <div className={classes.wrap}>
           <div className={classes.header}>
             <img src={logo} />
@@ -59,14 +65,21 @@ export default () => {
                 Получить доступ
               </Button>
             </div>
-            <div className={classes.form}>
-              {openSignInForm
-                ? <SignInForm />
-                : openSignUpForm
-                  ? <SignUpForm />
-                  : <></>
-              }
-            </div>
+            {openSignInForm || openSignUpForm ?
+              <div className={classes.form}>
+                <CloseButton
+                  className={classes.closeButton}
+                  onClick={handleCloseForms}
+                />
+                {openSignInForm
+                  ? <SignInForm/>
+                  : openSignUpForm
+                    ? <SignUpForm/>
+                    : <></>
+                }
+              </div>
+              : <div className={classes.emptyForm}/>
+            }
           </div>
         </div>
       </div>

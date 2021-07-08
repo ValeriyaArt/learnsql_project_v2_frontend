@@ -18,7 +18,20 @@ export const useStyles = makeStyles((theme) => createStyles({
     padding: '35px',
     display: 'flex',
     flexDirection: 'column',
-    height: 'fit-content'
+    height: 'fit-content',
+    backdropFilter: 'blur(10px)',
+    '@media (max-width: 768px)': {
+      width: '100%',
+      height: '100%',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      background: 'rgb(247 247 247)',
+      '& div': {
+        width: '100%',
+      }
+    }
   },
   link: {
     cursor: 'pointer',
