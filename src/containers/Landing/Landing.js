@@ -1,6 +1,7 @@
-import React, {useEffect, useState} from 'react'
-import {useDispatch} from 'react-redux'
+import React, {useEffect, useState, useCallback} from 'react'
+import {useDispatch, useSelector} from 'react-redux'
 import Link from 'react-router-dom/Link'
+import { useHistory } from 'react-router-dom'
 import Typography from '@material-ui/core/Typography'
 import CloseButton from '@material-ui/icons/CloseOutlined'
 import Button from '../../components/Button'
@@ -16,17 +17,25 @@ import offerImage2 from './img/levels.png'
 import offerImage3 from './img/individual.png'
 import offerImage4 from './img/teachers.png'
 import actions from '../SignUp/actions'
+import { getAuth } from "../../layout/getters";
+import {appRouter} from "../../service/router-service";
 
 export default () => {
   const classes = useStyles()
   const dispatch = useDispatch()
+  const history = useHistory()
   const [openSignInForm, setOpenSignInForm] = useState(false)
   const [openSignUpForm, setOpenSignUpForm] = useState(false)
+  const isAuth = useSelector((state) => getAuth(state))
 
-  const handleOpenSignInForm = () => {
-    setOpenSignInForm(true)
-    setOpenSignUpForm(false)
-  }
+  const handleOpenSignInForm = useCallback(() => {
+    if (isAuth){
+      history.push(appRouter.getMyCoursesRoute())
+    } else {
+      setOpenSignInForm(true)
+      setOpenSignUpForm(false)
+    }
+  }, [isAuth])
 
   const handleOpenSignUpForm = () => {
     setOpenSignInForm(false)

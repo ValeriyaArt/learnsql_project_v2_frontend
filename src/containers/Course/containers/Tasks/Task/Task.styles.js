@@ -5,6 +5,35 @@ export default (theme) => ({
         paddingBottom: '100px',
         display: 'flex'
     },
+    hightlight: {
+        position: 'absolute',
+        top: '-5px',
+        width: '100%',
+        background: 'transparent',
+        whiteSpace: 'normal',
+        boxSizing: 'border-box',
+        padding: '0px 34px 18.5px 2px',
+        '& code': {
+            lineHeight: '20px',
+            fontSize: '20px',
+            fontFamily: '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"',
+            background: 'transparent',
+            '& .hljs-keyword': {
+                fontWeight: 400,
+                color: theme.palette.secondary.main
+            }
+        }
+    },
+    textField: {
+        zIndex: '10',
+        color: 'transparent',
+        '& textarea': {
+            lineHeight: '20px',
+            fontSize: '20px',
+            color: 'transparent',
+            caretColor: 'black'
+        }
+    },
     leftSide: {
         width: '50%',
         display: 'flex',
@@ -39,7 +68,8 @@ export default (theme) => ({
         width: '100%',
         marginTop: 20,
         paddingRight: 20,
-        boxSizing: 'border-box'
+        boxSizing: 'border-box',
+        position: 'relative'
     },
     buttonsContainer: {
         marginTop: 20

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from "prop-types";
 import get from 'lodash/get';
+import Highlight from 'react-highlight.js';
 
 import Scrollbars from "react-custom-scrollbars";
 
@@ -24,6 +25,7 @@ import connect from './Task.connect';
 import styles from './Task.styles';
 import BigImageModal from "../../BigImageModal";
 
+
 class Task extends React.PureComponent{
     constructor(props) {
         super();
@@ -43,7 +45,11 @@ class Task extends React.PureComponent{
     }
 
     answerChangeHandler = (event) => {
-        this.setState({answer: get(event, 'target.value')});
+        if (event.key === 'Enter') {
+            event.preventDefault();
+        } else {
+            this.setState({answer: get(event, 'target.value')});
+        }
     };
 
     clearAnswerField = () => {
@@ -80,8 +86,13 @@ class Task extends React.PureComponent{
                            fullWidth
                            maxwidth={500}
                            onChange={this.answerChangeHandler}
+                           onKeyPress={this.answerChangeHandler}
                            value={answer}
+                           className={classes.textField}
                 />
+                <Highlight language="sql" className={classes.hightlight}>
+                    {answer}
+                </Highlight>
                 <Box display={'flex'}
                      justifyContent={'flex-end'}
                      className={classes.buttonsContainer}
