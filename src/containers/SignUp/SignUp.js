@@ -95,7 +95,7 @@ class SignUp extends React.PureComponent{
 
         const isAuth = userService.isAuth() && auth;
 
-        if (isAuth) return <Redirect to={appRouter.getHomeRoute()} />;
+        if (isAuth) return <Redirect to={appRouter.getAllCoursesRoute()} />;
 
         return(
             <div className={classes.root}>

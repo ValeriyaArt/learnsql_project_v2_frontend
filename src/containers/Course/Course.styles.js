@@ -7,14 +7,17 @@ export default (theme) => ({
     },
     paper: {
         height: '100%',
-        boxShadow: '0px 0px 6px 1px rgba(194,194,194,0.3)',
+        boxShadow: 'none !important',
+        border: '1px solid #f4f4f4',
         overflow: 'hidden'
     },
     tabs: {
-        padding: '0px 50px'
+        padding: '0px',
     },
     tab: {
-        padding: '20px'
+        padding: '20px',
+        fontSize: '14px',
+        maxWidth: 'initial',
     },
     tabRoot: {
         display: 'flex',

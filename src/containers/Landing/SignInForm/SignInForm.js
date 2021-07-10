@@ -26,7 +26,7 @@ export default () => {
       const token = res?.data?.auth_token
       userService.setToken(token)
       dispatch(actions.setAuthTrue())
-      history.push(appRouter.getHomeRoute())
+      history.push(appRouter.getAllCoursesRoute())
     } catch (e) {
       dispatch(actions.fetchingFailed(e));
     }

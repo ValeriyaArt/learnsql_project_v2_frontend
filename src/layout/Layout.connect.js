@@ -1,9 +1,9 @@
 import {connect} from 'react-redux';
 import {bindActionCreators} from "redux";
 import actions from "./actions";
-import homeActions from "../containers/Home/actions";
+import homeActions from "../containers/Courses/actions";
 import {isFetching, getErrors, getSuccessMessages, getAuth} from './getters';
-import {getMyCourses} from "../containers/Home/getters";
+import {getMyCourses} from "../containers/Courses/getters";
 
 const mapStateToProps = (state) => {
     return {

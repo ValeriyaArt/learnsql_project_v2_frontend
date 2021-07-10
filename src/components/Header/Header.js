@@ -1,125 +1,120 @@
-import React from 'react';
-import PropTypes from "prop-types";
-import Link from "react-router-dom/Link";
+import React from 'react'
+import PropTypes from "prop-types"
+import Link from "react-router-dom/Link"
+import classNames from 'classnames'
 
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/MenuOutlined';
-import CloseIcon from '@material-ui/icons/CloseOutlined';
-import AccountCircle from '@material-ui/icons/AccountCircleOutlined';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
-import withStyles from '@material-ui/core/styles/withStyles';
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import Typography from '@material-ui/core/Typography'
+import IconButton from '@material-ui/core/IconButton'
+import AccountCircle from '@material-ui/icons/AccountCircleOutlined'
+import HelpIcon from '@material-ui/icons/HelpOutline'
+import MenuItem from '@material-ui/core/MenuItem'
+import Menu from '@material-ui/core/Menu'
+import withStyles from '@material-ui/core/styles/withStyles'
 
-import UserService from "../../service/user-service";
-import {appRouter} from "../../service/router-service";
+import UserService from "../../service/user-service"
+import {appRouter} from "../../service/router-service"
 
 import logo from './logo.svg'
 
-import styles from './Header.styles';
+import styles from './Header.styles'
 
 const userService = UserService.factory();
 
-class Header extends React.PureComponent{
-    state = {
-        anchorEl: null
-    };
+class Header extends React.PureComponent {
+  state = {
+    anchorEl: null,
+    anchorElMyCourses: null,
+  };
 
-    handleMenu = event => {
-        this.setState({anchorEl: event.currentTarget});
-    };
+  handleMenu = event => {
+    this.setState({anchorEl: event.currentTarget})
+  };
 
-    handleClose = () => {
-        this.setState({anchorEl: null});
-    };
+  handleClose = () => {
+    this.setState({anchorEl: null})
+  };
 
-    handleGeneralMenuButtonClick = () => {
-        const {openGeneralMenu} = this.props;
+  handleLogout = () => {
+    userService.logout()
+    this.handleClose()
+    this.props.logout()
+  };
 
-        if (openGeneralMenu){
-            this.props.handleCloseMenu();
-        } else {
-            this.props.handleOpenMenu();
-        }
-    };
+  render() {
+    const {classes, isAuth} = this.props
+    const {anchorEl} = this.state
+    const isOpenAvatarMenu = Boolean(anchorEl)
 
-    handleLogout = () => {
-        userService.logout();
-        this.handleClose();
-        this.props.logout();
-    };
-
-    render() {
-        const {classes, openGeneralMenu, isAuth} = this.props;
-        const {anchorEl} = this.state;
-        const isOpenAvatarMenu = Boolean(anchorEl);
-
-        return(
-            <AppBar position="fixed" className={classes.header}>
-                <Toolbar>
-                    {isAuth &&
-                        <IconButton edge="start"
-                                    color="inherit"
-                                    aria-label="menu"
-                                    onClick={this.handleGeneralMenuButtonClick}>
-                            {openGeneralMenu ? <CloseIcon /> : <MenuIcon />}
-                        </IconButton>
-                    }
-                    <img src={logo} className={classes.logo} />
-                    {isAuth &&
-                        <div className={classes.avatar}>
-                            <IconButton
-                                aria-haspopup="true"
-                                onClick={this.handleMenu}
-                                color="inherit"
-                            >
-                                <AccountCircle/>
-                            </IconButton>
-                            <Menu
-                                anchorEl={anchorEl}
-                                anchorOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                }}
-                                keepMounted
-                                transformOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                }}
-                                open={isOpenAvatarMenu}
-                                onClose={this.handleClose}
-                                PopoverClasses={{
-                                    root: classes.popper
-                                }}
-                            >
-                                <MenuItem onClick={this.handleClose}>
-                                    <Link to={appRouter.getProfileRoute()}
-                                          className={classes.link}
-                                    >
-                                        Профиль
-                                    </Link>
-                                </MenuItem>
-                                <MenuItem onClick={this.handleLogout}>
-                                    <Link to={appRouter.getSignInRoute()}
-                                          className={classes.link}
-                                    >
-                                        Выйти
-                                    </Link>
-                                </MenuItem>
-                            </Menu>
-                        </div>
-                    }
-                </Toolbar>
-            </AppBar>
-        );
-    }
+    return (
+      <AppBar position="fixed" className={classes.header}>
+        <Toolbar>
+          {isAuth &&
+            <>
+              <img src={logo} className={classes.logo}/>
+              <Typography variant="button">
+                <Link to={appRouter.getAllCoursesRoute()} className={classes.link}>Все курсы</Link>
+              </Typography>
+              <Typography variant="button">
+                <Link to={appRouter.getMyCoursesRoute()} className={classes.link}>Мои курсы</Link>
+              </Typography>
+              <Typography variant="button">
+                <Link to={appRouter.getFAQLink()} className={classes.link}>FAQ</Link>
+              </Typography>
+              <Link to={appRouter.getFeedbackLink()} className={classNames(classes.link, classes.help)}><HelpIcon/></Link>
+              <div>
+                <IconButton
+                  aria-haspopup="true"
+                  onClick={this.handleMenu}
+                  color="inherit"
+                >
+                  <AccountCircle/>
+                </IconButton>
+                <Menu
+                  anchorEl={anchorEl}
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  open={isOpenAvatarMenu}
+                  onClose={this.handleClose}
+                  PopoverClasses={{
+                    root: classes.popper
+                  }}
+                >
+                  <MenuItem onClick={this.handleClose}>
+                    <Link to={appRouter.getProfileRoute()}
+                          className={classes.menuLink}
+                    >
+                      Профиль
+                    </Link>
+                  </MenuItem>
+                  <MenuItem onClick={this.handleLogout}>
+                    <Link to={appRouter.getSignInRoute()}
+                          className={classes.menuLink}
+                    >
+                      Выйти
+                    </Link>
+                  </MenuItem>
+                </Menu>
+              </div>
+            </>
+          }
+        </Toolbar>
+      </AppBar>
+    );
+  }
 }
 
 Header.propTypes = {
-    isAuth: PropTypes.bool,
-    logout: PropTypes.func,
+  isAuth: PropTypes.bool,
+  logout: PropTypes.func,
 };
 
 export default withStyles(styles)(Header);

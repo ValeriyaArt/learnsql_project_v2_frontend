@@ -8,7 +8,8 @@ const COURSE = 'course';
 const PROFILE = 'profile';
 const FAQ = 'faq';
 const FEEDBACK = 'feedback';
-const HOME = 'home';
+const ALL_COURSES = 'all-courses';
+const MY_COURSES = 'my-courses';
 
 const SEPARATOR = '/';
 
@@ -65,8 +66,12 @@ export default class RouterService {
         return SEPARATOR + FEEDBACK;
     };
 
-    getHomeRoute = () => {
-        return SEPARATOR + HOME;
+    getAllCoursesRoute = () => {
+        return SEPARATOR + ALL_COURSES;
+    };
+
+    getMyCoursesRoute = () => {
+        return SEPARATOR + MY_COURSES;
     };
 
     getLandingPath = () => {

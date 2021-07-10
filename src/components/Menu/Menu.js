@@ -32,7 +32,7 @@ class Menu extends React.PureComponent{
                 }}
             >
                 <List className={classes.menuList}>
-                    <Link to={appRouter.getHomeRoute()} className={classes.link}>
+                    <Link to={appRouter.getAllCoursesRoute()} className={classes.link}>
                         <MenuItem
                             selected={pathname === '/'}
                             classes={{

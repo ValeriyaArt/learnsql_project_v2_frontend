@@ -7,7 +7,7 @@ import ResetPassword from './containers/ResetPassword';
 import SignUp from './containers/SignUp';
 import Course from './containers/Course';
 import Profile from './containers/Profile';
-import Home from './containers/Home';
+import Courses from './containers/Courses';
 
 import RouterService from './service/router-service';
 import UserService from './service/user-service';
@@ -53,8 +53,11 @@ export default () => (
         <PrivateRoute path={routerService.getCourseRoute()}>
           <Course/>
         </PrivateRoute>
-        <PrivateRoute path={routerService.getHomeRoute()}>
-          <Home/>
+        <PrivateRoute path={routerService.getAllCoursesRoute()}>
+          <Courses />
+        </PrivateRoute>
+        <PrivateRoute path={routerService.getMyCoursesRoute()}>
+          <Courses isMy />
         </PrivateRoute>
         <Route path={routerService.getLandingPath()}>
           <Landing />

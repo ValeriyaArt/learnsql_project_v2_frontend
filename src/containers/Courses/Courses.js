@@ -18,8 +18,8 @@ import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import {appRouter} from "../../service/router-service";
 import UserService from "../../service/user-service";
 
-import connect from './Home.connect';
-import styles from './Home.styles';
+import connect from './Courses.connect';
+import styles from './Courses.styles';
 // import moment from "moment";
 
 const userService = UserService.factory();
@@ -30,7 +30,7 @@ const tasksTypes = {
     3: 'задания подбираются случайным образом'
 }
 
-class Home extends React.PureComponent{
+class Courses extends React.PureComponent{
     componentDidMount() {
         this.props.actions.getCourses();
         this.props.actions.getMyCourses();
@@ -41,7 +41,7 @@ class Home extends React.PureComponent{
     };
 
     render() {
-        const {classes, auth, courses, myCourses} = this.props;
+        const {classes, auth, courses, myCourses, isMy} = this.props;
         const isAuth = userService.isAuth() && auth;
 
         if (!isAuth) return <Redirect to={appRouter.getLandingPath()} />;
@@ -50,6 +50,8 @@ class Home extends React.PureComponent{
             <div className={classes.root}>
                 {courses.map(course => {
                     const isMyCourse = myCourses.find(myCourse => myCourse.course === course.id);
+
+                    if (isMy && !isMyCourse) return <></>
 
                     return (
                         <Card className={classes.card} key={`course-${course.id}`}>
@@ -115,7 +117,7 @@ class Home extends React.PureComponent{
     }
 }
 
-Home.propTypes = {
+Courses.propTypes = {
     classes: PropTypes.object,
     actions: PropTypes.object,
     courses: PropTypes.array,
@@ -123,4 +125,4 @@ Home.propTypes = {
     auth: PropTypes.bool,
 };
 
-export default withStyles(styles)(connect(Home));
+export default withStyles(styles)(connect(Courses));
