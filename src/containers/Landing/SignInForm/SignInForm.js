@@ -49,7 +49,7 @@ export default () => {
   }, [email])
 
   const handleGoogleSignIn = async () => {
-    const { data } = await axios.get('http://62.109.28.95:8001/social-auth/o/google-oauth2/?redirect_uri=http://localhost:8001/admin')
+    const { data } = await axios.get('http://localhost:8001/social-auth/o/google-oauth2/?redirect_uri=http://localhost:3001/admin')
     window.location.replace(data.authorization_url)
   }
 
