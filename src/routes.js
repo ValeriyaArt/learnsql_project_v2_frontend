@@ -8,6 +8,7 @@ import SignUp from './containers/SignUp';
 import Course from './containers/Course';
 import Profile from './containers/Profile';
 import Courses from './containers/Courses';
+import GoogleSignIn from './containers/Landing/GoogleSignIn';
 
 import RouterService from './service/router-service';
 import UserService from './service/user-service';
@@ -23,14 +24,17 @@ export default () => (
   <Router>
     <Layout>
       <Switch>
-        <Route path={routerService.getSignInRoute()}>
-          <SignIn/>
-        </Route>
-        <Route path={routerService.getSignUpRoute()}>
-          <SignUp/>
-        </Route>
-        <Route path={routerService.getResetPasswordRoute()}>
-          <ResetPassword/>
+        {/*<Route path={routerService.getSignInRoute()}>*/}
+        {/*  <SignIn/>*/}
+        {/*</Route>*/}
+        {/*<Route path={routerService.getSignUpRoute()}>*/}
+        {/*  <SignUp/>*/}
+        {/*</Route>*/}
+        {/*<Route path={routerService.getResetPasswordRoute()}>*/}
+        {/*  <ResetPassword/>*/}
+        {/*</Route>*/}
+        <Route path="/admin">
+          <GoogleSignIn />
         </Route>
         <Route path={routerService.getFAQLink()}>
           <FAQ/>

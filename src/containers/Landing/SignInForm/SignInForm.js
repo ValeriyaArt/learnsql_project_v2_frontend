@@ -1,15 +1,16 @@
 import React, {useCallback, useState} from 'react'
 import {useDispatch} from 'react-redux'
-import {useHistory} from 'react-router'
+import {useHistory, useLocation} from 'react-router'
+import axios from 'axios'
 import TextField from '@material-ui/core/TextField'
+import Typography from '@material-ui/core/Typography'
 import Button from '../../../components/Button'
 import { service } from '../service'
 import { service as userService } from '../../../service/user-service'
-import { useStyles } from './SignIn.styles'
 import actions from '../../../layout/actions'
 import {appRouter} from '../../../service/router-service'
-import Typography from "@material-ui/core/Typography";
-import layoutActions from "../../../layout/actions";
+import layoutActions from '../../../layout/actions'
+import { useStyles } from './SignIn.styles'
 
 export default () => {
   const [email, setEmail] = useState('')
@@ -19,6 +20,7 @@ export default () => {
   const classes = useStyles()
   const dispatch = useDispatch()
   const history = useHistory()
+  const location = useLocation()
 
   const handleLogin = useCallback(async () => {
     try {
@@ -45,6 +47,11 @@ export default () => {
 
     setEmail('')
   }, [email])
+
+  const handleGoogleSignIn = async () => {
+    const { data } = await axios.get('http://62.109.28.95:8001/social-auth/o/google-oauth2/?redirect_uri=http://localhost:8001/admin')
+    window.location.replace(data.authorization_url)
+  }
 
   return (
     <div className={classes.form}>
@@ -105,6 +112,17 @@ export default () => {
           >
             Войти
           </Button>
+          {/*<Button*/}
+          {/*  type='outlined'*/}
+          {/*  color='primary'*/}
+          {/*  className={classes.button}*/}
+          {/*  disabled={login.length === 0 || password.length === 0}*/}
+          {/*  onClick={handleLogin}*/}
+          {/*>*/}
+          {/*  Войти с помощью гугл*/}
+          {/*</Button>*/}
+
+          <div onClick={handleGoogleSignIn}> GOODLE </div>
         </>
       }
     </div>

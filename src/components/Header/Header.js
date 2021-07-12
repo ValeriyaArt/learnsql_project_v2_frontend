@@ -96,7 +96,7 @@ class Header extends React.PureComponent {
                     </Link>
                   </MenuItem>
                   <MenuItem onClick={this.handleLogout}>
-                    <Link to={appRouter.getSignInRoute()}
+                    <Link to={appRouter.getLandingPath()}
                           className={classes.menuLink}
                     >
                       Выйти

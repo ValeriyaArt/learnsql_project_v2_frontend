@@ -13,7 +13,6 @@ import styles from './Feedback.styles'
 
 
 class Feedback extends React.PureComponent {
-
     changeSubject = (e) => {
         this.props.actions.feedbackChangeField({destination: Enum.SUBJECT, value: get(e, 'target.value', '')})
     };
@@ -38,6 +37,7 @@ class Feedback extends React.PureComponent {
                                 <TextField label="Тема"
                                            className={classes.textField}
                                            onChange={this.changeSubject}
+                                           variant="outlined"
                                 />
                             </div>
 

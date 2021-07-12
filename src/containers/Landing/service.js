@@ -22,6 +22,15 @@ class AuthService extends BaseService{
 
         return this.post('/auth/users/reset_password/', formData);
     }
+
+    getTokens(code, state){
+        const formData = new FormData();
+
+        formData.append('code', code);
+        formData.append('state', state);
+        
+        return this.post(`social-auth/o/google-oauth2/?state=${state}&code=${code}`)
+    }
 }
 
 export default AuthService;
