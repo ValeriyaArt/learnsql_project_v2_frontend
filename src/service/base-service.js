@@ -71,8 +71,10 @@ export default class BaseService {
         console.log('isAuth', isAuth)
         if (_axios !== null && isAuth) {
             _axios.defaults.headers.common['Authorization'] = `Bearer ${userService.getToken()}`;
-        }
 
+        }
+        /* Полина, я пытался, код ниже */
+        _axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded';
         return _axios;
     }
 }

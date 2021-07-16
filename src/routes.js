@@ -33,7 +33,7 @@ export default () => (
         {/*<Route path={routerService.getResetPasswordRoute()}>*/}
         {/*  <ResetPassword/>*/}
         {/*</Route>*/}
-        <Route path="/admin">
+        <Route path="/googleoauth2">
           <GoogleSignIn />
         </Route>
         <Route path={routerService.getFAQLink()}>
